@@ -14,12 +14,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+/*
+ * This entity store the data of different users such 'owner', 'employee', 'manager' etc.
+ * */
 @Entity
-public class User {
+@Table(name = "users")
+public class UserEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID userId;
 
@@ -28,7 +33,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "brand_id",nullable=false)
-    private Brand brand;
+    private BrandEntity brand;
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
@@ -44,7 +49,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "subsidiary_id", nullable = true)
-    private Subsidiary subsidiary;
+    private SubsidiaryEntity subsidiary;
     
 	@Column(name = "assigned_by", length = 36, nullable = true)
     private String assignedBy;
@@ -62,21 +67,21 @@ public class User {
     private LocalDateTime createdOn;
 
     @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false,updatable = true)
+    @Column(name = "updated_on", nullable = false,updatable = false)
     private LocalDateTime updatedOn;
     
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private User createdBy;
+    private UserEntity createdBy;
 
     @ManyToOne
     @JoinColumn(name = "updated_by", nullable = false,updatable = false)
-    private User updatedBy;
+    private UserEntity updatedBy;
 
-   
-
-
-
+    public UserEntity() {
+        // Default constructor
+        this.userId = UUID.randomUUID();
+    }
 
 }
 
