@@ -62,7 +62,7 @@ public class User {
     private LocalDateTime createdOn;
 
     @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false,updatable = false)
+    @Column(name = "updated_on", nullable = false,updatable = true)
     private LocalDateTime updatedOn;
     
     @ManyToOne
@@ -73,12 +73,7 @@ public class User {
     @JoinColumn(name = "updated_by", nullable = false,updatable = false)
     private User updatedBy;
 
-    public User() {
-        // Default constructor
-        this.userId = UUID.randomUUID();
-    }
-
-
+   
 
 
 

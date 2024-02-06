@@ -41,9 +41,6 @@ public class Brand {
     @JoinColumn(name = "updated_by", nullable = false,updatable = false)
     private User updatedBy;
     
-    public Brand() {
-        // Default constructor
-       
-    }
+    
 
 }

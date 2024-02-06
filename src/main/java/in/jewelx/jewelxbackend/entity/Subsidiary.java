@@ -66,4 +66,8 @@ public class Subsidiary {
 	    @ManyToOne
 	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
 	    private User updatedBy;
+	    
+	  
+	    
+	    
 }
