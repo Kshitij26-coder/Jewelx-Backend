@@ -69,4 +69,126 @@ public class SubsidiaryEntity {
 	    @ManyToOne
 	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
 	    private UserEntity updatedBy;
+
+		public UUID getSubsidiaryId() {
+			return subsidiaryId;
+		}
+
+		public void setSubsidiaryId(UUID subsidiaryId) {
+			this.subsidiaryId = subsidiaryId;
+		}
+
+		public BrandEntity getBrand() {
+			return brand;
+		}
+
+		public void setBrand(BrandEntity brand) {
+			this.brand = brand;
+		}
+
+		public String getShopActNumber() {
+			return shopActNumber;
+		}
+
+		public void setShopActNumber(String shopActNumber) {
+			this.shopActNumber = shopActNumber;
+		}
+
+		public String getSubsidiaryName() {
+			return subsidiaryName;
+		}
+
+		public void setSubsidiaryName(String subsidiaryName) {
+			this.subsidiaryName = subsidiaryName;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+
+		public String getGstin() {
+			return gstin;
+		}
+
+		public void setGstin(String gstin) {
+			this.gstin = gstin;
+		}
+
+		public double getCashBalance() {
+			return cashBalance;
+		}
+
+		public void setCashBalance(double cashBalance) {
+			this.cashBalance = cashBalance;
+		}
+
+		public String getLogoUrl() {
+			return logoUrl;
+		}
+
+		public void setLogoUrl(String logoUrl) {
+			this.logoUrl = logoUrl;
+		}
+
+		public String getFormHeader() {
+			return formHeader;
+		}
+
+		public void setFormHeader(String formHeader) {
+			this.formHeader = formHeader;
+		}
+
+		public String getFormFooter() {
+			return formFooter;
+		}
+
+		public void setFormFooter(String formFooter) {
+			this.formFooter = formFooter;
+		}
+
+		public LocalDateTime getCreatedOn() {
+			return createdOn;
+		}
+
+		public void setCreatedOn(LocalDateTime createdOn) {
+			this.createdOn = createdOn;
+		}
+
+		public LocalDateTime getUpdatedOn() {
+			return updatedOn;
+		}
+
+		public void setUpdatedOn(LocalDateTime updatedOn) {
+			this.updatedOn = updatedOn;
+		}
+
+		public UserEntity getCreatedBy() {
+			return createdBy;
+		}
+
+		public void setCreatedBy(UserEntity createdBy) {
+			this.createdBy = createdBy;
+		}
+
+		public UserEntity getUpdatedBy() {
+			return updatedBy;
+		}
+
+		public void setUpdatedBy(UserEntity updatedBy) {
+			this.updatedBy = updatedBy;
+		}
+	    
+	    
 }

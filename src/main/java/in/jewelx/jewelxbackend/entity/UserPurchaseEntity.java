@@ -32,22 +32,22 @@ public class UserPurchaseEntity {
 	    @JoinColumn(name = "customer_id", nullable = false)
 	    private CustomerEntity customer;
 
-	    @Column(name = "purity", precision = 3, scale = 2, nullable = false)
+	    @Column(name = "purity", precision = 3, nullable = false)
 	    private BigDecimal purity;
 
 	    @Column(name = "article_description", length = 50, nullable = false)
 	    private String articleDescription;
 
-	    @Column(name = "net_weight", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "net_weight", precision = 8, nullable = false)
 	    private BigDecimal netWeight;
 
-	    @Column(name = "gross_weight", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "gross_weight", precision = 8, nullable = false)
 	    private BigDecimal grossWeight;
 
-	    @Column(name = "metal_rate", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "metal_rate", precision = 8, nullable = false)
 	    private BigDecimal metalRate;
 
-	    @Column(name = "total_amount", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "total_amount", precision = 8, nullable = false)
 	    private BigDecimal totalAmount;
 
 	    @ManyToOne

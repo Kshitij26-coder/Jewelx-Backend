@@ -24,8 +24,8 @@ import jakarta.persistence.TemporalType;
 public class CustomerEntity {
 
     @Id
-    @Column(name = "customer_id", length = 36)
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "customer_id")
     private UUID customerId;
 
     @Column(name = "name", length = 100, nullable = false)
@@ -37,24 +37,24 @@ public class CustomerEntity {
     @Column(name = "address", length = 255, nullable = false)
     private String address;
 
-    @Column(name = "aaddhar_id", precision = 12, scale = 0,unique=true)
+    @Column(name = "aaddhar_id", precision = 12, unique=true)
     private Long aadharId;
 
     @Column(name = "pan_id", length = 10,unique =true)
     private String panId;
 
-    @Column(name = "mobile_number", precision = 12, scale = 0, nullable = false)
+    @Column(name = "mobile_number", precision = 12, nullable = false)
     private Long mobileNumber;
 
-    @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @Column(name = "anivarsary_date")
     @Temporal(TemporalType.DATE)
+    @Column(name = "anivarsary_date")
     private Date anniversaryDate;
 
-    @Column(name = "opening_balance", precision = 15, scale = 2, nullable = false)
+    @Column(name = "opening_balance", precision = 15, nullable = false)
     private Double openingBalance;
 
     @CreationTimestamp

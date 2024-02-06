@@ -28,16 +28,16 @@ public class AccountingEntity {
     @Column(name = "accounting_id")
     private UUID accountingId;
 
-    @Column(name = "current_balance", precision = 15, scale = 2, nullable = false)
+    @Column(name = "current_balance", precision = 15,  nullable = false)
     private BigDecimal currentBalance;
 
-    @Column(name = "transaction_amount", precision = 15, scale = 2, nullable = false)
+    @Column(name = "transaction_amount", precision = 15, nullable = false)
     private BigDecimal transactionAmount;
 
     @Column(name = "transaction_type", length = 1, nullable = false)
     private String transactionType;
 
-    @Temporal(TemporalType.TIME.DATE)
+    @Temporal(TemporalType.DATE)
     @Column(name = "transaction_date", nullable = false)
     private Date transactionDate;
 

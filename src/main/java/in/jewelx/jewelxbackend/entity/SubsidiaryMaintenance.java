@@ -28,13 +28,13 @@ public class SubsidiaryMaintenance {
     @Column(name = "transaction_id")
     private UUID transactionId;
 
-    @Column(name = "transaction_amount", precision = 8, scale = 2, nullable = false)
+    @Column(name = "transaction_amount", precision = 8, nullable = false)
     private BigDecimal transactionAmount;
 
     @Column(name = "transaction_type", length = 1, nullable = false)
     private String transactionType;
 
-    @Column(name = "transaction_description", precision = 15, scale = 2, nullable = false)
+    @Column(name = "transaction_description", precision = 15, nullable = false)
     private BigDecimal transactionDescription;
 
     @Temporal(TemporalType.DATE)

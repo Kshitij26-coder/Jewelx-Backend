@@ -26,7 +26,7 @@ public class MetalEntity {
     @Column(name = "metal_description", nullable = false, length = 100)
     private String metalDescription;
 
-    @Column(name = "metal_rate", nullable = false, precision = 15, scale = 2)
+    @Column(name = "metal_rate", nullable = false, precision = 15)
     private Double metalRate;
 
     @Column(name = "metal_name", nullable = false, length = 20)

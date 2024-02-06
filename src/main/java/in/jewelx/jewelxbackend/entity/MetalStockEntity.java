@@ -31,10 +31,10 @@ public class MetalStockEntity {
     @JoinColumn(name = "metal_id", nullable = false)
     private MetalEntity metal;
 
-    @Column(name = "opening_weight", precision = 8, scale = 2, nullable = false)
+    @Column(name = "opening_weight", precision = 8,  nullable = false)
     private BigDecimal openingWeight;
 
-    @Column(name = "closing_weight", precision = 8, scale = 2, nullable = false)
+    @Column(name = "closing_weight", precision = 8, nullable = false)
     private BigDecimal closingWeight;
 
     @CreationTimestamp

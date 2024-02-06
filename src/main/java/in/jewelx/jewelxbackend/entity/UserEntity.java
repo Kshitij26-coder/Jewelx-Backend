@@ -7,6 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class UserEntity {
     @Column(name = "user_name", length = 100, nullable = false)
     private String userName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "brand_id",nullable=false)
     private BrandEntity brand;
 
@@ -51,8 +52,9 @@ public class UserEntity {
     @JoinColumn(name = "subsidiary_id", nullable = true)
     private SubsidiaryEntity subsidiary;
     
-	@Column(name = "assigned_by", length = 36, nullable = true)
-    private String assignedBy;
+    @ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "assigned_by", nullable = true)
+    private UserEntity assignedBy;
     
     @Column(name = "is_active", nullable = false)
     @ColumnDefault("false")
@@ -67,21 +69,155 @@ public class UserEntity {
     private LocalDateTime createdOn;
 
     @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false,updatable = false)
+    @Column(name = "updated_on", nullable = false)
     private LocalDateTime updatedOn;
     
     @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
+    @JoinColumn(name = "created_by")
     private UserEntity createdBy;
 
     @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
+    @JoinColumn(name = "updated_by")
     private UserEntity updatedBy;
 
     public UserEntity() {
         // Default constructor
         this.userId = UUID.randomUUID();
     }
+
+	public UserEntity(String userName, String email, String mobileNumber, String password,
+			String userRole, SubsidiaryEntity subsidiary, UserEntity assignedBy) {
+		super();
+		this.userName = userName;
+		this.email = email;
+		this.mobileNumber = mobileNumber;
+		this.password = password;
+		this.userRole = userRole;
+		this.subsidiary = subsidiary;
+		this.assignedBy = assignedBy;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public BrandEntity getBrand() {
+		return brand;
+	}
+
+	public void setBrand(BrandEntity brand) {
+		this.brand = brand;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public SubsidiaryEntity getSubsidiary() {
+		return subsidiary;
+	}
+
+	public void setSubsidiary(SubsidiaryEntity subsidiary) {
+		this.subsidiary = subsidiary;
+	}
+
+	public UserEntity getAssignedBy() {
+		return assignedBy;
+	}
+
+	public void setAssignedBy(UserEntity assignedBy) {
+		this.assignedBy = assignedBy;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public UserEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UserEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public UserEntity getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(UserEntity updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	
 
 }
 

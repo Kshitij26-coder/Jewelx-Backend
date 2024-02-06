@@ -30,6 +30,7 @@ public class CustomerOrderEntity {
 	    @Column(name = "metal_id", nullable = false)
 	    private Long metalId;
 
+	    @ManyToOne
 	    @JoinColumn(name = "customer_id", nullable = false)
 	    private CustomerEntity customer;
 
@@ -39,13 +40,13 @@ public class CustomerOrderEntity {
 	    @Column(name = "article_description", length = 200, nullable = false)
 	    private String articleDescription;
 
-	    @Column(name = "gross_weight", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "gross_weight", precision = 8,  nullable = false)
 	    private BigDecimal grossWeight;
 
 	    @Column(name = "net_weight", nullable = false)
 	    private Long netWeight;
 
-	    @Column(name = "paid_amount", precision = 15, scale = 2, nullable = false)
+	    @Column(name = "paid_amount", precision = 15, nullable = false)
 	    private BigDecimal paidAmount;
 
 	    @Column(name = "order_status", length = 2, nullable = false)
@@ -59,7 +60,7 @@ public class CustomerOrderEntity {
 	    @Column(name = "order_date", nullable = false)
 	    private Date orderDate;
 
-	    @Column(name = "metal_rate", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "metal_rate", precision = 8, nullable = false)
 	    private BigDecimal metalRate;
 	    
 	    @CreationTimestamp

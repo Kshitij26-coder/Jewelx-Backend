@@ -30,16 +30,16 @@ public class ArticleStockEntity {
     @Column(name = "barcode", length = 10, nullable = false)
     private String barcode;
 
-    @Column(name = "gross_weight", precision = 8, scale = 2, nullable = false)
+    @Column(name = "gross_weight", precision = 8,  nullable = false)
     private Double grossWeight;
 
-    @Column(name = "net_weight", precision = 8, scale = 2, nullable = false)
+    @Column(name = "net_weight", precision = 8,  nullable = false)
     private Double netWeight;
 
-    @Column(name = "purity", precision = 3, scale = 2, nullable = false)
+    @Column(name = "purity", precision = 3, nullable = false)
     private Double purity;
 
-    @Column(name = "stone_weight", precision = 8, scale = 2, nullable = false)
+    @Column(name = "stone_weight", precision = 8, nullable = false)
     private Double stoneWeight;
 
     @Column(name = "huid", length = 6)

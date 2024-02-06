@@ -31,29 +31,29 @@ public class ItemSaleEntity {
 	    @JoinColumn(name = "sale_id", nullable = false)
 	    private SaleEntity sale;
 
-	    @ManyToMany
+	    @ManyToOne
 	    @JoinColumn(name = "tag_id", nullable = false)
 	    private ArticleStockEntity tagId;
 
 	    @Column(name = "item_amount", nullable = false)
 	    private Long itemAmount;
 
-	    @Column(name = "metal_rate", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "metal_rate", precision = 8,  nullable = false)
 	    private BigDecimal metalRate;
 
 	    @Column(name = "total_amount", nullable = false)
 	    private Long totalAmount;
 
-	    @Column(name = "sgst", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "sgst", precision = 8, nullable = false)
 	    private BigDecimal sgst;
 
-	    @Column(name = "cgst", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "cgst", precision = 8, nullable = false)
 	    private BigDecimal cgst;
 
-	    @Column(name = "payable_amount", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "payable_amount", precision = 8, nullable = false)
 	    private BigDecimal payableAmount;
 
-	    @Column(name = "making_charges", precision = 8, scale = 2, nullable = false)
+	    @Column(name = "making_charges", precision = 8,  nullable = false)
 	    private BigDecimal makingCharges;
 
 	    @CreationTimestamp

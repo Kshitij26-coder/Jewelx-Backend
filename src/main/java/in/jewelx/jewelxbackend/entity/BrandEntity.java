@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,7 +21,7 @@ public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "brand_id")
-    private int brandId;
+    private Integer brandId;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
@@ -36,16 +37,24 @@ public class BrandEntity {
     private LocalDateTime createdOn;
 
     @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false,updatable = false)
+    @Column(name = "updated_on")
     private LocalDateTime updatedOn;
     
     @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
+    @JoinColumn(name = "updated_by",nullable=true)
     private UserEntity updatedBy;
     
     public BrandEntity() {
         // Default constructor
        
     }
+
+	public BrandEntity(String name, String description, String imageUrl) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.imageUrl = imageUrl;
+	}
+    
 
 }
