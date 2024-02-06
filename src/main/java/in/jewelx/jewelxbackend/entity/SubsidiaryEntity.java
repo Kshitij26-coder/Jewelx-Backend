@@ -1,6 +1,7 @@
 package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,17 +13,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-public class Subsidiary {
+@Table(name = "subsidiaries")
+public class SubsidiaryEntity {
 	   @Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
+	    @GeneratedValue(strategy = GenerationType.UUID)
 	    @Column(name = "subsidiary_id")
-	    private int subsidiaryId;
+	    private UUID subsidiaryId;
 
 	   @ManyToOne
 	    @JoinColumn(name = "brand_id",nullable=false)
-	    private Brand brand;
+	    private BrandEntity brand;
 	   
 	    @Column(name = "shop_act_number", length = 18, nullable = false)
 	    private String shopActNumber;
@@ -61,9 +64,9 @@ public class Subsidiary {
 	    
 	    @ManyToOne
 	    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-	    private User createdBy;
+	    private UserEntity createdBy;
 
 	    @ManyToOne
 	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
-	    private User updatedBy;
+	    private UserEntity updatedBy;
 }

@@ -12,9 +12,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-public class Brand {
+@Table(name = "brands")
+public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "brand_id")
@@ -39,9 +41,9 @@ public class Brand {
     
     @ManyToOne
     @JoinColumn(name = "updated_by", nullable = false,updatable = false)
-    private User updatedBy;
+    private UserEntity updatedBy;
     
-    public Brand() {
+    public BrandEntity() {
         // Default constructor
        
     }
