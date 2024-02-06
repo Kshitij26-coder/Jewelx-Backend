@@ -2,8 +2,8 @@ package in.jewelx.jewelxbackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import in.jewelx.jewelxbackend.entity.Brand;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 
-public interface BrandRepository extends JpaRepository<Brand, Integer> {
+public interface BrandRepository extends JpaRepository<BrandEntity, Integer> {
 
 }
