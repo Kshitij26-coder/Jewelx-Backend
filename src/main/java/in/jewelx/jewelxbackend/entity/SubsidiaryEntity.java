@@ -189,6 +189,15 @@ public class SubsidiaryEntity {
 		public void setUpdatedBy(UserEntity updatedBy) {
 			this.updatedBy = updatedBy;
 		}
+
+		@Override
+		public String toString() {
+			return "SubsidiaryEntity [subsidiaryId=" + subsidiaryId + ", brand=" + brand + ", shopActNumber="
+					+ shopActNumber + ", subsidiaryName=" + subsidiaryName + ", address=" + address + ", city=" + city
+					+ ", gstin=" + gstin + ", cashBalance=" + cashBalance + ", logoUrl=" + logoUrl + ", formHeader="
+					+ formHeader + ", formFooter=" + formFooter + ", createdOn=" + createdOn + ", updatedOn="
+					+ updatedOn + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		}
 	    
 	    
 }
