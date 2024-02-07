@@ -18,7 +18,6 @@ public class UserService implements IUserService {
 	@Autowired
 	private BrandService brandService;
 	
-	
 	@Override
 	public String createUser(UserDto userDto) {
 		ViewBrandUser viewBrandUser = UserMapper.mapToBrandUser(userDto);
@@ -26,6 +25,15 @@ public class UserService implements IUserService {
 		
 		if(viewBrandUser.getUser() != null) {
 			viewBrandUser.getUser().setBrand(createdBrand);	
+			
+			if(viewBrandUser.getUser().getAssignedBy().getUserName()==null) {
+				viewBrandUser.getUser().setAssignedBy(null);
+			}
+			
+			if(viewBrandUser.getUser().getSubsidiary().getSubsidiaryId()==null) {
+				viewBrandUser.getUser().setSubsidiary(null);
+			}
+			
 			 userRepo.save(viewBrandUser.getUser());
 			 return "Succesfully saved user data";
 			}

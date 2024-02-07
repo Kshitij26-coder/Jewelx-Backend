@@ -19,6 +19,10 @@ public class ViewBrandUser {
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
+	@Override
+	public String toString() {
+		return "ViewBrandUser [brand=" + brand + ", user=" + user + "]";
+	}
 	
 	
 }

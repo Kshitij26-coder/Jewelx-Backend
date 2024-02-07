@@ -55,6 +55,12 @@ public class BrandEntity {
 		this.description = description;
 		this.imageUrl = imageUrl;
 	}
+
+	@Override
+	public String toString() {
+		return "BrandEntity [brandId=" + brandId + ", name=" + name + ", description=" + description + ", imageUrl="
+				+ imageUrl + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + "]";
+	}
     
 
 }

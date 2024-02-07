@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,11 @@ public class BrandService implements IBrandService {
 	@Override
     @Transactional
 	public BrandEntity createBrand(BrandEntity brandEntity) {
-		
-		if (brandEntity != null) {
-			BrandEntity createdBrand = brandRepo.save(brandEntity);
-			return createdBrand;
+		System.out.println(brandEntity);
+		if (brandEntity == null) {
+			throw new NullPointerException("Brand Entity does not contains any data");
 		}
-		throw new NullPointerException("Brand Entity does not contains any data");
-		
+		return brandRepo.save(brandEntity);
 	}
 
 }

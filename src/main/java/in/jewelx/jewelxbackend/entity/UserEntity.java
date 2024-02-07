@@ -72,13 +72,7 @@ public class UserEntity {
     @Column(name = "updated_on", nullable = false)
     private LocalDateTime updatedOn;
     
-    @ManyToOne
-    @JoinColumn(name = "created_by")
-    private UserEntity createdBy;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by")
-    private UserEntity updatedBy;
 
     public UserEntity() {
         // Default constructor
@@ -201,20 +195,17 @@ public class UserEntity {
 		this.updatedOn = updatedOn;
 	}
 
-	public UserEntity getCreatedBy() {
-		return createdBy;
-	}
 
-	public void setCreatedBy(UserEntity createdBy) {
-		this.createdBy = createdBy;
-	}
 
-	public UserEntity getUpdatedBy() {
-		return updatedBy;
-	}
+	
 
-	public void setUpdatedBy(UserEntity updatedBy) {
-		this.updatedBy = updatedBy;
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", userName=" + userName + ", brand=" + brand + ", email=" + email
+				+ ", mobileNumber=" + mobileNumber + ", password=" + password + ", userRole=" + userRole
+				+ ", subsidiary=" + subsidiary + ", assignedBy=" + assignedBy + ", isActive=" + isActive
+				+ ", isLoggedIn=" + isLoggedIn + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
+				+"]";
 	}
 	
 	
