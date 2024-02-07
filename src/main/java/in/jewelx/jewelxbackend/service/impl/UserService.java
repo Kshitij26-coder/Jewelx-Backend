@@ -3,6 +3,7 @@ package in.jewelx.jewelxbackend.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.jewelx.jewelxbackend.dto.LoginDto;
 import in.jewelx.jewelxbackend.dto.UserDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.mapper.UserMapper;
@@ -38,5 +39,11 @@ public class UserService implements IUserService {
 			 return "Succesfully saved user data";
 			}
 		throw new NullPointerException("User Entity does not contains any data");
+	}
+
+	@Override
+	public String createLogin(LoginDto loginDto) {
+		
+		return null;
 	}
 }
