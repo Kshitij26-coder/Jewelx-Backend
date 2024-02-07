@@ -31,5 +31,4 @@ public class UserService implements IUserService {
 			}
 		throw new NullPointerException("User Entity does not contains any data");
 	}
-
 }
