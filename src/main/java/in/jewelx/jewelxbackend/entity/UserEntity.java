@@ -1,11 +1,14 @@
 package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.UUID;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,65 +25,63 @@ import jakarta.persistence.Table;
  * */
 @Entity
 @Table(name = "users")
-public class UserEntity {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id")
-    private UUID userId;
+public class UserEntity implements UserDetails {
 
-    @Column(name = "user_name", length = 100, nullable = false)
-    private String userName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "user_id")
+	private UUID userId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id",nullable=false)
-    private BrandEntity brand;
+	@Column(name = "user_name", length = 100, nullable = false)
+	private String userName;
 
-    @Column(name = "email", length = 50, nullable = false)
-    private String email;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
 
-    @Column(name = "mobile_number", length = 15, nullable = false)
-    private String mobileNumber;
+	@Column(name = "email", length = 50, nullable = false)
+	private String email;
 
-    @Column(name = "password", length = 30, nullable = false)
-    private String password;
+	@Column(name = "mobile_number", length = 15, nullable = false)
+	private String mobileNumber;
 
-    @Column(name = "user_role", length = 1, nullable = false)
-    private String userRole;
+	@Column(name = "password", length = 500, nullable = false)
+	private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "subsidiary_id", nullable = true)
-    private SubsidiaryEntity subsidiary;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
+	@Column(name = "user_role", length = 1, nullable = false)
+	private String userRole;
+
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = true)
+	private SubsidiaryEntity subsidiary;
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "assigned_by", nullable = true)
-    private UserEntity assignedBy;
-    
-    @Column(name = "is_active", nullable = false)
-    @ColumnDefault("false")
-    private boolean isActive;
-  
-    @Column(name = "is_logged_in", nullable = false)
-    @ColumnDefault("false")
-    private boolean isLoggedIn;
-   
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	private UserEntity assignedBy;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
+	@Column(name = "is_active", nullable = false)
+	@ColumnDefault("false")
+	private boolean isActive;
 
+	@Column(name = "is_logged_in", nullable = false)
+	@ColumnDefault("false")
+	private boolean isLoggedIn;
 
-    public UserEntity() {
-        // Default constructor
-        this.userId = UUID.randomUUID();
-    }
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-	public UserEntity(String userName, String email, String mobileNumber, String password,
-			String userRole, SubsidiaryEntity subsidiary, UserEntity assignedBy) {
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
+
+	public UserEntity() {
+		// Default constructor
+		this.userId = UUID.randomUUID();
+	}
+
+	public UserEntity(String userName, String email, String mobileNumber, String password, String userRole,
+			SubsidiaryEntity subsidiary, UserEntity assignedBy) {
 		super();
 		this.userName = userName;
 		this.email = email;
@@ -195,20 +196,48 @@ public class UserEntity {
 		this.updatedOn = updatedOn;
 	}
 
-
-
-	
-
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", userName=" + userName + ", brand=" + brand + ", email=" + email
 				+ ", mobileNumber=" + mobileNumber + ", password=" + password + ", userRole=" + userRole
 				+ ", subsidiary=" + subsidiary + ", assignedBy=" + assignedBy + ", isActive=" + isActive
-				+ ", isLoggedIn=" + isLoggedIn + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
-				+"]";
+				+ ", isLoggedIn=" + isLoggedIn + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
 	}
-	
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return this.isActive;
+	}
 
 }
-

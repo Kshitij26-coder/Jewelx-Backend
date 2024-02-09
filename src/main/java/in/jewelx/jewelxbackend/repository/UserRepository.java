@@ -10,4 +10,6 @@ import in.jewelx.jewelxbackend.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
+	UserEntity findByEmail(String userName);
+
 }
