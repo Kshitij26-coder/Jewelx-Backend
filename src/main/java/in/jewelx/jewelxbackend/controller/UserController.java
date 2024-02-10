@@ -114,12 +114,11 @@ public class UserController {
         }	
 	}
 
-	
-	
 	@RequestMapping("/test")
 	public String test() {
 		this.logger.warn("This is working message");
 		return "Testing message";
 	}
+
 
 }

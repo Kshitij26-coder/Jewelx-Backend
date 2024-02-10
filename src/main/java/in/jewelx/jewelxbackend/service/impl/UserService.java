@@ -39,7 +39,6 @@ public class UserService implements IUserService, UserDetailsService {
 	private OtpRepository otpRepo;
 
 	
-	
 	@Override
 	public String createUser(UserDto userDto) {
 		ViewBrandUser viewBrandUser = UserMapper.mapToBrandUser(userDto);
@@ -55,14 +54,16 @@ public class UserService implements IUserService, UserDetailsService {
 			if (viewBrandUser.getUser().getSubsidiary().getSubsidiaryId() == null) {
 				viewBrandUser.getUser().setSubsidiary(null);
 			}
+
 			viewBrandUser.getUser().setPassword(passwordEncoder.encode(viewBrandUser.getUser().getPassword()));
+
 			userRepo.save(viewBrandUser.getUser());
 			return "Succesfully saved user data";
 		}
 		throw new NullPointerException("User Entity does not contains any data");
 	}
 
-	
+
 	
 	public String sendOtp(String email) throws MessagingException {
 
@@ -83,7 +84,6 @@ public class UserService implements IUserService, UserDetailsService {
 
 	}
 
-	
 	
 	
 	public boolean verifyOtp(String email, String otpByUser) {
@@ -118,4 +118,5 @@ public class UserService implements IUserService, UserDetailsService {
 		}
 		return user;
 	}
+
 }

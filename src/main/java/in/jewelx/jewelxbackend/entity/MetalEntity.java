@@ -13,45 +13,59 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "metal_master")
 public class MetalEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "metal_id")
-    private Long metalId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "metal_id")
+	private Long metalId;
 
-    @Column(name = "metal_description", nullable = false, length = 100)
-    private String metalDescription;
+	@Column(name = "metal_description", nullable = false, length = 100)
+	private String metalDescription;
 
-    @Column(name = "metal_rate", nullable = false, precision = 15)
-    private Double metalRate;
+	@Column(name = "metal_rate", nullable = false, precision = 15)
+	private Double metalRate;
 
-    @Column(name = "metal_name", nullable = false, length = 20)
-    private String metalName;
+	@Column(name = "metal_name", nullable = false, length = 20)
+	private String metalName;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
-    // Constructors, getters, and setters
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
 
-    public MetalEntity() {
-        // Default constructor
-    }
+	// Constructors, getters, and setters
+
+	public MetalEntity() {
+		// Default constructor
+	}
+
+	public MetalEntity(String metalDescription, Double metalRate, String metalName, UserEntity createdBy,
+			UserEntity updatedBy) {
+		super();
+		this.metalDescription = metalDescription;
+		this.metalRate = metalRate;
+		this.metalName = metalName;
+		this.createdBy = createdBy;
+		this.updatedBy = updatedBy;
+	}
 
 }

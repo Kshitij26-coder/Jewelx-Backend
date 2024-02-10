@@ -35,9 +35,9 @@ public class UserEntity implements UserDetails {
 	@Column(name = "user_name", length = 100, nullable = false)
 	private String userName;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "brand_id", nullable = false)
-	private BrandEntity brand;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "brand_id",nullable=false) 
+    private BrandEntity brand;
 
 	@Column(name = "email", length = 50, nullable = false)
 	private String email;
@@ -203,6 +203,7 @@ public class UserEntity implements UserDetails {
 				+ ", subsidiary=" + subsidiary + ", assignedBy=" + assignedBy + ", isActive=" + isActive
 				+ ", isLoggedIn=" + isLoggedIn + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
 	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
