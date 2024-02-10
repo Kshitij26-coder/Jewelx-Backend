@@ -33,7 +33,7 @@ public class UserEntity {
     private String userName;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id",nullable=false)
+    @JoinColumn(name = "brand_id",nullable=false) 
     private BrandEntity brand;
 
     @Column(name = "email", length = 50, nullable = false)
@@ -195,10 +195,6 @@ public class UserEntity {
 		this.updatedOn = updatedOn;
 	}
 
-
-
-	
-
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", userName=" + userName + ", brand=" + brand + ", email=" + email
@@ -208,7 +204,5 @@ public class UserEntity {
 				+"]";
 	}
 	
-	
-
 }
 

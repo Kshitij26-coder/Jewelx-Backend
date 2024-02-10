@@ -14,12 +14,11 @@ import in.jewelx.jewelxbackend.service.impl.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
-	
+
 	@PostMapping
 	public String createUser(@RequestBody UserDto userDto) {
-		
+
 		return userService.createUser(userDto);
 	}
-	
-	
+
 }
