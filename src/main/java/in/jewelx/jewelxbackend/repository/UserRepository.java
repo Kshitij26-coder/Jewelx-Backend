@@ -11,5 +11,4 @@ import in.jewelx.jewelxbackend.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
 	UserEntity findByEmail(String userName);
-
 }
