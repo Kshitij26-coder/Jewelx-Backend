@@ -1,7 +1,7 @@
 package in.jewelx.jewelxbackend.mapper;
 
-import in.jewelx.jewelxbackend.dto.BrandDto;
-import in.jewelx.jewelxbackend.dto.BrandResponseDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 

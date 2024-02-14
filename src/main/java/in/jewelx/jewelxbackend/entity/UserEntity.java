@@ -19,10 +19,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
  * This entity store the data of different users such 'owner', 'employee', 'manager' etc.
  * */
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "users")
 public class UserEntity implements UserDetails {
@@ -35,9 +41,9 @@ public class UserEntity implements UserDetails {
 	@Column(name = "user_name", length = 100, nullable = false)
 	private String userName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id",nullable=false) 
-    private BrandEntity brand;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
 
 	@Column(name = "email", length = 50, nullable = false)
 	private String email;
@@ -92,118 +98,9 @@ public class UserEntity implements UserDetails {
 		this.assignedBy = assignedBy;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public BrandEntity getBrand() {
-		return brand;
-	}
-
-	public void setBrand(BrandEntity brand) {
-		this.brand = brand;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
-
-	public SubsidiaryEntity getSubsidiary() {
-		return subsidiary;
-	}
-
-	public void setSubsidiary(SubsidiaryEntity subsidiary) {
-		this.subsidiary = subsidiary;
-	}
-
-	public UserEntity getAssignedBy() {
-		return assignedBy;
-	}
-
-	public void setAssignedBy(UserEntity assignedBy) {
-		this.assignedBy = assignedBy;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public boolean isLoggedIn() {
-		return isLoggedIn;
-	}
-
-	public void setLoggedIn(boolean isLoggedIn) {
-		this.isLoggedIn = isLoggedIn;
-	}
-
-	public LocalDateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(LocalDateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public LocalDateTime getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(LocalDateTime updatedOn) {
-		this.updatedOn = updatedOn;
-	}
-
-	@Override
-	public String toString() {
-		return "UserEntity [userId=" + userId + ", userName=" + userName + ", brand=" + brand + ", email=" + email
-				+ ", mobileNumber=" + mobileNumber + ", password=" + password + ", userRole=" + userRole
-				+ ", subsidiary=" + subsidiary + ", assignedBy=" + assignedBy + ", isActive=" + isActive
-				+ ", isLoggedIn=" + isLoggedIn + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
-	}
-
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -211,6 +108,7 @@ public class UserEntity implements UserDetails {
 		return null;
 	}
 
+	// Note: getUsernmae returns email and getUserName return full name of the user
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub

@@ -4,8 +4,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.UUID;
 
-import in.jewelx.jewelxbackend.dto.CustomerDto;
-import in.jewelx.jewelxbackend.dto.CustomerResponseDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
 
 public interface ICustomerService {
 

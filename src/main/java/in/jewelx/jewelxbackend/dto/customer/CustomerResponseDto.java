@@ -1,6 +1,7 @@
-package in.jewelx.jewelxbackend.dto;
+package in.jewelx.jewelxbackend.dto.customer;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomerDto {
+public class CustomerResponseDto {
 	private String name;
 
 	private Integer pincode;
@@ -27,6 +28,9 @@ public class CustomerDto {
 
 	private Double openingBalance;
 
-	private UUID userID;
+	private UUID customerID;
 
+	private LocalDateTime createdOn;
+
+	private LocalDateTime updatedOn;
 }

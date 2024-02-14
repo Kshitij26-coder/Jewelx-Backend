@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import in.jewelx.jewelxbackend.dto.MetalDto;
-import in.jewelx.jewelxbackend.dto.MetalResponseDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
@@ -31,6 +31,7 @@ public class MetalService implements IMetalService {
 			metalRepo.save(MetalMapper.metalDtoToMetalEntity(metalDto));
 			return "Successfull save metal data";
 		}
+		
 	}
 
 	@Override

@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import in.jewelx.jewelxbackend.dto.BrandDto;
-import in.jewelx.jewelxbackend.dto.BrandResponseDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;

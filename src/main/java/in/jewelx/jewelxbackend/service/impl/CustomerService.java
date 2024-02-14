@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import in.jewelx.jewelxbackend.dto.CustomerDto;
-import in.jewelx.jewelxbackend.dto.CustomerResponseDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
 import in.jewelx.jewelxbackend.entity.CustomerEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
