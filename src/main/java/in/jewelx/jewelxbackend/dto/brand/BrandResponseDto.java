@@ -1,15 +1,13 @@
-package in.jewelx.jewelxbackend.dto;
-
-import java.util.UUID;
+package in.jewelx.jewelxbackend.dto.brand;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class BrandDto {
+public class BrandResponseDto {
+	private Long brandId;
 	private String name;
 	private String description;
 	private String imageUrl;
-	private UUID userId;
 }

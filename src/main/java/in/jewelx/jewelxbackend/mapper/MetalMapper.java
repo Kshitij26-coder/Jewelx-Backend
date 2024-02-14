@@ -1,7 +1,7 @@
 package in.jewelx.jewelxbackend.mapper;
 
-import in.jewelx.jewelxbackend.dto.MetalDto;
-import in.jewelx.jewelxbackend.dto.MetalResponseDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 

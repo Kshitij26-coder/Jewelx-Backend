@@ -27,6 +27,10 @@ import lombok.Setter;
 public class CustomerEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idx_id")
+	private Long idxId;
+
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "customer_id")
 	private UUID customerId;

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.jewelx.jewelxbackend.dto.BrandDto;
-import in.jewelx.jewelxbackend.dto.BrandResponseDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.mapper.BrandMapper;
 import in.jewelx.jewelxbackend.service.impl.BrandService;

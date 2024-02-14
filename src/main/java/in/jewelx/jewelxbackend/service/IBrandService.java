@@ -2,8 +2,8 @@ package in.jewelx.jewelxbackend.service;
 
 import java.util.List;
 
-import in.jewelx.jewelxbackend.dto.BrandDto;
-import in.jewelx.jewelxbackend.dto.BrandResponseDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 
 public interface IBrandService {

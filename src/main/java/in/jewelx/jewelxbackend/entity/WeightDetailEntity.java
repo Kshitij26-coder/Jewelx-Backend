@@ -20,7 +20,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "weight_details")
 public class WeightDetailEntity {
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idx_id")
+	private Long idxId;
+	
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "detail_id", length = 36)
     private UUID detailId;

@@ -2,8 +2,8 @@ package in.jewelx.jewelxbackend.service;
 
 import java.util.List;
 
-import in.jewelx.jewelxbackend.dto.MetalDto;
-import in.jewelx.jewelxbackend.dto.MetalResponseDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
 
 public interface IMetalService {
 	String createMetal(MetalDto metalDto);

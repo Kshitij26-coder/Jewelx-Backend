@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.jewelx.jewelxbackend.dto.CustomerDto;
-import in.jewelx.jewelxbackend.dto.CustomerResponseDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.service.impl.CustomerService;
 
