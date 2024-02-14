@@ -34,6 +34,9 @@ import lombok.ToString;
 public class UserEntity implements UserDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "user_id")
 	private UUID userId;

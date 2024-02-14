@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserBrandResponseDto {
-	private int brandId;
+	private long brandId;
 	private String brandName;
 }

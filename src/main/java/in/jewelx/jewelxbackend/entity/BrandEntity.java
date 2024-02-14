@@ -21,9 +21,9 @@ import lombok.Setter;
 @Table(name = "brands")
 public class BrandEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "brand_id")
-	private Integer brandId;
+	private Long brandId;
 
 	@Column(name = "name", length = 100, nullable = false)
 	private String name;

@@ -24,6 +24,9 @@ import jakarta.persistence.TemporalType;
 public class AccountingEntity {
 	
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "accounting_id")
     private UUID accountingId;

@@ -24,6 +24,9 @@ import jakarta.persistence.TemporalType;
 public class SubsidiaryMaintenance {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "transaction_id")
     private UUID transactionId;

@@ -18,186 +18,189 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "subsidiaries")
 public class SubsidiaryEntity {
-	   @Id
-	    @GeneratedValue(strategy = GenerationType.UUID)
-	    @Column(name = "subsidiary_id")
-	    private UUID subsidiaryId;
 
-	   @ManyToOne
-	    @JoinColumn(name = "brand_id",nullable=false)
-	    private BrandEntity brand;
-	   
-	    @Column(name = "shop_act_number", length = 18, nullable = false)
-	    private String shopActNumber;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	    @Column(name = "subsidiary_name", length = 255, nullable = false)
-	    private String subsidiaryName;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "subsidiary_id")
+	private UUID subsidiaryId;
 
-	    @Column(name = "address", columnDefinition = "TEXT", nullable = false)
-	    private String address;
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
 
-	    @Column(name = "city", length = 20, nullable = false)
-	    private String city;
+	@Column(name = "shop_act_number", length = 18, nullable = false)
+	private String shopActNumber;
 
-	    @Column(name = "gstin", length = 15, nullable = false)
-	    private String gstin;
+	@Column(name = "subsidiary_name", length = 255, nullable = false)
+	private String subsidiaryName;
 
-	    @Column(name = "cash_balance", precision = 15, nullable = false)
-	    private double cashBalance;
+	@Column(name = "address", columnDefinition = "TEXT", nullable = false)
+	private String address;
 
-	    @Column(name = "logo_url", length = 150, nullable = false)
-	    private String logoUrl;
+	@Column(name = "city", length = 20, nullable = false)
+	private String city;
 
-	    @Column(name = "form_header", columnDefinition = "TEXT", nullable = false)
-	    private String formHeader;
+	@Column(name = "gstin", length = 15, nullable = false)
+	private String gstin;
 
-	    @Column(name = "form_footer", columnDefinition = "TEXT", nullable = false)
-	    private String formFooter;
-	    
-	    @CreationTimestamp
-	    @Column(name = "created_on", nullable = false, updatable = false)
-	    private LocalDateTime createdOn;
+	@Column(name = "cash_balance", precision = 15, nullable = false)
+	private double cashBalance;
 
-	    @UpdateTimestamp
-	    @Column(name = "updated_on", nullable = false,updatable = false)
-	    private LocalDateTime updatedOn;
-	    
-	    @ManyToOne
-	    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-	    private UserEntity createdBy;
+	@Column(name = "logo_url", length = 150, nullable = false)
+	private String logoUrl;
 
-	    @ManyToOne
-	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
-	    private UserEntity updatedBy;
+	@Column(name = "form_header", columnDefinition = "TEXT", nullable = false)
+	private String formHeader;
 
-		public UUID getSubsidiaryId() {
-			return subsidiaryId;
-		}
+	@Column(name = "form_footer", columnDefinition = "TEXT", nullable = false)
+	private String formFooter;
 
-		public void setSubsidiaryId(UUID subsidiaryId) {
-			this.subsidiaryId = subsidiaryId;
-		}
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-		public BrandEntity getBrand() {
-			return brand;
-		}
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false, updatable = false)
+	private LocalDateTime updatedOn;
 
-		public void setBrand(BrandEntity brand) {
-			this.brand = brand;
-		}
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
-		public String getShopActNumber() {
-			return shopActNumber;
-		}
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false, updatable = false)
+	private UserEntity updatedBy;
 
-		public void setShopActNumber(String shopActNumber) {
-			this.shopActNumber = shopActNumber;
-		}
+	public UUID getSubsidiaryId() {
+		return subsidiaryId;
+	}
 
-		public String getSubsidiaryName() {
-			return subsidiaryName;
-		}
+	public void setSubsidiaryId(UUID subsidiaryId) {
+		this.subsidiaryId = subsidiaryId;
+	}
 
-		public void setSubsidiaryName(String subsidiaryName) {
-			this.subsidiaryName = subsidiaryName;
-		}
+	public BrandEntity getBrand() {
+		return brand;
+	}
 
-		public String getAddress() {
-			return address;
-		}
+	public void setBrand(BrandEntity brand) {
+		this.brand = brand;
+	}
 
-		public void setAddress(String address) {
-			this.address = address;
-		}
+	public String getShopActNumber() {
+		return shopActNumber;
+	}
 
-		public String getCity() {
-			return city;
-		}
+	public void setShopActNumber(String shopActNumber) {
+		this.shopActNumber = shopActNumber;
+	}
 
-		public void setCity(String city) {
-			this.city = city;
-		}
+	public String getSubsidiaryName() {
+		return subsidiaryName;
+	}
 
-		public String getGstin() {
-			return gstin;
-		}
+	public void setSubsidiaryName(String subsidiaryName) {
+		this.subsidiaryName = subsidiaryName;
+	}
 
-		public void setGstin(String gstin) {
-			this.gstin = gstin;
-		}
+	public String getAddress() {
+		return address;
+	}
 
-		public double getCashBalance() {
-			return cashBalance;
-		}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-		public void setCashBalance(double cashBalance) {
-			this.cashBalance = cashBalance;
-		}
+	public String getCity() {
+		return city;
+	}
 
-		public String getLogoUrl() {
-			return logoUrl;
-		}
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-		public void setLogoUrl(String logoUrl) {
-			this.logoUrl = logoUrl;
-		}
+	public String getGstin() {
+		return gstin;
+	}
 
-		public String getFormHeader() {
-			return formHeader;
-		}
+	public void setGstin(String gstin) {
+		this.gstin = gstin;
+	}
 
-		public void setFormHeader(String formHeader) {
-			this.formHeader = formHeader;
-		}
+	public double getCashBalance() {
+		return cashBalance;
+	}
 
-		public String getFormFooter() {
-			return formFooter;
-		}
+	public void setCashBalance(double cashBalance) {
+		this.cashBalance = cashBalance;
+	}
 
-		public void setFormFooter(String formFooter) {
-			this.formFooter = formFooter;
-		}
+	public String getLogoUrl() {
+		return logoUrl;
+	}
 
-		public LocalDateTime getCreatedOn() {
-			return createdOn;
-		}
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
 
-		public void setCreatedOn(LocalDateTime createdOn) {
-			this.createdOn = createdOn;
-		}
+	public String getFormHeader() {
+		return formHeader;
+	}
 
-		public LocalDateTime getUpdatedOn() {
-			return updatedOn;
-		}
+	public void setFormHeader(String formHeader) {
+		this.formHeader = formHeader;
+	}
 
-		public void setUpdatedOn(LocalDateTime updatedOn) {
-			this.updatedOn = updatedOn;
-		}
+	public String getFormFooter() {
+		return formFooter;
+	}
 
-		public UserEntity getCreatedBy() {
-			return createdBy;
-		}
+	public void setFormFooter(String formFooter) {
+		this.formFooter = formFooter;
+	}
 
-		public void setCreatedBy(UserEntity createdBy) {
-			this.createdBy = createdBy;
-		}
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
 
-		public UserEntity getUpdatedBy() {
-			return updatedBy;
-		}
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
 
-		public void setUpdatedBy(UserEntity updatedBy) {
-			this.updatedBy = updatedBy;
-		}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
 
-		@Override
-		public String toString() {
-			return "SubsidiaryEntity [subsidiaryId=" + subsidiaryId + ", brand=" + brand + ", shopActNumber="
-					+ shopActNumber + ", subsidiaryName=" + subsidiaryName + ", address=" + address + ", city=" + city
-					+ ", gstin=" + gstin + ", cashBalance=" + cashBalance + ", logoUrl=" + logoUrl + ", formHeader="
-					+ formHeader + ", formFooter=" + formFooter + ", createdOn=" + createdOn + ", updatedOn="
-					+ updatedOn + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
-		}
-	    
-	    
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public UserEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UserEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public UserEntity getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(UserEntity updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Override
+	public String toString() {
+		return "SubsidiaryEntity [subsidiaryId=" + subsidiaryId + ", brand=" + brand + ", shopActNumber="
+				+ shopActNumber + ", subsidiaryName=" + subsidiaryName + ", address=" + address + ", city=" + city
+				+ ", gstin=" + gstin + ", cashBalance=" + cashBalance + ", logoUrl=" + logoUrl + ", formHeader="
+				+ formHeader + ", formFooter=" + formFooter + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+	}
+
 }

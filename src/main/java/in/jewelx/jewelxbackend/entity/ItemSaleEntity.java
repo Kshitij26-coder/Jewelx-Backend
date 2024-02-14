@@ -21,6 +21,9 @@ import jakarta.persistence.Table;
 public class ItemSaleEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "item_id")
 	private UUID itemId;
