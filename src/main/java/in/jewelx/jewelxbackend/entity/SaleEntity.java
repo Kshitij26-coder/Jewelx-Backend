@@ -29,7 +29,8 @@ public class SaleEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Column(name = "idx_id")
+	private Long idxId;
 
     @Column(name = "sale_id")
 	@GeneratedValue(strategy = GenerationType.UUID)

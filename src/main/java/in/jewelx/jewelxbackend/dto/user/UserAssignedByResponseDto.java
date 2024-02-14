@@ -12,8 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAssignedByResponseDto {
-
-	private UUID uuid;
+	private UUID userId;
 	private String username;
 	private String email;
 

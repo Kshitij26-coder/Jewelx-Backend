@@ -30,7 +30,6 @@ public class UserMapper {
 
 	public static UserResponseDto UserToUserResponseDto(UserEntity user) {
 		UserResponseDto userDto = new UserResponseDto();
-
 		UUID userId = null;
 		String email = null;
 		String userName = null;
