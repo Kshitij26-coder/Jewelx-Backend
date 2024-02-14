@@ -1,4 +1,4 @@
-package in.jewelx.jewelxbackend.dto;
+package in.jewelx.jewelxbackend.dto.uom;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package in.jewelx.jewelxbackend.dto;
+package in.jewelx.jewelxbackend.dto.uom;
 
 import lombok.Getter;
 import lombok.Setter;

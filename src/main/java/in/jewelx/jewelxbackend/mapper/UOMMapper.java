@@ -1,7 +1,7 @@
 package in.jewelx.jewelxbackend.mapper;
 
-import in.jewelx.jewelxbackend.dto.UOMDto;
-import in.jewelx.jewelxbackend.dto.UOMResponseDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMResponseDto;
 import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 

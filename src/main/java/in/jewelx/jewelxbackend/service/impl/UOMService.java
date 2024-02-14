@@ -4,8 +4,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import in.jewelx.jewelxbackend.dto.UOMDto;
-import in.jewelx.jewelxbackend.dto.UOMResponseDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMResponseDto;
 import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;

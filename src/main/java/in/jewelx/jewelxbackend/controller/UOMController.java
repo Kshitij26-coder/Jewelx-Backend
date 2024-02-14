@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.jewelx.jewelxbackend.dto.UOMDto;
-import in.jewelx.jewelxbackend.dto.UOMResponseDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMDto;
+import in.jewelx.jewelxbackend.dto.uom.UOMResponseDto;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.service.impl.UOMService;
 
