@@ -1,6 +1,5 @@
 package in.jewelx.jewelxbackend.repository;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -14,6 +13,6 @@ import in.jewelx.jewelxbackend.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
 	UserEntity findByEmail(String userName);
-	
-	Page<UserEntity> findByUserRole(String userRole,Pageable pageable);
+
+	Page<UserEntity> findByUserRole(String userRole, Pageable pageable);
 }

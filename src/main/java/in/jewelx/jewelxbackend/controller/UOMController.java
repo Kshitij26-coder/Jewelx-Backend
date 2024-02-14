@@ -2,10 +2,8 @@ package in.jewelx.jewelxbackend.controller;
 
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,26 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.jewelx.jewelxbackend.dto.uom.UOMDto;
 import in.jewelx.jewelxbackend.dto.uom.UOMResponseDto;
-import in.jewelx.jewelxbackend.exception.IdNotFoundException;
+
 import in.jewelx.jewelxbackend.service.impl.UOMService;
 
 @RestController
 @RequestMapping("/uom")
 public class UOMController {
-	
+
 	@Autowired
 	UOMService uomService;
-	
+
 	@PutMapping
 	public ResponseEntity<?> createUOM(@RequestBody UOMDto uomDto) {
-		try {
-			return ResponseEntity.ok(uomService.createUOM(uomDto));
-		} catch (DataIntegrityViolationException | ConstraintViolationException err) {
-			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body("Integrity constraint violation: " + err.getMessage());
-		} catch (Exception err) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err.getMessage());
-		}
+		return ResponseEntity.ok(uomService.createUOM(uomDto));
 	}
 
 	@GetMapping
@@ -46,28 +37,16 @@ public class UOMController {
 
 	@GetMapping("/{uomId}")
 	public ResponseEntity<?> getOneCustomer(@PathVariable("uomID") Long id) {
-		try {
-			return ResponseEntity.ok(uomService.getOneUOM(id));
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		return ResponseEntity.ok(uomService.getOneUOM(id));
 	}
 
 	@PutMapping("/{uomId}")
 	public ResponseEntity<?> updateCustomer(@PathVariable("uomId") Long id, @RequestBody UOMDto uomDto) {
-		try {
-			return ResponseEntity.ok(uomService.updateUOM(id, uomDto));
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		return ResponseEntity.ok(uomService.updateUOM(id, uomDto));
 	}
 
 	@DeleteMapping("/{uomId}")
 	public ResponseEntity<String> deleteCustomerById(@PathVariable("uomId") Long id) {
-		try {
-			return ResponseEntity.ok(uomService.deleteUOMById(id));
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		return ResponseEntity.ok(uomService.deleteUOMById(id));
 	}
 }

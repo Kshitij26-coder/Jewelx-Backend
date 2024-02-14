@@ -1,6 +1,5 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,7 +24,7 @@ public class CustomerService implements ICustomerService {
 	CustomerRepository customerRepo;
 
 	@Override
-	public String createCustomer(CustomerDto customerDto) throws SQLIntegrityConstraintViolationException{
+	public String createCustomer(CustomerDto customerDto) {
 		if (customerDto == null) {
 			throw new NullObjectException("CustomerDto is null");
 		}

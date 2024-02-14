@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
-import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.service.impl.MetalService;
 import in.jewelx.jewelxbackend.utils.ResponseBuilder;
 
@@ -27,44 +26,27 @@ public class MetalController {
 
 	@PostMapping
 	public ResponseEntity<String> createMetal(@RequestBody MetalDto metalDto) {
-
 		return ResponseBuilder.status(HttpStatus.CREATED).body(metalService.createMetal(metalDto));
-
 	}
 
 	@GetMapping
 	public ResponseEntity<?> getAllMetals() {
 		return ResponseEntity.ok(metalService.getAllMetals());
-
 	}
 
 	@DeleteMapping("/{metalId}")
 	public ResponseEntity<String> deleteUserById(@PathVariable("metalId") Long id) {
-		try {
-			return ResponseEntity.ok(metalService.deleteMetalById(id));
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		return ResponseEntity.ok(metalService.deleteMetalById(id));
 	}
 
 	@PutMapping("/{metalId}")
 	public ResponseEntity<String> updateMetal(@RequestBody MetalDto metalDto, @PathVariable("metalId") Long id) {
-		try {
-			return ResponseEntity.ok(metalService.updateMetal(id, metalDto));
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-
+		return ResponseEntity.ok(metalService.updateMetal(id, metalDto));
 	}
 
 	@GetMapping("/{metalId}")
 	public ResponseEntity<?> getOneMetal(@PathVariable("metalId") Long id) {
-		try {
-			MetalResponseDto foundMetal = metalService.getOneMetal(id);
-			return ResponseEntity.ok(foundMetal);
-		} catch (IdNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
+		MetalResponseDto foundMetal = metalService.getOneMetal(id);
+		return ResponseEntity.ok(foundMetal);
 	}
-
 }
