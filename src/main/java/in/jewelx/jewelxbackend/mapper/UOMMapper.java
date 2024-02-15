@@ -6,20 +6,20 @@ import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
 public class UOMMapper {
-	
+
 	public static UnitOfMeasurementEntity dtoToUOMEntity(UOMDto uomDto) {
-		
+
 		UnitOfMeasurementEntity uomEntity = new UnitOfMeasurementEntity();
 		uomEntity.setUomCode(uomDto.getUomCode());
 		uomEntity.setUomName(uomDto.getUomName());
 		uomEntity.setDescription(uomDto.getDescription());
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(uomDto.getUserID());
+		userEntity.setIdxId(uomDto.getUserID());
 		uomEntity.setCreatedBy(userEntity);
 		uomEntity.setUpdatedBy(userEntity);
 		return uomEntity;
 	}
-	
+
 	public static UOMResponseDto uomEntityToUOMRespDto(UnitOfMeasurementEntity uomEntity) {
 		UOMResponseDto uomResp = new UOMResponseDto();
 		uomResp.setUomId(uomEntity.getUomId());

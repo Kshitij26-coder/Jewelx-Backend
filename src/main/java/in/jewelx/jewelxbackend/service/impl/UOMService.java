@@ -1,8 +1,7 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.uom.UOMDto;
@@ -30,9 +29,10 @@ public class UOMService implements IUOMService {
 	}
 
 	@Override
-	public List<UOMResponseDto> getAllUOM() {
-		List<UnitOfMeasurementEntity> allUOMs = uomRepo.findAll();
-		return allUOMs.stream().map(UOMMapper::uomEntityToUOMRespDto).collect(Collectors.toList());
+	public Page<UOMResponseDto> getAllUOM(int pageNumber, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+		Page<UnitOfMeasurementEntity> uomPage = uomRepo.findAll(pageRequest);
+		return uomPage.map(UOMMapper::uomEntityToUOMRespDto);
 	}
 
 	@Override
@@ -65,10 +65,10 @@ public class UOMService implements IUOMService {
 			foundUOM.setUomCode(updatedUOM.getUomCode());
 		}
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(uomDto.getUserID());
+		userEntity.setIdxId(uomDto.getUserID());
 		foundUOM.setUpdatedBy(userEntity);
 		uomRepo.save(foundUOM);
-		return null;
+		return "Unit of Measurement Entity Updated Successfully";
 	}
 
 }
