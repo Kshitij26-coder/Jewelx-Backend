@@ -13,7 +13,7 @@ public class BrandMapper {
 		brandEntity.setImageUrl(brandDto.getImageUrl());
 		brandEntity.setName(brandDto.getName());
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(brandDto.getUserId());
+		userEntity.setIdxId(brandDto.getUserId());
 		brandEntity.setUpdatedBy(userEntity);
 		return brandEntity;
 	}

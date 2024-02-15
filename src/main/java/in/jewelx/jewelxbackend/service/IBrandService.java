@@ -1,7 +1,6 @@
 package in.jewelx.jewelxbackend.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import in.jewelx.jewelxbackend.dto.brand.BrandDto;
 import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
@@ -9,12 +8,12 @@ import in.jewelx.jewelxbackend.entity.BrandEntity;
 public interface IBrandService {
 	BrandEntity createBrand(BrandEntity brandEntity);
 
-	List<BrandResponseDto> getAllBrands();
+	String deleteBrandById(Long id);
 
-	String deleteBrandById(Integer id);
+	BrandResponseDto getOneBrand(Long id);
 
-	BrandResponseDto getOneBrand(Integer id);
-	
-	String updateBrand(Integer id, BrandDto brandDto);
+	String updateBrand(Long id, BrandDto brandDto);
+
+	Page<BrandResponseDto> getAllBrands(int pageNumber, int pageSize);
 
 }

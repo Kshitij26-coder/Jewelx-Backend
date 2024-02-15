@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 
 @Repository
-public interface BrandRepository extends JpaRepository<BrandEntity, Integer> {
+public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
 
 }

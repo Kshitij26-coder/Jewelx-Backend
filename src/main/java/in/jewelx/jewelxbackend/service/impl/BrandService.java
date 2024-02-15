@@ -1,9 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.brand.BrandDto;
@@ -33,26 +32,27 @@ public class BrandService implements IBrandService {
 	}
 
 	@Override
-	public List<BrandResponseDto> getAllBrands() {
-		List<BrandEntity> allBrands = brandRepo.findAll();
-		return allBrands.stream().map(BrandMapper::brandEntityToBrandRespDto).collect(Collectors.toList());
+	public Page<BrandResponseDto> getAllBrands(int pageNumber, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+		Page<BrandEntity> brandsPage = brandRepo.findAll(pageRequest);
+		return brandsPage.map(BrandMapper::brandEntityToBrandRespDto);
 	}
 
 	@Override
-	public String deleteBrandById(Integer id) {
+	public String deleteBrandById(Long id) {
 		getOneBrand(id);
 		brandRepo.deleteById(id);
 		return "Brand with id: " + id + " is deleted Successfully";
 	}
 
 	@Override
-	public BrandResponseDto getOneBrand(Integer id) {
+	public BrandResponseDto getOneBrand(Long id) {
 		BrandEntity foundBrand = brandRepo.findById(id).orElseThrow(() -> new IdNotFoundException("Invalid id"));
 		return BrandMapper.brandEntityToBrandRespDto(foundBrand);
 	}
 
 	@Override
-	public String updateBrand(Integer id, BrandDto brandDto) {
+	public String updateBrand(Long id, BrandDto brandDto) {
 		BrandEntity updatedBrand = BrandMapper.dtoToBrandEntity(brandDto);
 		BrandEntity foundBrand = brandRepo.findById(id).orElseThrow(() -> new IdNotFoundException("Invalid id"));
 		if (updatedBrand.getName() != null) {
@@ -65,7 +65,7 @@ public class BrandService implements IBrandService {
 			foundBrand.setImageUrl(updatedBrand.getImageUrl());
 		}
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(brandDto.getUserId());
+		userEntity.setIdxId(brandDto.getUserId());
 		foundBrand.setUpdatedBy(userEntity);
 		brandRepo.save(foundBrand);
 		return "Brand updated Successfully";
