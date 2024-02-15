@@ -38,8 +38,8 @@ public class UserEntity implements UserDetails {
 	@Column(name = "idx_id")
 	private Long idxId;
 
-	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID userId;
 
 	@Column(name = "user_name", length = 100, nullable = false)
@@ -93,6 +93,7 @@ public class UserEntity implements UserDetails {
 	public UserEntity(String userName, String email, String mobileNumber, String password, String userRole,
 			SubsidiaryEntity subsidiary, UserEntity assignedBy) {
 		super();
+		this.userId = UUID.randomUUID();
 		this.userName = userName;
 		this.email = email;
 		this.mobileNumber = mobileNumber;

@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAssignedByResponseDto {
+	private Long idxId;
 	private UUID userId;
 	private String username;
 	private String email;

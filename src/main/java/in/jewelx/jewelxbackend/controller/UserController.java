@@ -104,7 +104,8 @@ public class UserController {
 
 	// get specific user using id
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable UUID userid) {
+	public ResponseEntity<?> getUserById(@PathVariable("id") UUID userid) {
+		System.out.println(userid);
 		return ResponseEntity.ok(userService.getUserById(userid));
 	}
 

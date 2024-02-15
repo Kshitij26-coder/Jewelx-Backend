@@ -134,7 +134,8 @@ public class UserService implements IUserService, UserDetailsService {
 
 	public UserEntity updateUser(UUID userId, UpdateUserDto updatedUserData) {
 		// Find the user by userId
-		UserEntity existingUser = userRepo.findById(userId)
+		UserEntity existingUser = userRepo
+				.findByUserId(userId)
 				.orElseThrow(() -> new NullObjectException("User not found with userId: " + userId));
 
 		existingUser.setUserName(updatedUserData.getUsername());
@@ -147,7 +148,7 @@ public class UserService implements IUserService, UserDetailsService {
 
 	// returns a specific user by Id
 	public UserEntity getUserById(UUID id) {
-		UserEntity user = userRepo.findById(id).orElseThrow(() -> new IdNotFoundException(id + " not found"));
+		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new IdNotFoundException(id + " not found"));
 		return user;
 	}
 

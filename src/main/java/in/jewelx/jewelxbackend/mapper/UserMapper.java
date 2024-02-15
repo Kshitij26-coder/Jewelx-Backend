@@ -30,11 +30,13 @@ public class UserMapper {
 
 	public static UserResponseDto UserToUserResponseDto(UserEntity user) {
 		UserResponseDto userDto = new UserResponseDto();
+		Long idxId = null;
 		UUID userId = null;
 		String email = null;
 		String userName = null;
 
 		if (user.getAssignedBy() != null) {
+			idxId = user.getIdxId();
 			email = user.getAssignedBy().getEmail();
 			userId = user.getAssignedBy().getUserId();
 			userName = user.getAssignedBy().getUsername();
@@ -48,7 +50,7 @@ public class UserMapper {
 			subsidiaryId = user.getSubsidiary().getSubsidiaryId();
 		}
 
-		UserAssignedByResponseDto userAssignedByDto = new UserAssignedByResponseDto(userId, userName, email);
+		UserAssignedByResponseDto userAssignedByDto = new UserAssignedByResponseDto(idxId, userId, userName, email);
 		UserSubsidiaryResponseDto userSubsidiaryDto = new UserSubsidiaryResponseDto(subsidiaryId, subsidaryName);
 		UserBrandResponseDto userBrandResponseDto = new UserBrandResponseDto(user.getBrand().getBrandId(),
 				user.getBrand().getName());
