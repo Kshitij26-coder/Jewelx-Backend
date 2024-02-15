@@ -14,56 +14,61 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
 /*
  * This entity stores information about any credit or debit in terms of metal of a customer.
  * */
+@Getter
+@Setter
 @Entity
 @Table(name = "weight_details")
 public class WeightDetailEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idx_id")
+	@Column(name = "idx_id")
 	private Long idxId;
-	
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "detail_id", length = 36)
-    private UUID detailId;
 
-	 @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private	CustomerEntity customer;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "detail_id", length = 36)
+	private UUID detailId;
 
-    @ManyToOne
-    @JoinColumn(name = "metal_id", nullable = false)
-    private MetalEntity metal;
+	@ManyToOne
+	@JoinColumn(name = "customer_id", nullable = false)
+	private CustomerEntity customer;
 
-    @Column(name = "metal_weight", precision = 6, nullable = false)
-    private Double metalWeight;
+	@ManyToOne
+	@JoinColumn(name = "metal_id", nullable = false)
+	private MetalEntity metal;
 
-    @ManyToOne
-    @JoinColumn(name = "uom_code", nullable = false)
-    private UnitOfMeasurementEntity uom;
+	@Column(name = "metal_weight", precision = 6, nullable = false)
+	private Double metalWeight;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@ManyToOne
+	@JoinColumn(name = "uom_code", nullable = false)
+	private UnitOfMeasurementEntity uom;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    // Constructors, getters, and setters
-    public WeightDetailEntity() {
-        // Default constructor
-    	
-    }
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
+
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
+
+	// Constructors, getters, and setters
+	public WeightDetailEntity() {
+		// Default constructor
+
+	}
 }
