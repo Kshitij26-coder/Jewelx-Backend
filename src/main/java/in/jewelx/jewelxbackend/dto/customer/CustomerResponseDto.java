@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CustomerResponseDto {
+	private Long idx_id;
+
 	private String name;
 
 	private Integer pincode;

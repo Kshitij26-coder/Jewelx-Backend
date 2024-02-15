@@ -1,10 +1,10 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
@@ -33,62 +33,54 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public List<CustomerResponseDto> getAllCustomers() {
-		List<CustomerEntity> allCustomers = customerRepo.findAll();
-		return allCustomers.stream().map(CustomerMapper::customerEntityToCustomerRespDto).collect(Collectors.toList());
+	public Page<CustomerResponseDto> getAllCustomers(int pageNumber, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+		Page<CustomerEntity> allCustomers = customerRepo.findAll(pageRequest);
+		return allCustomers.map(CustomerMapper::customerEntityToCustomerRespDto);
 	}
 
 	@Override
 	public String deleteCustomerById(UUID id) {
 		getOneCustomer(id);
-		customerRepo.deleteById(id);
+		customerRepo.deleteByCustomerId(id);
 		return "Customer deleted Successfully";
 	}
 
 	@Override
 	public CustomerResponseDto getOneCustomer(UUID id) {
-		CustomerEntity foundCutomer = customerRepo.findById(id)
-				.orElseThrow(() -> new IdNotFoundException("Invalid id"));
+		CustomerEntity foundCutomer = customerRepo.findByCustomerId(id)
+				.orElseThrow(() -> new IdNotFoundException("Invalid Customer id"));
 		return CustomerMapper.customerEntityToCustomerRespDto(foundCutomer);
 	}
 
 	@Override
 	public String updateCustomer(UUID id, CustomerDto customerDto) {
 		CustomerEntity updatedCustomer = CustomerMapper.dtoToCustomerEntity(customerDto);
-		CustomerEntity foundCustomer = customerRepo.findById(id)
+		CustomerEntity foundCustomer = customerRepo.findByCustomerId(id)
 				.orElseThrow(() -> new IdNotFoundException("Invalid Id"));
-		if (updatedCustomer.getAadharId() != null)
-			foundCustomer.setAadharId(updatedCustomer.getAadharId());
 
-		if (updatedCustomer.getAddress() != null)
-			foundCustomer.setAddress(updatedCustomer.getAddress());
+		foundCustomer.setAadharId(updatedCustomer.getAadharId());
 
-		if (updatedCustomer.getAnniversaryDate() != null)
-			foundCustomer.setAnniversaryDate(updatedCustomer.getAnniversaryDate());
+		foundCustomer.setAddress(updatedCustomer.getAddress());
 
-		if (updatedCustomer.getDateOfBirth() != null)
-			foundCustomer.setDateOfBirth(updatedCustomer.getDateOfBirth());
+		foundCustomer.setAnniversaryDate(updatedCustomer.getAnniversaryDate());
 
-		if (updatedCustomer.getMobileNumber() != null)
-			foundCustomer.setMobileNumber(updatedCustomer.getMobileNumber());
+		foundCustomer.setDateOfBirth(updatedCustomer.getDateOfBirth());
 
-		if (updatedCustomer.getName() != null)
-			foundCustomer.setName(updatedCustomer.getName());
+		foundCustomer.setMobileNumber(updatedCustomer.getMobileNumber());
 
-		if (updatedCustomer.getOpeningBalance() != null)
-			foundCustomer.setOpeningBalance(updatedCustomer.getOpeningBalance());
+		foundCustomer.setName(updatedCustomer.getName());
 
-		if (updatedCustomer.getPanId() != null)
-			foundCustomer.setPanId(updatedCustomer.getPanId());
+		foundCustomer.setOpeningBalance(updatedCustomer.getOpeningBalance());
 
-		if (updatedCustomer.getPincode() != null)
-			foundCustomer.setPincode(updatedCustomer.getPincode());
+		foundCustomer.setPanId(updatedCustomer.getPanId());
+
+		foundCustomer.setPincode(updatedCustomer.getPincode());
 
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(customerDto.getUserID());
+		userEntity.setIdxId(customerDto.getUserID());
 		foundCustomer.setUpdatedBy(userEntity);
 		customerRepo.save(foundCustomer);
 		return "Customer updated Successfully";
 	}
-
 }

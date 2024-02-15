@@ -1,16 +1,15 @@
 package in.jewelx.jewelxbackend.service;
 
-import java.util.List;
 import java.util.UUID;
-
+import org.springframework.data.domain.Page;
 import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
 import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
 
 public interface ICustomerService {
 
-	String createCustomer(CustomerDto CustomerDto);
+	String createCustomer(CustomerDto customerDto);
 
-	List<CustomerResponseDto> getAllCustomers();
+	Page<CustomerResponseDto> getAllCustomers(int pageNumber, int pageSize);
 
 	String deleteCustomerById(UUID id);
 

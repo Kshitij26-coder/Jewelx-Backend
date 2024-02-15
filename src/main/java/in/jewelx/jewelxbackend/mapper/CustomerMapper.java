@@ -20,7 +20,7 @@ public class CustomerMapper {
 		customerEntity.setPincode(customerDto.getPincode());
 
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(customerDto.getUserID());
+		userEntity.setIdxId(customerDto.getUserID());
 		customerEntity.setCreatedBy(userEntity);
 		customerEntity.setUpdatedBy(userEntity);
 		return customerEntity;
@@ -28,6 +28,7 @@ public class CustomerMapper {
 
 	public static CustomerResponseDto customerEntityToCustomerRespDto(CustomerEntity customerEntity) {
 		CustomerResponseDto customerRespDto = new CustomerResponseDto();
+		customerRespDto.setIdx_id(customerEntity.getIdxId());
 		customerRespDto.setCustomerID(customerEntity.getCustomerId());
 		customerRespDto.setName(customerEntity.getName());
 		customerRespDto.setAadharId(customerEntity.getAadharId());

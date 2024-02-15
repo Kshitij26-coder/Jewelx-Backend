@@ -1,8 +1,6 @@
 package in.jewelx.jewelxbackend.dto.customer;
 
 import java.sql.Date;
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +25,6 @@ public class CustomerDto {
 
 	private Double openingBalance;
 
-	private UUID userID;
+	private Long userID;
 
 }
