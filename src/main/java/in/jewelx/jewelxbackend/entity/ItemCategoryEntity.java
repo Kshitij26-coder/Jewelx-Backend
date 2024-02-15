@@ -13,45 +13,47 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "item_categories")
 public class ItemCategoryEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Short categoryId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "category_id")
+	private Short categoryId;
 
-    @Column(name = "category_name", length = 20, nullable = false)
-    private String categoryName;
+	@Column(name = "category_name", length = 20, nullable = false)
+	private String categoryName;
 
-    @ManyToOne
-    @JoinColumn(name = "category_metal", nullable = false)
-    private MetalEntity categoryMetal;
+	@ManyToOne
+	@JoinColumn(name = "category_metal", nullable = false)
+	private MetalEntity categoryMetal;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
 
-    // Constructors, getters, and setters
+	// Constructors, getters, and setters
 
-    public ItemCategoryEntity() {
-        // Default constructor
-    }
+	public ItemCategoryEntity() {
+		// Default constructor
+	}
 
 }
