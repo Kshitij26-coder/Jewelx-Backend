@@ -1,10 +1,10 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
@@ -31,13 +31,14 @@ public class MetalService implements IMetalService {
 			metalRepo.save(MetalMapper.metalDtoToMetalEntity(metalDto));
 			return "Successfull save metal data";
 		}
-		
+
 	}
 
 	@Override
-	public List<MetalResponseDto> getAllMetals() {
-		List<MetalEntity> allMetals = metalRepo.findAll();
-		return allMetals.stream().map(MetalMapper::metalEntityToMetalRespDto).collect(Collectors.toList());
+	public Page<MetalResponseDto> getAllMetals(int pageNumber, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+		Page<MetalEntity> allMetals = metalRepo.findAll(pageRequest);
+		return allMetals.map(MetalMapper::metalEntityToMetalRespDto);
 	}
 
 	@Override
@@ -65,17 +66,15 @@ public class MetalService implements IMetalService {
 		Optional<MetalEntity> opt = metalRepo.findById(id);
 		if (!opt.isEmpty()) {
 			MetalEntity existingMetal = opt.get();
-			if (updatedMetal.getMetalName() != null) {
-				existingMetal.setMetalName(updatedMetal.getMetalName());
-			}
-			if (updatedMetal.getMetalDescription() != null) {
-				existingMetal.setMetalDescription(updatedMetal.getMetalDescription());
-			}
-			if (updatedMetal.getMetalRate() != null) {
-				existingMetal.setMetalRate(updatedMetal.getMetalRate());
-			}
+
+			existingMetal.setMetalName(updatedMetal.getMetalName());
+
+			existingMetal.setMetalDescription(updatedMetal.getMetalDescription());
+
+			existingMetal.setMetalRate(updatedMetal.getMetalRate());
+
 			UserEntity userEntity = new UserEntity();
-			userEntity.setUserId(metalDto.getUserID());
+			userEntity.setIdxId(metalDto.getUserID());
 			existingMetal.setUpdatedBy(userEntity);
 			metalRepo.save(existingMetal);
 			return "Updated Successfully Metal of id: " + id;

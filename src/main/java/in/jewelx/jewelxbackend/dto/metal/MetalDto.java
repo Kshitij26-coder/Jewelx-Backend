@@ -18,6 +18,6 @@ public class MetalDto {
 
 	private String metalName;
 
-	private UUID userID;
+	private Long userID;
 
 }

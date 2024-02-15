@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
@@ -25,22 +26,23 @@ public class MetalController {
 	MetalService metalService;
 
 	@PostMapping
-	public ResponseEntity<String> createMetal(@RequestBody MetalDto metalDto) {
+	public ResponseEntity<?> createMetal(@RequestBody MetalDto metalDto) {
 		return ResponseBuilder.status(HttpStatus.CREATED).body(metalService.createMetal(metalDto));
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getAllMetals() {
-		return ResponseEntity.ok(metalService.getAllMetals());
+	public ResponseEntity<?> getAllMetals(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		return ResponseEntity.ok(metalService.getAllMetals(page,size));
 	}
 
 	@DeleteMapping("/{metalId}")
-	public ResponseEntity<String> deleteUserById(@PathVariable("metalId") Long id) {
+	public ResponseEntity<?> deleteUserById(@PathVariable("metalId") Long id) {
 		return ResponseEntity.ok(metalService.deleteMetalById(id));
 	}
 
 	@PutMapping("/{metalId}")
-	public ResponseEntity<String> updateMetal(@RequestBody MetalDto metalDto, @PathVariable("metalId") Long id) {
+	public ResponseEntity<?> updateMetal(@RequestBody MetalDto metalDto, @PathVariable("metalId") Long id) {
 		return ResponseEntity.ok(metalService.updateMetal(id, metalDto));
 	}
 

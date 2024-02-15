@@ -8,12 +8,12 @@ import in.jewelx.jewelxbackend.entity.UserEntity;
 public class MetalMapper {
 	public static MetalEntity metalDtoToMetalEntity(MetalDto metalDto) {
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUserId(metalDto.getUserID());
+		userEntity.setIdxId(metalDto.getUserID());
 		MetalEntity metalEntity = new MetalEntity(metalDto.getMetalDescription(), metalDto.getMetalRate(),
 				metalDto.getMetalName(), userEntity, userEntity);
 		return metalEntity;
 	}
-	
+
 	public static MetalResponseDto metalEntityToMetalRespDto(MetalEntity metalEntity) {
 		MetalResponseDto metalRespDto = new MetalResponseDto();
 		metalRespDto.setMetalId(metalEntity.getMetalId());
