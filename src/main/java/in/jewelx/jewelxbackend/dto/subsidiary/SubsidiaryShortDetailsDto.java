@@ -1,4 +1,4 @@
-package in.jewelx.jewelxbackend.dto.user;
+package in.jewelx.jewelxbackend.dto.subsidiary;
 
 import java.util.UUID;
 
@@ -11,10 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAssignedByResponseDto {
-	private Long idxId;
-	private UUID userId;
-	private String username;
-	private String email;
-
+public class SubsidiaryShortDetailsDto {
+	private long idxId;
+	private UUID subsidiaryId;
+	private String subsidiaryName;
 }

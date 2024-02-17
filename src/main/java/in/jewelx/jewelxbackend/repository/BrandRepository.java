@@ -7,5 +7,4 @@ import in.jewelx.jewelxbackend.entity.BrandEntity;
 
 @Repository
 public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
-
 }

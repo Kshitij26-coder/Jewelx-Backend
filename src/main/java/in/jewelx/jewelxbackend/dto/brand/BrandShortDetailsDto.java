@@ -1,4 +1,4 @@
-package in.jewelx.jewelxbackend.dto.user;
+package in.jewelx.jewelxbackend.dto.brand;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserBrandResponseDto {
-	private long brandId;
-	private String brandName;
+public class BrandShortDetailsDto {
+	private Long brandId;
+	private String name;
+	private String imageUrl;
 }

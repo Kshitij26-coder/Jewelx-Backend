@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import in.jewelx.jewelxbackend.service.impl.BrandService;
 
 @RestController
 @RequestMapping("/brand")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BrandController {
 	@Autowired
 	BrandService brandService;
@@ -28,11 +30,17 @@ public class BrandController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getAllBrands(@RequestParam(defaultValue = "0") int page,
+	public ResponseEntity<?> getAllBrandsPaginationTrue(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(brandService.getAllBrands(page, size));
 	}
-
+	
+	@GetMapping("/all")
+	public ResponseEntity<?> getAllBrandsPaginationFalse() {
+		return ResponseEntity.ok(brandService.getAllBrandsPaginationFalse());
+	}
+	
+	
 	@GetMapping("/{brandId}")
 	public ResponseEntity<?> getOneBrand(@PathVariable("brandId") Long id) {
 		return ResponseEntity.ok(brandService.getOneBrand(id));

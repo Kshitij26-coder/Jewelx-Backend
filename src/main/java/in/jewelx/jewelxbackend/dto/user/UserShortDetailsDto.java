@@ -11,7 +11,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSubsidiaryResponseDto {
-	private UUID subsidiaryId;
-	private String subsidiaryName;
+public class UserShortDetailsDto {
+	private Long idxId;
+	private UUID userId;
+	private String username;
+	private String email;
+
 }

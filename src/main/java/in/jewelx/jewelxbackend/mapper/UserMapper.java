@@ -1,21 +1,29 @@
 package in.jewelx.jewelxbackend.mapper;
 
-import java.util.UUID;
-
-import in.jewelx.jewelxbackend.dto.user.UserAssignedByResponseDto;
-import in.jewelx.jewelxbackend.dto.user.UserBrandResponseDto;
-import in.jewelx.jewelxbackend.dto.user.UserDto;
+import in.jewelx.jewelxbackend.dto.brand.BrandShortDetailsDto;
+import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryShortDetailsDto;
+import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
 import in.jewelx.jewelxbackend.dto.user.UserResponseDto;
-import in.jewelx.jewelxbackend.dto.user.UserSubsidiaryResponseDto;
+import in.jewelx.jewelxbackend.dto.user.UserShortDetailsDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.SubsidiaryEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
 public class UserMapper {
-	public static ViewBrandUser mapToBrandUser(UserDto userDto) {
+
+	/*
+	 * Used to convert userDto to ViewBrandUser object
+	 */
+	public static ViewBrandUser mapToBrandUser(UserRequestDto userDto) {
+
+		// will set Brand object in user later after creating it in database
 		ViewBrandUser viewBrandUser = new ViewBrandUser();
+
 		SubsidiaryEntity subsidiaryEntity = new SubsidiaryEntity();
-		subsidiaryEntity.setSubsidiaryId(userDto.getSubsidiaryId());
+		subsidiaryEntity.setIdxId(userDto.getSubsidiaryId());
+
+		BrandEntity brandEntity = new BrandEntity();
+		brandEntity.setBrandId(userDto.getBrandId());
 
 		UserEntity assignedByUser = new UserEntity();
 		assignedByUser.setUserId(userDto.getAssignedBy());
@@ -24,36 +32,21 @@ public class UserMapper {
 				new BrandEntity(userDto.getBrandName(), userDto.getBrandDescription(), userDto.getBrandImageUrl()));
 
 		viewBrandUser.setUser(new UserEntity(userDto.getUserName(), userDto.getEmail(), userDto.getMobileNumber(),
-				userDto.getPassword(), userDto.getUserRole(), subsidiaryEntity, assignedByUser));
+				userDto.getPassword(), userDto.getUserRole(), subsidiaryEntity, assignedByUser, brandEntity));
+
 		return viewBrandUser;
 	}
 
+	/*
+	 * Used to convert UserEntity to UserResponseDto object
+	 */
 	public static UserResponseDto UserToUserResponseDto(UserEntity user) {
 		UserResponseDto userDto = new UserResponseDto();
-		Long idxId = null;
-		UUID userId = null;
-		String email = null;
-		String userName = null;
 
-		if (user.getAssignedBy() != null) {
-			idxId = user.getIdxId();
-			email = user.getAssignedBy().getEmail();
-			userId = user.getAssignedBy().getUserId();
-			userName = user.getAssignedBy().getUsername();
-		}
-
-		String subsidaryName = null;
-		UUID subsidiaryId = null;
-
-		if (user.getSubsidiary() != null) {
-			subsidaryName = user.getSubsidiary().getSubsidiaryName();
-			subsidiaryId = user.getSubsidiary().getSubsidiaryId();
-		}
-
-		UserAssignedByResponseDto userAssignedByDto = new UserAssignedByResponseDto(idxId, userId, userName, email);
-		UserSubsidiaryResponseDto userSubsidiaryDto = new UserSubsidiaryResponseDto(subsidiaryId, subsidaryName);
-		UserBrandResponseDto userBrandResponseDto = new UserBrandResponseDto(user.getBrand().getBrandId(),
-				user.getBrand().getName());
+		UserShortDetailsDto userAssignedByDto = UserMapper.UserEntityToUserShortDetailsDto(user);
+		SubsidiaryShortDetailsDto userSubsidiaryDto = SubsidiaryMapper
+				.mapToSubsidiaryShortDetailsDto(user.getSubsidiary());
+		BrandShortDetailsDto userBrandResponseDto = BrandMapper.brandEntitytoBrandShortDetails(user.getBrand());
 
 		userDto.setAssignedBy(userAssignedByDto);
 		userDto.setActive(user.isActive());
@@ -67,6 +60,22 @@ public class UserMapper {
 		userDto.setBrand(userBrandResponseDto);
 
 		return userDto;
+	}
+
+	/*
+	 * Used to convert UserEntity to UserShortDetailsDto
+	 */
+	public static UserShortDetailsDto UserEntityToUserShortDetailsDto(UserEntity user) {
+		if (user != null) {
+			UserShortDetailsDto dto = new UserShortDetailsDto();
+			dto.setIdxId(user.getIdxId());
+			dto.setUserId(user.getUserId());
+			dto.setUsername(user.getUsername());
+			dto.setEmail(user.getEmail());
+			return dto;
+		} else {
+			return null; // Or handle the case where the user is null
+		}
 	}
 
 }

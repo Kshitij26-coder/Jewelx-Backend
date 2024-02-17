@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +13,7 @@ import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
+import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.BrandMapper;
 import in.jewelx.jewelxbackend.repository.BrandRepository;
 import in.jewelx.jewelxbackend.service.IBrandService;
@@ -26,7 +30,7 @@ public class BrandService implements IBrandService {
 	public BrandEntity createBrand(BrandEntity brandEntity) {
 		System.out.println(brandEntity);
 		if (brandEntity == null) {
-			throw new NullPointerException("Brand Entity does not contains any data");
+			throw new NullObjectException("Brand Entity does not contains any data");
 		}
 		return brandRepo.save(brandEntity);
 	}
@@ -36,6 +40,13 @@ public class BrandService implements IBrandService {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 		Page<BrandEntity> brandsPage = brandRepo.findAll(pageRequest);
 		return brandsPage.map(BrandMapper::brandEntityToBrandRespDto);
+	}
+
+	// created to populate drop-down
+	@Override
+	public List<BrandResponseDto> getAllBrandsPaginationFalse() {
+		List<BrandEntity> brands = brandRepo.findAll();
+		return brands.stream().map(BrandMapper::brandEntityToBrandRespDto).collect(Collectors.toList());
 	}
 
 	@Override

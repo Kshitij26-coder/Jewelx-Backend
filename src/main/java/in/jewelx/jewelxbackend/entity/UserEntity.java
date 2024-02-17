@@ -45,7 +45,7 @@ public class UserEntity implements UserDetails {
 	@Column(name = "user_name", length = 100, nullable = false)
 	private String userName;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "brand_id", nullable = false)
 	private BrandEntity brand;
 
@@ -91,7 +91,7 @@ public class UserEntity implements UserDetails {
 	}
 
 	public UserEntity(String userName, String email, String mobileNumber, String password, String userRole,
-			SubsidiaryEntity subsidiary, UserEntity assignedBy) {
+			SubsidiaryEntity subsidiary, UserEntity assignedBy, BrandEntity brandEntity) {
 		super();
 		this.userId = UUID.randomUUID();
 		this.userName = userName;
@@ -101,6 +101,7 @@ public class UserEntity implements UserDetails {
 		this.userRole = userRole;
 		this.subsidiary = subsidiary;
 		this.assignedBy = assignedBy;
+		this.brand = brandEntity;
 	}
 
 	public String getUserName() {

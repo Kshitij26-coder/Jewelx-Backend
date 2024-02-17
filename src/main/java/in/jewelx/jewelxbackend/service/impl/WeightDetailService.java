@@ -44,13 +44,13 @@ public class WeightDetailService implements IWeightDetailService {
 	@Override
 	public String deleteWeightDetailById(UUID id) {
 		getWeightDetailById(id);
-		weightDetailRepo.deleteByWeightDetailId(id);
+		weightDetailRepo.deleteByDetailId(id);
 		return "Weight Detail deleted successfully";
 	}
 
 	@Override
 	public WeightDetailsResponseDto getWeightDetailById(UUID id) {
-		WeightDetailEntity foundWeightDetailEntity = weightDetailRepo.findByWeightDetailId(id)
+		WeightDetailEntity foundWeightDetailEntity = weightDetailRepo.findByDetailId(id)
 				.orElseThrow(() -> new IdNotFoundException("Invalid Weight Detail Id"));
 		return WeightDetailMapper.entityToDto(foundWeightDetailEntity);
 	}
@@ -58,7 +58,7 @@ public class WeightDetailService implements IWeightDetailService {
 	@Override
 	public String updateWeightDetail(UUID id, WeightDetailsDto weightDetailsDto) {
 		WeightDetailEntity updatedWeightDetail = WeightDetailMapper.dtoToEntity(weightDetailsDto);
-		WeightDetailEntity foundWeightDetail = weightDetailRepo.findByWeightDetailId(id)
+		WeightDetailEntity foundWeightDetail = weightDetailRepo.findByDetailId(id)
 				.orElseThrow(() -> new IdNotFoundException("Invalid Weight Detail Id"));
 
 		foundWeightDetail.setMetalWeight(updatedWeightDetail.getMetalWeight());

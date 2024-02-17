@@ -33,10 +33,11 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable())
-				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/user/test").authenticated().requestMatchers("/user").permitAll()
-								.requestMatchers("/user/send-otp").permitAll().requestMatchers("/user/*").permitAll()
-								.requestMatchers("/user/send-otp/*").permitAll().anyRequest().authenticated())
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/user/test").authenticated()
+						.requestMatchers("/user").permitAll().requestMatchers("/user/send-otp").permitAll()
+						.requestMatchers("/user/*").permitAll().requestMatchers("/brand/*").permitAll()
+						.requestMatchers("/subsidiary/brand/*").permitAll().requestMatchers("/user/send-otp/*")
+						.permitAll().anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

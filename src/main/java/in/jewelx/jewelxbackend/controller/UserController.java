@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.jewelx.jewelxbackend.dto.user.OtpRequestDto;
 import in.jewelx.jewelxbackend.dto.user.SetPasswordDto;
-import in.jewelx.jewelxbackend.dto.user.UserDto;
+import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.security.JwtHelper;
 import in.jewelx.jewelxbackend.security.model.JwtRequest;
@@ -32,6 +33,7 @@ import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
 	@Autowired
@@ -57,7 +59,9 @@ public class UserController {
 		String token = this.helper.generateToken(userDetails);
 
 		JwtResponse response = JwtResponse.builder().jwtToken(token).username(userDetails.getUserName())
-				.email(userDetails.getEmail()).userId(userDetails.getUserId()).build();
+				.email(userDetails.getEmail()).userId(userDetails.getUserId()).role(userDetails.getUserRole())
+				.subsidiaryId(userDetails.getSubsidiary() == null ? null : userDetails.getSubsidiary().getIdxId())
+				.brandId(userDetails.getBrand().getBrandId()).build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -72,9 +76,8 @@ public class UserController {
 		}
 	}
 
-	// register user
 	@PostMapping
-	public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<?> createUser(@RequestBody UserRequestDto userDto) {
 		return ResponseEntity.ok(userService.createUser(userDto));
 	}
 
@@ -105,7 +108,6 @@ public class UserController {
 	// get specific user using id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable("id") UUID userid) {
-		System.out.println(userid);
 		return ResponseEntity.ok(userService.getUserById(userid));
 	}
 

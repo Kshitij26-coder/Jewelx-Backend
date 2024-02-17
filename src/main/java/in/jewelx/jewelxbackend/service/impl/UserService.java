@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.user.SetPasswordDto;
 import in.jewelx.jewelxbackend.dto.user.UpdateUserDto;
-import in.jewelx.jewelxbackend.dto.user.UserDto;
+import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
 import in.jewelx.jewelxbackend.dto.user.UserResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.OtpEntity;
@@ -27,6 +27,7 @@ import in.jewelx.jewelxbackend.mapper.ViewBrandUser;
 import in.jewelx.jewelxbackend.repository.OtpRepository;
 import in.jewelx.jewelxbackend.repository.UserRepository;
 import in.jewelx.jewelxbackend.service.IUserService;
+import in.jewelx.jewelxbackend.utils.RolesEnum;
 import jakarta.mail.MessagingException;
 
 @Service
@@ -46,30 +47,42 @@ public class UserService implements IUserService, UserDetailsService {
 	@Autowired
 	private OtpRepository otpRepo;
 
+	/*
+	 * create a user. Brand is created first and then user is created
+	 */
 	@Override
-	public String createUser(UserDto userDto) {
+	public String createUser(UserRequestDto userDto) {
 		ViewBrandUser viewBrandUser = UserMapper.mapToBrandUser(userDto);
-		BrandEntity createdBrand = brandService.createBrand(viewBrandUser.getBrand());
+		if (RolesEnum.valueOf(userDto.getUserRole().toUpperCase()) == RolesEnum.O) {
+			BrandEntity createdBrand = brandService.createBrand(viewBrandUser.getBrand());
+			// will prevent in creating nested objects in viewBrandUserObject
 
-		if (viewBrandUser.getUser() != null) {
 			viewBrandUser.getUser().setBrand(createdBrand);
-
-			if (viewBrandUser.getUser().getAssignedBy().getUserName() == null) {
-				viewBrandUser.getUser().setAssignedBy(null);
-			}
-
-			if (viewBrandUser.getUser().getSubsidiary().getSubsidiaryId() == null) {
-				viewBrandUser.getUser().setSubsidiary(null);
-			}
-
-			viewBrandUser.getUser().setPassword(passwordEncoder.encode(viewBrandUser.getUser().getPassword()));
-
-			userRepo.save(viewBrandUser.getUser());
-			return "Succesfully saved user data";
 		}
-		throw new NullObjectException("User Entity does not contains any data");
+
+		if (viewBrandUser.getUser().getAssignedBy().getIdxId() == null) {
+			viewBrandUser.getUser().setAssignedBy(null);
+		}
+
+		if (viewBrandUser.getUser().getSubsidiary().getIdxId() == null
+				|| viewBrandUser.getUser().getSubsidiary().getIdxId() == 0) {
+			viewBrandUser.getUser().setSubsidiary(null);
+		}
+
+		if (viewBrandUser.getUser().getBrand().getBrandId() == null
+				|| viewBrandUser.getUser().getBrand().getBrandId() == 0) {
+			viewBrandUser.getUser().setBrand(null);
+		}
+
+		viewBrandUser.getUser().setPassword(passwordEncoder.encode(viewBrandUser.getUser().getPassword()));
+		userRepo.save(viewBrandUser.getUser());
+		return "Succesfully saved user data";
+
 	}
 
+	/*
+	 * send OTP to email
+	 */
 	@Override
 	public String sendOtp(String email) throws MessagingException {
 
@@ -90,7 +103,9 @@ public class UserService implements IUserService, UserDetailsService {
 
 	}
 
-	// verify OTP
+	/*
+	 * reset password a specific user by Id
+	 */
 	@Override
 	public boolean verifyOtp(String email, String otpByUser) {
 
@@ -115,7 +130,6 @@ public class UserService implements IUserService, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity user = userRepo.findByEmail(username);
-		System.out.println(user);
 		if (user == null) {
 			// replace this with custom exception
 			throw new EmailNotFoundException("email:" + username + " not found");
@@ -123,7 +137,10 @@ public class UserService implements IUserService, UserDetailsService {
 		return user;
 	}
 
-	// reset the password
+	/*
+	 * reset password a specific user by Id
+	 */
+	@Override
 	public String setPassword(SetPasswordDto setPasswordDto) {
 		UserEntity user = (UserEntity) loadUserByUsername(setPasswordDto.getEmail());
 		user.setPassword(passwordEncoder.encode(setPasswordDto.getPassword()));
@@ -132,10 +149,13 @@ public class UserService implements IUserService, UserDetailsService {
 		return "password updated successfully";
 	}
 
+	/*
+	 * updates a specific user by Id
+	 */
+	@Override
 	public UserEntity updateUser(UUID userId, UpdateUserDto updatedUserData) {
 		// Find the user by userId
-		UserEntity existingUser = userRepo
-				.findByUserId(userId)
+		UserEntity existingUser = userRepo.findByUserId(userId)
 				.orElseThrow(() -> new NullObjectException("User not found with userId: " + userId));
 
 		existingUser.setUserName(updatedUserData.getUsername());
@@ -146,12 +166,19 @@ public class UserService implements IUserService, UserDetailsService {
 
 	}
 
-	// returns a specific user by Id
+	/*
+	 * returns a specific user by Id
+	 */
+	@Override
 	public UserEntity getUserById(UUID id) {
 		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new IdNotFoundException(id + " not found"));
 		return user;
 	}
 
+	/*
+	 * Get all user in paginated format
+	 */
+	@Override
 	public Page<UserResponseDto> getUsersByRole(String role, int pageSize, int pageNumber) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 

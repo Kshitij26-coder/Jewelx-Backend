@@ -9,8 +9,8 @@ import in.jewelx.jewelxbackend.entity.WeightDetailEntity;
 
 public interface WeightDetailRepository extends JpaRepository<WeightDetailEntity, Long> {
 
-	void deleteByWeightDetailId(UUID id);
+	void deleteByDetailId(UUID id);
 
-	Optional<WeightDetailEntity> findByWeightDetailId(UUID id);
+	Optional<WeightDetailEntity> findByDetailId(UUID id);
 
 }

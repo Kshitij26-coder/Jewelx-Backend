@@ -18,12 +18,16 @@ import lombok.ToString;
 public class JwtResponse {
 
 	private String username;
-	
+
 	private String jwtToken;
-	
+
 	private String email;
-	
+
 	private String role;
-	
+
 	private UUID userId;
+
+	private Long subsidiaryId;
+
+	private Long brandId;
 }

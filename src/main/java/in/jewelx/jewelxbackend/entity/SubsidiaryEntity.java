@@ -14,14 +14,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
 @Entity
+@ToString
 @Table(name = "subsidiaries")
 public class SubsidiaryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idx_id")
+	@Column(name = "idx_id")
 	private Long idxId;
 
 	@GeneratedValue(strategy = GenerationType.UUID)
@@ -64,7 +70,7 @@ public class SubsidiaryEntity {
 	private LocalDateTime createdOn;
 
 	@UpdateTimestamp
-	@Column(name = "updated_on", nullable = false, updatable = false)
+	@Column(name = "updated_on", nullable = false)
 	private LocalDateTime updatedOn;
 
 	@ManyToOne
@@ -72,136 +78,34 @@ public class SubsidiaryEntity {
 	private UserEntity createdBy;
 
 	@ManyToOne
-	@JoinColumn(name = "updated_by", nullable = false, updatable = false)
+	@JoinColumn(name = "updated_by", nullable = false)
 	private UserEntity updatedBy;
 
-	public UUID getSubsidiaryId() {
-		return subsidiaryId;
+	@Column(name = "is_Active", nullable = false)
+	private boolean isActive;
+
+	public SubsidiaryEntity() {
+		this.subsidiaryId = UUID.randomUUID();
+		this.isActive = false;
 	}
 
-	public void setSubsidiaryId(UUID subsidiaryId) {
-		this.subsidiaryId = subsidiaryId;
-	}
-
-	public BrandEntity getBrand() {
-		return brand;
-	}
-
-	public void setBrand(BrandEntity brand) {
+	public SubsidiaryEntity(BrandEntity brand, String shopActNumber, String subsidiaryName, String address, String city,
+			String gstin, double cashBalance, String logoUrl, String formHeader, String formFooter, UserEntity user) {
+		super();
+		this.subsidiaryId = UUID.randomUUID();
 		this.brand = brand;
-	}
-
-	public String getShopActNumber() {
-		return shopActNumber;
-	}
-
-	public void setShopActNumber(String shopActNumber) {
 		this.shopActNumber = shopActNumber;
-	}
-
-	public String getSubsidiaryName() {
-		return subsidiaryName;
-	}
-
-	public void setSubsidiaryName(String subsidiaryName) {
 		this.subsidiaryName = subsidiaryName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getGstin() {
-		return gstin;
-	}
-
-	public void setGstin(String gstin) {
 		this.gstin = gstin;
-	}
-
-	public double getCashBalance() {
-		return cashBalance;
-	}
-
-	public void setCashBalance(double cashBalance) {
 		this.cashBalance = cashBalance;
-	}
-
-	public String getLogoUrl() {
-		return logoUrl;
-	}
-
-	public void setLogoUrl(String logoUrl) {
 		this.logoUrl = logoUrl;
-	}
-
-	public String getFormHeader() {
-		return formHeader;
-	}
-
-	public void setFormHeader(String formHeader) {
 		this.formHeader = formHeader;
-	}
-
-	public String getFormFooter() {
-		return formFooter;
-	}
-
-	public void setFormFooter(String formFooter) {
 		this.formFooter = formFooter;
-	}
-
-	public LocalDateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(LocalDateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public LocalDateTime getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(LocalDateTime updatedOn) {
-		this.updatedOn = updatedOn;
-	}
-
-	public UserEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(UserEntity createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public UserEntity getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(UserEntity updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@Override
-	public String toString() {
-		return "SubsidiaryEntity [subsidiaryId=" + subsidiaryId + ", brand=" + brand + ", shopActNumber="
-				+ shopActNumber + ", subsidiaryName=" + subsidiaryName + ", address=" + address + ", city=" + city
-				+ ", gstin=" + gstin + ", cashBalance=" + cashBalance + ", logoUrl=" + logoUrl + ", formHeader="
-				+ formHeader + ", formFooter=" + formFooter + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		this.createdBy = user;
+		this.updatedBy = user;
+		this.isActive = false;
 	}
 
 }
