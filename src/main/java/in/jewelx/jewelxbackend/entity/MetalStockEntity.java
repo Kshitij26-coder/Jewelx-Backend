@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -30,6 +31,10 @@ public class MetalStockEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
 	private Long stockId;
+	
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "stock_uid")
+	private UUID metalStockUUID;
 
 	@ManyToOne
 	@JoinColumn(name = "metal_id", nullable = false)
@@ -62,14 +67,17 @@ public class MetalStockEntity {
     private BigDecimal transactionWeight;
 
 	public MetalStockEntity() {
-		// Default constructor
+		this.metalStockUUID = UUID.randomUUID();
 	}
 
 	public MetalStockEntity(MetalEntity metal, BigDecimal closingWeight, BigDecimal openingWeight) {
 		super();
+		this.metalStockUUID = UUID.randomUUID();
 		this.metal = metal;
 		this.closingWeight = closingWeight;
 		this.openingWeight = openingWeight;
 	}
+	
+	
 	
 }

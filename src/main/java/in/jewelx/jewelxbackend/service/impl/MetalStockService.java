@@ -38,7 +38,7 @@ public class MetalStockService implements IMetalStockService {
         } else {
            // BigDecimal openingWeight = metalStockDto.getOpeningWeight(); // Add this line
         	BigDecimal weight = metalStockRepo.findClosingWeightByMetalId(metalStockDto.getMetalId());
-            System.out.println("******************************** : "+weight);
+           // System.out.println("******************************** : "+weight);
             BigDecimal transactionWeight = metalStockDto.getWeight();
             MetalStockEntity entity = MetalStockMapper.dtoToEntity(metalStockDto);
 
