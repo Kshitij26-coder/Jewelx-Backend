@@ -1,6 +1,5 @@
 package in.jewelx.jewelxbackend.dto.metal;
 
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

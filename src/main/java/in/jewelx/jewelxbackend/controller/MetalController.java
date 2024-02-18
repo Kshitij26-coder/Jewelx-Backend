@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
 import in.jewelx.jewelxbackend.service.impl.MetalService;
-import in.jewelx.jewelxbackend.utils.ResponseBuilder;
 
 @RestController
 @RequestMapping("/metal")
@@ -27,7 +26,7 @@ public class MetalController {
 
 	@PostMapping
 	public ResponseEntity<?> createMetal(@RequestBody MetalDto metalDto) {
-		return ResponseBuilder.status(HttpStatus.CREATED).body(metalService.createMetal(metalDto));
+		return ResponseEntity.status(HttpStatus.CREATED).body(metalService.createMetal(metalDto));
 	}
 
 	@GetMapping

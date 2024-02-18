@@ -26,10 +26,10 @@ public class MetalService implements IMetalService {
 	@Override
 	public String createMetal(MetalDto metalDto) {
 		if (metalDto == null) {
-			throw new NullObjectException("Metal not Found");
+			throw new NullObjectException("Metal Dto is null");
 		} else {
 			metalRepo.save(MetalMapper.metalDtoToMetalEntity(metalDto));
-			return "Successfull save metal data";
+			return "Successfully Add metal data";
 		}
 
 	}

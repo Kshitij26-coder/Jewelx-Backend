@@ -17,45 +17,59 @@ import jakarta.persistence.ManyToOne;
  * This entity store the data of metal inventory 
  * */
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "metal_stocks")
 public class MetalStockEntity {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stock_id")
-    private Long stockId;
 
-    @ManyToOne
-    @JoinColumn(name = "metal_id", nullable = false)
-    private MetalEntity metal;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "stock_id")
+	private Long stockId;
 
-    @Column(name = "opening_weight", precision = 8,  nullable = false)
-    private BigDecimal openingWeight;
+	@ManyToOne
+	@JoinColumn(name = "metal_id", nullable = false)
+	private MetalEntity metal;
 
-    @Column(name = "closing_weight", precision = 8, nullable = false)
+	@Column(name = "opening_weight", precision = 8, scale = 3, nullable = false)
+	private BigDecimal openingWeight;
+
+	@Column(name = "closing_weight", precision = 8, scale = 3, nullable = false)
     private BigDecimal closingWeight;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
-    // Constructors, getters, and setters
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
 
-    public MetalStockEntity() {
-        // Default constructor
-    }
+	// Constructors, getters, and setters
+	@Column(name = "transaction_weight", precision = 8, scale = 3, nullable = false)
+    private BigDecimal transactionWeight;
+
+	public MetalStockEntity() {
+		// Default constructor
+	}
+
+	public MetalStockEntity(MetalEntity metal, BigDecimal closingWeight, BigDecimal openingWeight) {
+		super();
+		this.metal = metal;
+		this.closingWeight = closingWeight;
+		this.openingWeight = openingWeight;
+	}
+	
 }

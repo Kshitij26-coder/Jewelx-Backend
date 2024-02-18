@@ -37,10 +37,10 @@ public class SecurityConfig {
 						.requestMatchers("/user").permitAll().requestMatchers("/user/send-otp").permitAll()
 						.requestMatchers("/user/*").permitAll().requestMatchers("/brand/*").permitAll()
 						.requestMatchers("/subsidiary/brand/*").permitAll().requestMatchers("/user/send-otp/*")
-						.permitAll().anyRequest().authenticated())
+						.permitAll().requestMatchers("/article-stock/barcode/*").permitAll().anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
+//http://localhost:8080/article-stock/barcode/hjg54165
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
