@@ -20,32 +20,34 @@ import in.jewelx.jewelxbackend.service.impl.MetalStockService;
 @RestController
 @RequestMapping("/metal-stock")
 public class MetalStockController {
-	
+
 	@Autowired
 	private MetalStockService metalStockService;
-	
+
 	@PostMapping
-	public ResponseEntity<String> addMetalStock(@RequestBody MetalStockDto metalStockDto){
+	public ResponseEntity<String> addMetalStock(@RequestBody MetalStockDto metalStockDto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(metalStockService.addMetalStock(metalStockDto));
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<?> getAllMetalStocks(@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size ){
+	public ResponseEntity<?> getAllMetalStocks(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(metalStockService.getAllMetalStocks(page, size));
 	}
-	
+
 	@DeleteMapping("/{metalStockId}")
-	public ResponseEntity<String> deleteMetalStockById(@PathVariable("metalStockId")Long stockId){
+	public ResponseEntity<String> deleteMetalStockById(@PathVariable("metalStockId") Long stockId) {
 		return ResponseEntity.ok(metalStockService.deleteById(stockId));
 	}
-	
+
 	@PutMapping("/{metalStockId}")
-	public ResponseEntity<String> updateMetalStockById(@RequestBody MetalStockDto metalStockDto, @PathVariable("metalStockId")Long stockId){
+	public ResponseEntity<String> updateMetalStockById(@RequestBody MetalStockDto metalStockDto,
+			@PathVariable("metalStockId") Long stockId) {
 		return ResponseEntity.ok(metalStockService.updateMetalStockById(stockId, metalStockDto));
 	}
-	
+
 	@GetMapping("/{metalStockId}")
-	public ResponseEntity<MetalStockRepoDto> getMetalStockById(@PathVariable("metalStockId")Long stockId){
+	public ResponseEntity<MetalStockRepoDto> getMetalStockById(@PathVariable("metalStockId") Long stockId) {
 		MetalStockRepoDto foundMetalStock = metalStockService.getMetalStockById(stockId);
 		return ResponseEntity.ok(foundMetalStock);
 	}

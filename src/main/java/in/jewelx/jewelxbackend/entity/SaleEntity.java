@@ -40,15 +40,15 @@ public class SaleEntity {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private CustomerEntity customer;
 
-	@Column(name = "transaction_type", length = 2)
-	private String transactionType;
+//	@Column(name = "transaction_type", length = 2)
+//	private String transactionType;
+//
+//	@Column(name = "payment_mode", length = 3, nullable = false)
+//	private String paymentMode;
 
-	@Column(name = "payment_mode", length = 3, nullable = false)
-	private String paymentMode;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "purchasing_date", nullable = false)
-	private Date purchasingDate;
+//	@Temporal(TemporalType.DATE)
+//	@Column(name = "purchasing_date", nullable = false)
+//	private Date purchasingDate;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "due_date", nullable = false)
@@ -73,20 +73,20 @@ public class SaleEntity {
 	private BigDecimal payableAmount;
 
 	// transaction id of any online payment mode
-	@Column(name = "transaction_id", length = 50, unique = true)
-	private String transactionId;
+//	@Column(name = "transaction_id", length = 50, unique = true)
+//	private String transactionId;
 
-	@Column(name = "cash_payment", precision = 15, nullable = false)
-	private BigDecimal cashPayment;
+//	@Column(name = "cash_payment", precision = 15, nullable = false)
+//	private BigDecimal cashPayment;
 
-	@Column(name = "online_payment", precision = 15, nullable = false)
-	private BigDecimal onlinePayment;
+//	@Column(name = "online_payment", precision = 15, nullable = false)
+//	private BigDecimal onlinePayment;
 
-	@Column(name = "cheques_payment", precision = 8, nullable = false)
-	private BigDecimal chequesPayment;
+//	@Column(name = "cheques_payment", precision = 8, nullable = false)
+//	private BigDecimal chequesPayment;
 
-	@Column(name = "cheque_number", length = 255, nullable = false)
-	private String chequeNumber;
+//	@Column(name = "cheque_number", length = 255, nullable = false)
+//	private String chequeNumber;
 
 	@ManyToOne
 	@JoinColumn(name = "subsidiary_id", nullable = false)
