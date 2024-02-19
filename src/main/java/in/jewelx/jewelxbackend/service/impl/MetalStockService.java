@@ -27,7 +27,7 @@ public class MetalStockService implements IMetalStockService {
 	private MetalStockRepository metalStockRepo;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	@Override
 	@Transactional

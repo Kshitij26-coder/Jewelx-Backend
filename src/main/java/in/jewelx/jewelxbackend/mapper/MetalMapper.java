@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.mapper;
 
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
@@ -23,4 +24,11 @@ public class MetalMapper {
 		return metalRespDto;
 	}
 
+	public static MetalShortDto entityToMetalShortDto(MetalEntity entity) {
+		MetalShortDto dto = new MetalShortDto();
+		dto.setMetalId(entity.getMetalId());
+		dto.setMetalName(entity.getMetalName());
+		dto.setMetalRate(entity.getMetalRate());
+		return dto;
+	}
 }

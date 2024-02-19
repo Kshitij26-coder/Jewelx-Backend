@@ -43,7 +43,7 @@ public class WeightDetailEntity {
 	@JoinColumn(name = "metal_id", nullable = false)
 	private MetalEntity metal;
 
-	@Column(name = "metal_weight", precision = 6, nullable = false)
+	@Column(name = "metal_weight", precision = 6,scale=3, nullable = false)
 	private Double metalWeight;
 
 	@ManyToOne

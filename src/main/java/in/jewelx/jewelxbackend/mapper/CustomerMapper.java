@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.mapper;
 
 import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
 import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerShortDto;
 import in.jewelx.jewelxbackend.entity.CustomerEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
@@ -42,5 +43,13 @@ public class CustomerMapper {
 		customerRespDto.setPincode(customerEntity.getPincode());
 		customerRespDto.setUpdatedOn(customerEntity.getUpdatedOn());
 		return customerRespDto;
+	}
+	
+	public static CustomerShortDto entityToCustomerShortDto(CustomerEntity entity) {
+		CustomerShortDto dto = new CustomerShortDto();
+		dto.setIdx_id(entity.getIdxId());
+		dto.setName(entity.getName());
+		dto.setMobileNumber(entity.getMobileNumber());
+		return dto;
 	}
 }
