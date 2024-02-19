@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.dto.weightdetails;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class WeightDetailsResponseDto {
 
 	private Long metalID;
 
-	private Double metalWeight;
+	private BigDecimal metalWeight;
 
 	private Long uomId;
 
