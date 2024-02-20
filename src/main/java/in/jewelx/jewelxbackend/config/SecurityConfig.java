@@ -32,7 +32,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable())
+		http.csrf(csrf -> csrf.disable()).cors().and()
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/user/test").authenticated()
 						.requestMatchers("/user").permitAll().requestMatchers("/user/send-otp").permitAll()
 						.requestMatchers("/user/*").permitAll().requestMatchers("/brand/*").permitAll()

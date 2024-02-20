@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +32,7 @@ import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin("*")
 public class UserController {
 
 	@Autowired
@@ -56,6 +55,7 @@ public class UserController {
 		this.doAuthenticate(request.getEmail(), request.getPassword());
 
 		UserEntity userDetails = (UserEntity) userDetailsService.loadUserByUsername(request.getEmail());
+		userService.login(userDetails);
 		String token = this.helper.generateToken(userDetails);
 
 		JwtResponse response = JwtResponse.builder().jwtToken(token).username(userDetails.getUserName())
@@ -95,7 +95,7 @@ public class UserController {
 		if (isOtpVerified) {
 			return ResponseEntity.ok("OTP verified successfully"); // Return success message
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or Expired OTP");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or Expired OTP");
 		}
 	}
 
@@ -115,6 +115,18 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<?> getUsers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "") String role) {
+		System.out.println(role + " " + size + " " + " " + page);
 		return ResponseEntity.ok(userService.getUsersByRole(role, size, page));
+	}
+
+	@PutMapping("/logout/{id}")
+	public ResponseEntity<String> logout(@PathVariable UUID id) {
+		userService.logout(id);
+		return ResponseEntity.ok("logged successfully");
+	}
+
+	@PutMapping("/activate/{id}")
+	public ResponseEntity<String> setUserActive(@PathVariable UUID id) {
+		return ResponseEntity.ok(userService.setUserActive(id));
 	}
 }

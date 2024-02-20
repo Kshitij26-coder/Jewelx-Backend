@@ -43,7 +43,7 @@ public class UserMapper {
 	public static UserResponseDto UserToUserResponseDto(UserEntity user) {
 		UserResponseDto userDto = new UserResponseDto();
 
-		UserShortDetailsDto userAssignedByDto = UserMapper.UserEntityToUserShortDetailsDto(user);
+		UserShortDetailsDto userAssignedByDto = UserMapper.UserEntityToUserShortDetailsDto(user.getAssignedBy());
 		SubsidiaryShortDetailsDto userSubsidiaryDto = SubsidiaryMapper
 				.mapToSubsidiaryShortDetailsDto(user.getSubsidiary());
 		BrandShortDetailsDto userBrandResponseDto = BrandMapper.brandEntitytoBrandShortDetails(user.getBrand());

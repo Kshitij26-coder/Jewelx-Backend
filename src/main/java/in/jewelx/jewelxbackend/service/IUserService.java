@@ -23,7 +23,7 @@ public interface IUserService {
 
 	UserEntity updateUser(UUID userId, UpdateUserDto updatedUserData);
 
-	UserEntity getUserById(UUID id);
+	UserResponseDto getUserById(UUID id);
 
 	Page<UserResponseDto> getUsersByRole(String role, int pageSize, int pageNumber);
 

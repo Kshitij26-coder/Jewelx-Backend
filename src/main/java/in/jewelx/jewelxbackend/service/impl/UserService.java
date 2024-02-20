@@ -3,6 +3,7 @@ package in.jewelx.jewelxbackend.service.impl;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,11 +56,11 @@ public class UserService implements IUserService, UserDetailsService {
 		ViewBrandUser viewBrandUser = UserMapper.mapToBrandUser(userDto);
 		if (RolesEnum.valueOf(userDto.getUserRole().toUpperCase()) == RolesEnum.O) {
 			BrandEntity createdBrand = brandService.createBrand(viewBrandUser.getBrand());
-			// will prevent in creating nested objects in viewBrandUserObject
-
+			// owner will be by default active
+			viewBrandUser.getUser().setActive(true);
 			viewBrandUser.getUser().setBrand(createdBrand);
 		}
-
+		// will prevent in creating nested objects in viewBrandUserObject
 		if (viewBrandUser.getUser().getAssignedBy().getIdxId() == null) {
 			viewBrandUser.getUser().setAssignedBy(null);
 		}
@@ -78,6 +79,30 @@ public class UserService implements IUserService, UserDetailsService {
 		userRepo.save(viewBrandUser.getUser());
 		return "Succesfully saved user data";
 
+	}
+
+	/*
+	 * Used to change status to logged in
+	 */
+	public void login(UserEntity user) {
+		user.setLoggedIn(true);
+		userRepo.save(user);
+	}
+
+	/*
+	 * Used to change status to logged out
+	 */
+	public void logout(UUID id) {
+		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new ObjectNotFoundException(id, ":not found"));
+		user.setLoggedIn(false);
+		userRepo.save(user);
+	}
+
+	public String setUserActive(UUID id) {
+		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new ObjectNotFoundException(id, ":not found"));
+		user.setActive(!user.isActive());
+		userRepo.save(user);
+		return user.isActive() ? "User Activated" : "User Disabled";
 	}
 
 	/*
@@ -170,9 +195,10 @@ public class UserService implements IUserService, UserDetailsService {
 	 * returns a specific user by Id
 	 */
 	@Override
-	public UserEntity getUserById(UUID id) {
+	public UserResponseDto getUserById(UUID id) {
 		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new IdNotFoundException(id + " not found"));
-		return user;
+
+		return UserMapper.UserToUserResponseDto(user);
 	}
 
 	/*
@@ -188,7 +214,7 @@ public class UserService implements IUserService, UserDetailsService {
 		} else {
 			usersPage = userRepo.findByUserRole(role, pageRequest);
 		}
-
+		System.out.println(usersPage);
 		return usersPage.map(UserMapper::UserToUserResponseDto);
 	}
 
