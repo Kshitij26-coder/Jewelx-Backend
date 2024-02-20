@@ -36,18 +36,15 @@ public class CustomerOrderService implements ICustomerOrderService {
 	@Autowired
 	private WeightDetailService weightDetailsService;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
 	@Override
 	public String addCustomerOrder(CustomerOrderDto dto) {
 		if (dto == null) {
 			throw new NullObjectException("Customer Order Dto is null");
 		} else {
 			CustomerOrderEntity entity = CustomerOrderMapper.dtoToEntity(dto);
-			System.out.println("THIS IS:" + dto.getUserID());
+
 			// for accounting entity
-			System.out.println("DTO" + CustomerOrderMapper.customerOrderDtoToAccountingDto(dto));
+
 			AccountingEntity accountingEntity = accountingService
 					.addAccounting(CustomerOrderMapper.customerOrderDtoToAccountingDto(dto));
 
