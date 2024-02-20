@@ -9,14 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MetalDto {
-
-	private String metalDescription;
-
+public class MetalShortDto {
+	
+	private Long metalId;
+	
 	private Double metalRate;
-
+	
 	private String metalName;
-
-	private Long userID;
-
 }

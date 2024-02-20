@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.entity;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,7 +19,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "accounting")
 public class AccountingEntity {
@@ -32,12 +37,16 @@ public class AccountingEntity {
     @Column(name = "accounting_id")
     private UUID accountingId;
 
-    @Column(name = "current_balance", precision = 15,  nullable = false)
-    private BigDecimal currentBalance;
+    @Column(name = "opening_balance", precision = 15,scale=2,  nullable = false)
+    private BigDecimal openigBalance;
+    
+    @Column(name = "closing_balance", precision = 15,scale=2,  nullable = false)
+    private BigDecimal closingBalance;
 
     @Column(name = "transaction_amount", precision = 15, nullable = false)
     private BigDecimal transactionAmount;
 
+    //this for payment type (credit/debit)
     @Column(name = "transaction_type", length = 1, nullable = false)
     private String transactionType;
 
@@ -48,9 +57,25 @@ public class AccountingEntity {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
+    //this is for payment mode
     @Column(name = "transaction_mode", length = 3, nullable = false)
     private String transactionMode;
-
+    
+    @Column(name = "cheque_no", length=30)
+    private String chequeNo;
+    
+    @Column(name="cheque_amount",precision = 15,scale=2)
+    private BigDecimal chequeAmount;
+    
+    @Column(name="cash_amount",precision = 15,scale=2)
+    private BigDecimal cashAmount;
+    
+    @Column(name="netbanking_utr", length=30)
+    private String netBankingUTR;
+    
+    @Column(name="netbanking_amount",precision = 15,scale=2)
+    private BigDecimal netBankingAmount;
+    
     @CreationTimestamp
     @Column(name = "created_on", nullable = false, updatable = false)
     private LocalDateTime createdOn;
@@ -69,6 +94,7 @@ public class AccountingEntity {
     // Constructors, getters, and setters
 
     public AccountingEntity() {
-        // Default constructor
+    	this.transactionDate = Date.valueOf(LocalDate.now());
+    	this.accountingId = UUID.randomUUID();
     }
 }

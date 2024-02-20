@@ -17,6 +17,7 @@ public class WeightDetailMapper {
 		userEntity.setIdxId(weightDetailsDto.getUserID());
 		weightDetailEntity.setCreatedBy(userEntity);
 		weightDetailEntity.setUpdatedBy(userEntity);
+		weightDetailEntity.setMetalTransactionType(weightDetailsDto.getWeightTransactionType());
 
 		CustomerEntity customerEntity = new CustomerEntity();
 		customerEntity.setIdxId(weightDetailsDto.getCustomer());

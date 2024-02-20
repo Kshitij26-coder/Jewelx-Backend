@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -43,9 +44,12 @@ public class WeightDetailEntity {
 	@JoinColumn(name = "metal_id", nullable = false)
 	private MetalEntity metal;
 
-	@Column(name = "metal_weight", precision = 6, nullable = false)
-	private Double metalWeight;
+	@Column(name = "metal_weight", precision = 6,scale=3, nullable = false)
+	private BigDecimal metalWeight;
 
+	@Column(name="transaction_type", length = 2, nullable =false)
+	private String metalTransactionType;
+	
 	@ManyToOne
 	@JoinColumn(name = "uom_code", nullable = false)
 	private UnitOfMeasurementEntity uom;
@@ -68,7 +72,7 @@ public class WeightDetailEntity {
 
 	// Constructors, getters, and setters
 	public WeightDetailEntity() {
-		// Default constructor
+		this.detailId = UUID.randomUUID();
 
 	}
 }

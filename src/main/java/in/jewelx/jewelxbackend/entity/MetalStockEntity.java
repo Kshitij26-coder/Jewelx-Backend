@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,45 +18,66 @@ import jakarta.persistence.ManyToOne;
  * This entity store the data of metal inventory 
  * */
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "metal_stocks")
 public class MetalStockEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "stock_id")
+	private Long stockId;
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stock_id")
-    private Long stockId;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "stock_uid")
+	private UUID metalStockUUID;
 
-    @ManyToOne
-    @JoinColumn(name = "metal_id", nullable = false)
-    private MetalEntity metal;
+	@ManyToOne
+	@JoinColumn(name = "metal_id", nullable = false)
+	private MetalEntity metal;
 
-    @Column(name = "opening_weight", precision = 8,  nullable = false)
-    private BigDecimal openingWeight;
+	@Column(name = "opening_weight", precision = 8, scale = 3, nullable = false)
+	private BigDecimal openingWeight;
 
-    @Column(name = "closing_weight", precision = 8, nullable = false)
+	@Column(name = "closing_weight", precision = 8, scale = 3, nullable = false)
     private BigDecimal closingWeight;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
-    // Constructors, getters, and setters
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
 
-    public MetalStockEntity() {
-        // Default constructor
-    }
+	// Constructors, getters, and setters
+	@Column(name = "transaction_weight", precision = 8, scale = 3, nullable = false)
+    private BigDecimal transactionWeight;
+
+	public MetalStockEntity() {
+		this.metalStockUUID = UUID.randomUUID();
+	}
+
+	public MetalStockEntity(MetalEntity metal, BigDecimal closingWeight, BigDecimal openingWeight) {
+		super();
+		this.metalStockUUID = UUID.randomUUID();
+		this.metal = metal;
+		this.closingWeight = closingWeight;
+		this.openingWeight = openingWeight;
+	}
+	
+	
+	
 }

@@ -33,7 +33,7 @@ public class MetalEntity {
 	@Column(name = "metal_rate", nullable = false, precision = 15)
 	private Double metalRate;
 
-	@Column(name = "metal_name", nullable = false, length = 20)
+	@Column(name = "metal_name", nullable = false, length = 20, unique = true)
 	private String metalName;
 
 	@CreationTimestamp
