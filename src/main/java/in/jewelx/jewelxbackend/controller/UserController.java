@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.jewelx.jewelxbackend.dto.user.ActivateUserDto;
 import in.jewelx.jewelxbackend.dto.user.OtpRequestDto;
 import in.jewelx.jewelxbackend.dto.user.SetPasswordDto;
 import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
@@ -40,6 +41,7 @@ public class UserController {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
 	@Autowired
 	private AuthenticationManager manager;
 
@@ -61,7 +63,7 @@ public class UserController {
 		JwtResponse response = JwtResponse.builder().jwtToken(token).username(userDetails.getUserName())
 				.email(userDetails.getEmail()).userId(userDetails.getUserId()).role(userDetails.getUserRole())
 				.subsidiaryId(userDetails.getSubsidiary() == null ? null : userDetails.getSubsidiary().getIdxId())
-				.brandId(userDetails.getBrand().getBrandId()).build();
+				.brandId(userDetails.getBrand().getBrandId()).idxId(userDetails.getIdxId()).build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -114,9 +116,10 @@ public class UserController {
 	// get specific user using role
 	@GetMapping
 	public ResponseEntity<?> getUsers(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "") String role) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "") String role,
+			@RequestParam Long brand) {
 		System.out.println(role + " " + size + " " + " " + page);
-		return ResponseEntity.ok(userService.getUsersByRole(role, size, page));
+		return ResponseEntity.ok(userService.getUsersByRoleAndBrand(role, size, page, brand));
 	}
 
 	@PutMapping("/logout/{id}")
@@ -125,8 +128,8 @@ public class UserController {
 		return ResponseEntity.ok("logged successfully");
 	}
 
-	@PutMapping("/activate/{id}")
-	public ResponseEntity<String> setUserActive(@PathVariable UUID id) {
-		return ResponseEntity.ok(userService.setUserActive(id));
+	@PutMapping("/activate")
+	public ResponseEntity<String> setUserActive(@RequestBody ActivateUserDto dto) {
+		return ResponseEntity.ok(userService.setUserActive(dto));
 	}
 }

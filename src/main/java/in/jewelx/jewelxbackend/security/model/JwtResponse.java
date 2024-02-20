@@ -30,4 +30,6 @@ public class JwtResponse {
 	private Long subsidiaryId;
 
 	private Long brandId;
+
+	private Long idxId;
 }

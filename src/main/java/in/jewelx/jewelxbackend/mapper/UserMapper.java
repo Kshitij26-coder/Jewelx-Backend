@@ -47,7 +47,7 @@ public class UserMapper {
 		SubsidiaryShortDetailsDto userSubsidiaryDto = SubsidiaryMapper
 				.mapToSubsidiaryShortDetailsDto(user.getSubsidiary());
 		BrandShortDetailsDto userBrandResponseDto = BrandMapper.brandEntitytoBrandShortDetails(user.getBrand());
-
+		userDto.setIdxId(user.getIdxId());
 		userDto.setAssignedBy(userAssignedByDto);
 		userDto.setActive(user.isActive());
 		userDto.setLoggedIn(user.isLoggedIn());

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import in.jewelx.jewelxbackend.dto.user.ActivateUserDto;
 import in.jewelx.jewelxbackend.dto.user.SetPasswordDto;
 import in.jewelx.jewelxbackend.dto.user.UpdateUserDto;
 import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
@@ -98,9 +99,13 @@ public class UserService implements IUserService, UserDetailsService {
 		userRepo.save(user);
 	}
 
-	public String setUserActive(UUID id) {
-		UserEntity user = userRepo.findByUserId(id).orElseThrow(() -> new ObjectNotFoundException(id, ":not found"));
+	public String setUserActive(ActivateUserDto dto) {
+		UserEntity user = userRepo.findById(dto.getAssigneeId())
+				.orElseThrow(() -> new ObjectNotFoundException(0, "User not found"));
+		UserEntity assigner = userRepo.findById(dto.getAssignerId())
+				.orElseThrow(() -> new ObjectNotFoundException(0, "User not found"));
 		user.setActive(!user.isActive());
+		user.setAssignedBy(assigner);
 		userRepo.save(user);
 		return user.isActive() ? "User Activated" : "User Disabled";
 	}
@@ -205,14 +210,16 @@ public class UserService implements IUserService, UserDetailsService {
 	 * Get all user in paginated format
 	 */
 	@Override
-	public Page<UserResponseDto> getUsersByRole(String role, int pageSize, int pageNumber) {
+	public Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 
 		Page<UserEntity> usersPage;
 		if (role == null || role.isEmpty()) {
 			usersPage = userRepo.findAll(pageRequest);
 		} else {
-			usersPage = userRepo.findByUserRole(role, pageRequest);
+			BrandEntity brand = new BrandEntity();
+			brand.setBrandId(brandId);
+			usersPage = userRepo.findByUserRoleAndBrand(role, brand, pageRequest);
 		}
 		System.out.println(usersPage);
 		return usersPage.map(UserMapper::UserToUserResponseDto);
