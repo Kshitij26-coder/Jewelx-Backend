@@ -16,7 +16,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.CustomerMapper;
 import in.jewelx.jewelxbackend.repository.CustomerRepository;
 import in.jewelx.jewelxbackend.service.ICustomerService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class CustomerService implements ICustomerService {
 

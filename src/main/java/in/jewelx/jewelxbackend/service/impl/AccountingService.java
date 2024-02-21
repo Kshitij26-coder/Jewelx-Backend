@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import in.jewelx.jewelxbackend.dto.accounting.AccountRespDto;
 import in.jewelx.jewelxbackend.dto.accounting.AccountingDto;
 import in.jewelx.jewelxbackend.entity.AccountingEntity;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.AccountingMapper;
@@ -18,8 +19,8 @@ import in.jewelx.jewelxbackend.repository.AccountingRepository;
 import in.jewelx.jewelxbackend.service.IAccountingService;
 import jakarta.transaction.Transactional;
 
-@Service
 @Transactional
+@Service
 public class AccountingService implements IAccountingService {
 
 	@Autowired
@@ -63,10 +64,12 @@ public class AccountingService implements IAccountingService {
 			entity.setOpenigBalance(lastClosingAmount);
 			UserEntity userEntity = new UserEntity();
 			userEntity.setIdxId(dto.getUserId());
-			System.out.println(dto.getUserId());
+			//System.out.println(dto.getUserId());
 			entity.setCreatedBy(userEntity);
 			entity.setUpdatedBy(userEntity);
-			System.out.println(entity.getUpdatedBy());
+			//System.out.println(entity.getUpdatedBy());
+			BrandEntity brand = new BrandEntity(dto.getBrandId());
+			entity.setBrand(brand);
 			AccountingEntity savedEntity = accountingRepo.save(entity);
 			return savedEntity;
 		}

@@ -20,6 +20,8 @@ public class UOMMapper {
 		uomEntity.setBrand(brandEntity);
 		uomEntity.setCreatedBy(userEntity);
 		uomEntity.setUpdatedBy(userEntity);
+		BrandEntity brand = new BrandEntity(uomDto.getBrandId());
+		uomEntity.setBrand(brand);
 		return uomEntity;
 	}
 

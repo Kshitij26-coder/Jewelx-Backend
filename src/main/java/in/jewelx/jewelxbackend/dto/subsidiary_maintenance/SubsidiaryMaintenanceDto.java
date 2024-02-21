@@ -14,6 +14,10 @@ public class SubsidiaryMaintenanceDto {
 	private Long accountingId;
 
 	private Long userId;
+	
+	private Long brandId;
+	
+	private Long subsidiaryId;
 
 	// for Accounting Entity
 	private String transactionType; // only 1 length(credit / debit)
@@ -31,4 +35,5 @@ public class SubsidiaryMaintenanceDto {
 	private String netBankingUTR;
 
 	private BigDecimal netBankingAmount;
+	
 }

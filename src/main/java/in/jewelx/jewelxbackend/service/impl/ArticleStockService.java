@@ -17,7 +17,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.ArticleStockMapper;
 import in.jewelx.jewelxbackend.repository.ArticleStockRepository;
 import in.jewelx.jewelxbackend.service.IArticleStockService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class ArticleStockService implements IArticleStockService{
 	

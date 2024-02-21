@@ -16,7 +16,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.MetalMapper;
 import in.jewelx.jewelxbackend.repository.MetalRepository;
 import in.jewelx.jewelxbackend.service.IMetalService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class MetalService implements IMetalService {
 
