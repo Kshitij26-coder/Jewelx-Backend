@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.dto.subsidiary;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +28,7 @@ public class SubsidiaryRequestDto {
 	@Pattern(regexp = "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z0-9]{1}$", message = "Invalid GSTIN format")
 	private String gstin;
 
-	private double cashBalance;
+	private BigDecimal cashBalance;
 
 	private String logoUrl;
 
@@ -35,5 +37,7 @@ public class SubsidiaryRequestDto {
 	private String formFooter;
 
 	private Long userIdxId;
+	
+	private Long pinCode;
 
 }

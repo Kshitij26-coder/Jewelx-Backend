@@ -41,7 +41,7 @@ public class UnitOfMeasurementEntity {
 	    private LocalDateTime createdOn;
 
 	    @UpdateTimestamp
-	    @Column(name = "updated_on", nullable = false,updatable = false)
+	    @Column(name = "updated_on", nullable = false)
 	    private LocalDateTime updatedOn;
 	    
 	    @ManyToOne
@@ -49,8 +49,12 @@ public class UnitOfMeasurementEntity {
 	    private UserEntity createdBy;
 
 	    @ManyToOne
-	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
+	    @JoinColumn(name = "updated_by", nullable = false)
 	    private UserEntity updatedBy;
+	    
+	    @ManyToOne
+	    @JoinColumn(name="brand_id")
+	    private BrandEntity brand;
 
 	    // Constructors, getters, and setters
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.uom.UOMDto;
 import in.jewelx.jewelxbackend.dto.uom.UOMResponseDto;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
@@ -14,7 +15,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.UOMMapper;
 import in.jewelx.jewelxbackend.repository.UOMRepository;
 import in.jewelx.jewelxbackend.service.IUOMService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class UOMService implements IUOMService {
 	
@@ -27,13 +30,15 @@ public class UOMService implements IUOMService {
 			throw new NullObjectException("UOMDto is null");
 		}
 		uomRepo.save(UOMMapper.dtoToUOMEntity(uomDto));
-		return null;
+		return "Unit of Measurement Created Successfully : " + uomDto.getUomName() ;
 	}
 
 	@Override
-	public Page<UOMResponseDto> getAllUOM(int pageNumber, int pageSize) {
+	public Page<UOMResponseDto> getAllUOM(int pageNumber, int pageSize, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<UnitOfMeasurementEntity> uomPage = uomRepo.findAll(pageRequest);
+		BrandEntity brand = new BrandEntity();
+		brand.setBrandId(brandId);
+		Page<UnitOfMeasurementEntity> uomPage = uomRepo.findByBrand(brand,pageRequest);
 		return uomPage.map(UOMMapper::uomEntityToUOMRespDto);
 	}
 

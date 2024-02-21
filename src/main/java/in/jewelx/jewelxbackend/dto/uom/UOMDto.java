@@ -14,5 +14,7 @@ public class UOMDto {
 	private String description;
 
 	private Long userID;
+	
+	private Long brandId;
 
 }

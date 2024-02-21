@@ -71,6 +71,15 @@ public class SubsidiaryMaintenance {
 	@ManyToOne
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserEntity updatedBy;
+	
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+	
+	// Add Subsidiary Id
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity subsidiary;
 
 	public SubsidiaryMaintenance() {
 		this.maintenanceId = UUID.randomUUID();

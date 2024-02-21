@@ -3,6 +3,7 @@ package in.jewelx.jewelxbackend.mapper;
 import in.jewelx.jewelxbackend.dto.accounting.AccountRespDto;
 import in.jewelx.jewelxbackend.dto.accounting.AccountingDto;
 import in.jewelx.jewelxbackend.entity.AccountingEntity;
+import in.jewelx.jewelxbackend.entity.SubsidiaryEntity;
 
 public class AccountingMapper {
 
@@ -11,7 +12,8 @@ public class AccountingMapper {
 		entity.setTransactionType(dto.getTransactionType());
 		entity.setDescription(dto.getDescription());
 		entity.setTransactionMode(dto.getTransactionMode());
-
+		SubsidiaryEntity subsidiary = new SubsidiaryEntity(dto.getSubsidiaryId());
+		entity.setSubsidiary(subsidiary);
 		return entity;
 	}
 

@@ -1,6 +1,5 @@
 package in.jewelx.jewelxbackend.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryRequestDto;
@@ -29,8 +29,8 @@ public class SubsidiaryController {
 	private SubsidiaryService subsidiaryService;
 
 	@GetMapping("/brand/{id}")
-	public ResponseEntity<List<SubsidiaryResponseDto>> getSubsidiariesByBrandId(@PathVariable("id") Long brandId) {
-		return ResponseEntity.ok(subsidiaryService.getSubsidiariesByBrandId(brandId));
+	public ResponseEntity<?> getSubsidiariesByBrandId(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,@PathVariable("id") Long brandId) {
+		return ResponseEntity.ok(subsidiaryService.getSubsidiariesByBrandId(page, size,brandId));
 	}
 
 	@PostMapping

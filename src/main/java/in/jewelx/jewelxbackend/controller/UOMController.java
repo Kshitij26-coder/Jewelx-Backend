@@ -27,10 +27,12 @@ public class UOMController {
 		return ResponseEntity.ok(uomService.createUOM(uomDto));
 	}
 
-	@GetMapping
+	//Request Param - passes after ? 
+	//Path variable - passes directly after /
+	@GetMapping()
 	public ResponseEntity<?> getAllUOMs(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(uomService.getAllUOM(page, size));
+			@RequestParam(defaultValue = "10") int size,@RequestParam Long brandId) {
+		return ResponseEntity.ok(uomService.getAllUOM(page, size, brandId));
 	}
 
 	@GetMapping("/{uomId}")

@@ -19,6 +19,7 @@ import in.jewelx.jewelxbackend.repository.BrandRepository;
 import in.jewelx.jewelxbackend.service.IBrandService;
 import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class BrandService implements IBrandService {
 

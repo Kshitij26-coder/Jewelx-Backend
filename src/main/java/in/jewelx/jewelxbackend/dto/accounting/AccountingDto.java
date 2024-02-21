@@ -11,31 +11,26 @@ import lombok.ToString;
 @Setter
 @ToString
 public class AccountingDto {
-	
-// 	private BigDecimal openigBalance;
- 
-//    private BigDecimal closingBalance;
-    
-  //  private BigDecimal transactionAmount;
 
-    
-
-//    private Date transactionDate;
 	private String transactionType;
 
-    private String description;
+	private String description;
 
-    private String transactionMode;
-    
-    private String chequeNo;
-    
-    private BigDecimal chequeAmount;
-    
-    private BigDecimal cashAmount;
-    
-    private String netBankingUTR;
-    
-    private BigDecimal netBankingAmount;
-    
-    private Long userId;
+	private String transactionMode;
+
+	private String chequeNo;
+
+	private BigDecimal chequeAmount;
+
+	private BigDecimal cashAmount;
+
+	private String netBankingUTR;
+
+	private BigDecimal netBankingAmount;
+
+	private Long userId;
+
+	private Long brandId;
+
+	private Long subsidiaryId;
 }

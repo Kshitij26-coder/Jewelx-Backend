@@ -19,7 +19,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.WeightDetailMapper;
 import in.jewelx.jewelxbackend.repository.WeightDetailRepository;
 import in.jewelx.jewelxbackend.service.IWeightDetailService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class WeightDetailService implements IWeightDetailService {
 

@@ -47,7 +47,7 @@ public class AccountingEntity {
     private BigDecimal transactionAmount;
 
     //this for payment type (credit/debit)
-    @Column(name = "transaction_type", length = 1, nullable = false)
+    @Column(name = "transaction_type", length = 2, nullable = false)
     private String transactionType;
 
     @Temporal(TemporalType.DATE)
@@ -58,7 +58,7 @@ public class AccountingEntity {
     private String description;
 
     //this is for payment mode
-    @Column(name = "transaction_mode", length = 3, nullable = false)
+    @Column(name = "transaction_mode", length = 10, nullable = false)
     private String transactionMode;
     
     @Column(name = "cheque_no", length=30)
@@ -91,8 +91,16 @@ public class AccountingEntity {
     @ManyToOne
     @JoinColumn(name = "updated_by", nullable = false,updatable = false)
     private UserEntity updatedBy;
+    
+    @ManyToOne
+    @JoinColumn(name = "brand_id",nullable = false)
+    private BrandEntity brand;
     // Constructors, getters, and setters
-
+    
+    @ManyToOne
+    @JoinColumn(name = "subsidiary_id", nullable = false)
+    private SubsidiaryEntity subsidiary;
+    
     public AccountingEntity() {
     	this.transactionDate = Date.valueOf(LocalDate.now());
     	this.accountingId = UUID.randomUUID();

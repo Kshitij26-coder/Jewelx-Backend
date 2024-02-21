@@ -64,4 +64,10 @@ public class BrandEntity {
 				+ imageUrl + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + "]";
 	}
 
+	public BrandEntity(Long brandId) {
+		super();
+		this.brandId = brandId;
+	}
+	
+
 }

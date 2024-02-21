@@ -1,7 +1,6 @@
 package in.jewelx.jewelxbackend.mapper;
 
 import java.math.BigDecimal;
-
 import in.jewelx.jewelxbackend.dto.accounting.AccountingDto;
 import in.jewelx.jewelxbackend.dto.subsidiary_maintenance.SubsidiaryMaintenanceDto;
 
@@ -18,6 +17,8 @@ public class SubsidiaryMaintenanceMapper {
 		accountingDto.setNetBankingUTR(dto.getNetBankingUTR());
 		accountingDto.setNetBankingAmount(dto.getNetBankingAmount().multiply(new BigDecimal("-1")));
 		accountingDto.setUserId(dto.getUserId());
+		accountingDto.setBrandId(dto.getBrandId());
+		accountingDto.setSubsidiaryId(dto.getSubsidiaryId());
 		return accountingDto;
 	}
 }
