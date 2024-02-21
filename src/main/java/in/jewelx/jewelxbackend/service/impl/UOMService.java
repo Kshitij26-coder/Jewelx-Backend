@@ -30,11 +30,9 @@ public class UOMService implements IUOMService {
 			throw new NullObjectException("UOMDto is null");
 		}
 		uomRepo.save(UOMMapper.dtoToUOMEntity(uomDto));
-<<<<<<< HEAD
+
 		return "Unit \'" + uomDto.getUomCode() + "\' created successfully";
-=======
-		return "Unit of Measurement Created Successfully : " + uomDto.getUomName();
->>>>>>> branch 'develop' of https://github.com/Kshitij26-coder/Jewelx-Backend.git
+
 	}
 
 	@Override
