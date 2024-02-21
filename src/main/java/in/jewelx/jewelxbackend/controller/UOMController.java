@@ -34,17 +34,17 @@ public class UOMController {
 	}
 
 	@GetMapping("/{uomId}")
-	public ResponseEntity<?> getOneCustomer(@PathVariable("uomID") Long id) {
+	public ResponseEntity<?> getOneUom(@PathVariable("uomID") Long id) {
 		return ResponseEntity.ok(uomService.getOneUOM(id));
 	}
 
 	@PutMapping("/{uomId}")
-	public ResponseEntity<?> updateCustomer(@PathVariable("uomId") Long id, @RequestBody UOMDto uomDto) {
+	public ResponseEntity<?> updateUom(@PathVariable("uomId") Long id, @RequestBody UOMDto uomDto) {
 		return ResponseEntity.ok(uomService.updateUOM(id, uomDto));
 	}
 
 	@DeleteMapping("/{uomId}")
-	public ResponseEntity<?> deleteCustomerById(@PathVariable("uomId") Long id) {
+	public ResponseEntity<?> deleteUomId(@PathVariable("uomId") Long id) {
 		return ResponseEntity.ok(uomService.deleteUOMById(id));
 	}
 }

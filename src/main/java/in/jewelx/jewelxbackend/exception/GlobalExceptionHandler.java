@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.exception;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,6 +14,13 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler({ SQLIntegrityConstraintViolationException.class })
 	public ResponseEntity<String> handleDataIntegrityViolationException(SQLIntegrityConstraintViolationException ex) {
 		String errorMessage = "Error: Foreign key constraint violation. Please check your input data.";
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+	}
+
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+		String errorMessage = "Duplicate key";
+		System.out.println(ex.getMessage());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
 	}
 

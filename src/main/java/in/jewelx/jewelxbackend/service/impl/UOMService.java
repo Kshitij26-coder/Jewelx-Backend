@@ -27,7 +27,7 @@ public class UOMService implements IUOMService {
 			throw new NullObjectException("UOMDto is null");
 		}
 		uomRepo.save(UOMMapper.dtoToUOMEntity(uomDto));
-		return null;
+		return "Unit \'" + uomDto.getUomCode() + "\' created successfully";
 	}
 
 	@Override
