@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,8 +17,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 	UserEntity findByEmail(String userName);
 
-	Page<UserEntity> findByUserRoleAndBrand(String roleName, BrandEntity brand, Pageable pageable);
+	Page<UserEntity> findByUserRoleAndBrandAndSubsidiary_IdxIdOrderByUserNameAsc(String roleName, BrandEntity brand,
+			Long subsidiaryId, Pageable pageable);
 
 	Optional<UserEntity> findByUserId(UUID id);
+
+	Page<UserEntity> findByUserRoleInAndBrand_BrandIdOrderByUserNameAsc(List<String> roles, Long brandId,
+			Pageable pageable);
 
 }

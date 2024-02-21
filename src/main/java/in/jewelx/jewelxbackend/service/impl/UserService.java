@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -210,16 +213,24 @@ public class UserService implements IUserService, UserDetailsService {
 	 * Get all user in paginated format
 	 */
 	@Override
-	public Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId) {
+	public Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId,
+			Long subsidiaryId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 
-		Page<UserEntity> usersPage;
+		Page<UserEntity> usersPage = null;
 		if (role == null || role.isEmpty()) {
 			usersPage = userRepo.findAll(pageRequest);
 		} else {
-			BrandEntity brand = new BrandEntity();
-			brand.setBrandId(brandId);
-			usersPage = userRepo.findByUserRoleAndBrand(role, brand, pageRequest);
+			if (role.equals("A")) {
+				BrandEntity brand = new BrandEntity();
+				brand.setBrandId(brandId);
+				usersPage = userRepo.findByUserRoleAndBrandAndSubsidiary_IdxIdOrderByUserNameAsc("E", brand,
+						subsidiaryId, pageRequest);
+			} else if (role.equals("O")) {
+				List<String> rolesForOwner = new ArrayList<>(Arrays.asList("A", "E"));
+				usersPage = userRepo.findByUserRoleInAndBrand_BrandIdOrderByUserNameAsc(rolesForOwner, brandId,
+						pageRequest);
+			}
 		}
 		System.out.println(usersPage);
 		return usersPage.map(UserMapper::UserToUserResponseDto);

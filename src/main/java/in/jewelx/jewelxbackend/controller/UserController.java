@@ -41,7 +41,7 @@ public class UserController {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	private AuthenticationManager manager;
 
@@ -117,9 +117,9 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<?> getUsers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "") String role,
-			@RequestParam Long brand) {
+			@RequestParam Long brand, @RequestParam(defaultValue = "0") Long subsidiary) {
 		System.out.println(role + " " + size + " " + " " + page);
-		return ResponseEntity.ok(userService.getUsersByRoleAndBrand(role, size, page, brand));
+		return ResponseEntity.ok(userService.getUsersByRoleAndBrand(role, size, page, brand, subsidiary));
 	}
 
 	@PutMapping("/logout/{id}")

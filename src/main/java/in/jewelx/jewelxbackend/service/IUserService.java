@@ -25,6 +25,7 @@ public interface IUserService {
 
 	UserResponseDto getUserById(UUID id);
 
-	Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId);
+	Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId,
+			Long subsidiaryId);
 
 }
