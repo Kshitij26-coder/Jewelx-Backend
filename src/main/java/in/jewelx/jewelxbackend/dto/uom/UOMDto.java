@@ -13,6 +13,8 @@ public class UOMDto {
 
 	private String description;
 
+	private Long brandId;
+
 	private Long userID;
 
 }

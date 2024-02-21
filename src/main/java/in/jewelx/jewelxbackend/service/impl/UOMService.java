@@ -17,7 +17,7 @@ import in.jewelx.jewelxbackend.service.IUOMService;
 
 @Service
 public class UOMService implements IUOMService {
-	
+
 	@Autowired
 	private UOMRepository uomRepo;
 
@@ -31,9 +31,9 @@ public class UOMService implements IUOMService {
 	}
 
 	@Override
-	public Page<UOMResponseDto> getAllUOM(int pageNumber, int pageSize) {
+	public Page<UOMResponseDto> getAllUOMByBrand(int pageNumber, int pageSize, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<UnitOfMeasurementEntity> uomPage = uomRepo.findAll(pageRequest);
+		Page<UnitOfMeasurementEntity> uomPage = uomRepo.findByBrand_BrandId(brandId, pageRequest);
 		return uomPage.map(UOMMapper::uomEntityToUOMRespDto);
 	}
 

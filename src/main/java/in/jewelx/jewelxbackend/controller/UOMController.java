@@ -29,8 +29,8 @@ public class UOMController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllUOMs(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(uomService.getAllUOM(page, size));
+			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand) {
+		return ResponseEntity.ok(uomService.getAllUOMByBrand(page, size, brand));
 	}
 
 	@GetMapping("/{uomId}")

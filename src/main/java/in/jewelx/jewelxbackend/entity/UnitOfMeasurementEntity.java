@@ -22,39 +22,43 @@ import lombok.Setter;
 @Table(name = "unit_of_measurement")
 public class UnitOfMeasurementEntity {
 
-	  @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "uom_id")
-	    private Long uomId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "uom_id")
+	private Long uomId;
 
-	    @Column(name = "uom_code", nullable = false, length = 5,unique = true)
-	    private String uomCode;
+	@Column(name = "uom_code", nullable = false, length = 5, unique = true)
+	private String uomCode;
 
-	    @Column(name = "uom_name", nullable = false, length = 50,unique=true)
-	    private String uomName;
+	@Column(name = "uom_name", nullable = false, length = 50, unique = true)
+	private String uomName;
 
-	    @Column(name = "description", columnDefinition = "TEXT")
-	    private String description;
-	    
-	    @CreationTimestamp
-	    @Column(name = "created_on", nullable = false, updatable = false)
-	    private LocalDateTime createdOn;
+	@Column(name = "description", columnDefinition = "TEXT")
+	private String description;
 
-	    @UpdateTimestamp
-	    @Column(name = "updated_on", nullable = false,updatable = false)
-	    private LocalDateTime updatedOn;
-	    
-	    @ManyToOne
-	    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-	    private UserEntity createdBy;
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
 
-	    @ManyToOne
-	    @JoinColumn(name = "updated_by", nullable = false,updatable = false)
-	    private UserEntity updatedBy;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-	    // Constructors, getters, and setters
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-	    public UnitOfMeasurementEntity() {
-	        // Default constructor
-	    }
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
+
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
+
+	// Constructors, getters, and setters
+
+	public UnitOfMeasurementEntity() {
+		// Default constructor
+	}
 }

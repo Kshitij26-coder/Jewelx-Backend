@@ -1,6 +1,7 @@
 package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -62,6 +63,11 @@ public class BrandEntity {
 	public String toString() {
 		return "BrandEntity [brandId=" + brandId + ", name=" + name + ", description=" + description + ", imageUrl="
 				+ imageUrl + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + "]";
+	}
+
+	public BrandEntity(Long brandId) {
+		super();
+		this.brandId = brandId;
 	}
 
 }
