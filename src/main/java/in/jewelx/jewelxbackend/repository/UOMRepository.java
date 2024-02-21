@@ -9,5 +9,7 @@ import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 
 @Repository
 public interface UOMRepository extends JpaRepository<UnitOfMeasurementEntity, Long> {
+
 	Page<UnitOfMeasurementEntity> findByBrand_BrandId(Long brand_id, Pageable page);
+
 }

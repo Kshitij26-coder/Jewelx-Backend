@@ -20,6 +20,7 @@ import in.jewelx.jewelxbackend.repository.MetalStockRepository;
 import in.jewelx.jewelxbackend.service.IMetalStockService;
 import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class MetalStockService implements IMetalStockService {
 

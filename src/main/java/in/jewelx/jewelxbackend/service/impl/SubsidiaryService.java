@@ -1,13 +1,13 @@
 package in.jewelx.jewelxbackend.service.impl;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import in.jewelx.jewelxbackend.dto.accounting.AccountingDto;
 import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryRequestDto;
 import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryResponseDto;
 import in.jewelx.jewelxbackend.dto.subsidiary.UpdateActiveStatusDto;
@@ -17,12 +17,17 @@ import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.mapper.SubsidiaryMapper;
 import in.jewelx.jewelxbackend.repository.SubsidiaryRepository;
 import in.jewelx.jewelxbackend.service.ISubsidiaryService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class SubsidiaryService implements ISubsidiaryService {
 
 	@Autowired
 	SubsidiaryRepository subsidiaryRepo;
+
+	@Autowired
+	AccountingService accountingService;
 
 	@Autowired
 	ModelMapper modelMapper;
@@ -31,9 +36,10 @@ public class SubsidiaryService implements ISubsidiaryService {
 	 * get subsidiary by id
 	 */
 	@Override
-	public List<SubsidiaryResponseDto> getSubsidiariesByBrandId(Long id) {
-		List<SubsidiaryEntity> subsidiaries = subsidiaryRepo.findByBrandId(id);
-		return subsidiaries.stream().map(SubsidiaryMapper::mapToResponseDto).collect(Collectors.toList());
+	public Page<SubsidiaryResponseDto> getSubsidiariesByBrandId(int pageNumber, int pageSize,Long id) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+		Page<SubsidiaryEntity> subsidiaries = subsidiaryRepo.findByBrand_BrandId(id,pageRequest);
+		return subsidiaries.map(SubsidiaryMapper::mapToResponseDto);
 	}
 
 	/*
@@ -41,7 +47,16 @@ public class SubsidiaryService implements ISubsidiaryService {
 	 */
 	@Override
 	public String createSubsidiary(SubsidiaryRequestDto dto) {
-		subsidiaryRepo.save(SubsidiaryMapper.mapToSubsidiaryEntity(dto));
+		SubsidiaryEntity subsidiary =SubsidiaryMapper.mapToSubsidiaryEntity(dto);
+		UserEntity user = new UserEntity(dto.getUserIdxId());
+		subsidiary.setCreatedBy(user);
+		subsidiary.setUpdatedBy(user);
+		SubsidiaryEntity subsidiaryEntity = subsidiaryRepo.save(subsidiary);
+		AccountingDto accountingDto = SubsidiaryMapper.subsidiaryDtoToAccountingDto(dto);
+		accountingDto.setSubsidiaryId(subsidiaryEntity.getIdxId());
+		System.out.println(subsidiaryEntity.getIdxId());
+		System.out.println(accountingDto);
+		accountingService.addAccounting(accountingDto);
 		return "Subsidirary Created Successfully";
 	}
 

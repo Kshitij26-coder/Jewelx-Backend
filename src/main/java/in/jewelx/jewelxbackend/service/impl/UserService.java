@@ -34,7 +34,9 @@ import in.jewelx.jewelxbackend.repository.UserRepository;
 import in.jewelx.jewelxbackend.service.IUserService;
 import in.jewelx.jewelxbackend.utils.RolesEnum;
 import jakarta.mail.MessagingException;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class UserService implements IUserService, UserDetailsService {
 	@Autowired

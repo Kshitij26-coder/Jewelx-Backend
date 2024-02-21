@@ -14,7 +14,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.ItemCategoryMapper;
 import in.jewelx.jewelxbackend.repository.ItemCategoryRepository;
 import in.jewelx.jewelxbackend.service.IItemCategoryService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class ItemCategoryService implements IItemCategoryService {
 

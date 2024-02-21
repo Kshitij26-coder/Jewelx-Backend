@@ -1,10 +1,8 @@
 package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,21 +38,21 @@ public class UnitOfMeasurementEntity {
 	@JoinColumn(name = "brand_id", nullable = false)
 	private BrandEntity brand;
 
-	@CreationTimestamp
-	@Column(name = "created_on", nullable = false, updatable = false)
-	private LocalDateTime createdOn;
-
 	@UpdateTimestamp
 	@Column(name = "updated_on", nullable = false)
 	private LocalDateTime updatedOn;
 
-	@ManyToOne
-	@JoinColumn(name = "created_by", nullable = false, updatable = false)
-	private UserEntity createdBy;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
 	@ManyToOne
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserEntity updatedBy;
+
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
 	// Constructors, getters, and setters
 

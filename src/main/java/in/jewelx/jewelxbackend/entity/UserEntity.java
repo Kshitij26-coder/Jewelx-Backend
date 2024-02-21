@@ -145,4 +145,11 @@ public class UserEntity implements UserDetails {
 		return this.isActive;
 	}
 
+	public UserEntity(Long idxId) {
+		super();
+		this.idxId = idxId;
+	}
+	
+	
+
 }
