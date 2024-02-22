@@ -54,22 +54,22 @@ public class SaleEntity {
 	@Column(name = "due_date", nullable = false)
 	private Date dueDate;
 
-	@Column(name = "sgst", precision = 8, nullable = false)
+	@Column(name = "sgst", precision = 8,scale =2, nullable = false)
 	private BigDecimal sgst;
 
-	@Column(name = "cgst", precision = 8, nullable = false)
+	@Column(name = "cgst", precision = 8,scale =2, nullable = false)
 	private BigDecimal cgst;
 
-	@Column(name = "total_making_charges", precision = 8, nullable = false)
+	@Column(name = "total_making_charges", precision = 8,scale =2, nullable = false)
 	private BigDecimal totalMakingCharges;
 
-	@Column(name = "discount", precision = 8, nullable = false)
+	@Column(name = "discount", precision = 8,scale=2, nullable = false)
 	private BigDecimal discount;
 
-	@Column(name = "net_amount", precision = 8, nullable = false)
+	@Column(name = "net_amount", precision = 8,scale =2, nullable = false)
 	private BigDecimal netAmount;
 
-	@Column(name = "payable_amount", precision = 8, nullable = false)
+	@Column(name = "payable_amount", precision = 8,scale=2, nullable = false)
 	private BigDecimal payableAmount;
 
 	// transaction id of any online payment mode

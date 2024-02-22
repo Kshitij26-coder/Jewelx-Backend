@@ -31,8 +31,8 @@ public class ItemCategoryEntity {
 	private String categoryName;
 
 	@ManyToOne
-	@JoinColumn(name = "category_metal", nullable = false)
-	private MetalEntity categoryMetal;
+	@JoinColumn(name = "metal_id", nullable = false)
+	private MetalEntity metal;
 
 	@CreationTimestamp
 	@Column(name = "created_on", nullable = false, updatable = false)
@@ -49,6 +49,11 @@ public class ItemCategoryEntity {
 	@ManyToOne
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserEntity updatedBy;
+	
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+	
 
 	// Constructors, getters, and setters
 
