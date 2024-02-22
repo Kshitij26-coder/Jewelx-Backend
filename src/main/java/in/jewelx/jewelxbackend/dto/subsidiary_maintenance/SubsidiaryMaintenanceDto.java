@@ -22,7 +22,7 @@ public class SubsidiaryMaintenanceDto {
 	// for Accounting Entity
 	private String transactionType; // only 1 length(credit / debit)
 
-	private String transactionDescription;
+//	private String transactionDescription;
 
 	private String transactionMode; // lenght is 3
 

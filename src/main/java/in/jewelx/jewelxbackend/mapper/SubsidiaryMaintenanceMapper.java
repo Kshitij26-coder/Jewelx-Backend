@@ -9,7 +9,7 @@ public class SubsidiaryMaintenanceMapper {
 	public static AccountingDto subsidiaryMaintenanceDtoToAccountingDto(SubsidiaryMaintenanceDto dto) {
 		AccountingDto accountingDto = new AccountingDto();
 		accountingDto.setTransactionType(dto.getTransactionType());
-		accountingDto.setDescription(dto.getTransactionDescription());
+		accountingDto.setDescription(dto.getMaintenanceDescription());
 		accountingDto.setTransactionMode(dto.getTransactionMode());
 		accountingDto.setChequeNo(dto.getChequeNo());
 		accountingDto.setChequeAmount(dto.getChequeAmount().multiply(new BigDecimal("-1")));

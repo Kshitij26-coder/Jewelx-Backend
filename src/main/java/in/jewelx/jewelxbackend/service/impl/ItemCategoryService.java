@@ -28,7 +28,12 @@ public class ItemCategoryService implements IItemCategoryService {
 		if (itemCategoryDto == null) {
 			throw new NullObjectException("ItemCategoryDto is null");
 		}
-		itemCategoryRepo.save(ItemCategoryMapper.dtoToItemCategoryEntity(itemCategoryDto));
+		ItemCategoryEntity itemCategoryEntity = ItemCategoryMapper.dtoToItemCategoryEntity(itemCategoryDto);
+		UserEntity userEntity = new UserEntity();
+		userEntity.setIdxId(itemCategoryDto.getUserId());
+		itemCategoryEntity.setCreatedBy(userEntity);
+		itemCategoryEntity.setUpdatedBy(userEntity);
+		itemCategoryRepo.save(itemCategoryEntity);
 		return "Item category created successfully";
 	}
 
@@ -59,7 +64,7 @@ public class ItemCategoryService implements IItemCategoryService {
 		ItemCategoryEntity foundItemCategory = itemCategoryRepo.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Invalid Item Category Id"));
 		foundItemCategory.setCategoryName(updatedItemCategory.getCategoryName());
-		foundItemCategory.setCategoryMetal(updatedItemCategory.getCategoryMetal());
+		foundItemCategory.setMetal(updatedItemCategory.getMetal());
 		UserEntity userEntity = new UserEntity();
 		userEntity.setIdxId(itemCategoryDto.getUserId());
 		foundItemCategory.setUpdatedBy(userEntity);

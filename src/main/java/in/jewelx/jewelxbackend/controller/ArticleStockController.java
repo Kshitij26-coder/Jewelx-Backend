@@ -1,7 +1,5 @@
 package in.jewelx.jewelxbackend.controller;
 
-import java.io.OutputStream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-
-import in.jewelx.jewelxbackend.barcode.BarcodeGenerator;
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockDto;
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockRespDto;
 import in.jewelx.jewelxbackend.service.impl.ArticleStockService;
-import jakarta.servlet.http.HttpServletResponse;
+
 
 @RestController
 @RequestMapping("/article-stock")
@@ -30,7 +25,7 @@ public class ArticleStockController {
 	private ArticleStockService articleStockService;
 	
 	@PostMapping
-	public ResponseEntity<String> addArticleStock(@RequestBody ArticleStockDto dto){
+	public ResponseEntity<String> addArticleStock(@RequestBody ArticleStockDto dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(articleStockService.addArticleStock(dto));
 	}
 	
@@ -55,12 +50,13 @@ public class ArticleStockController {
 		return ResponseEntity.ok(foundArticleStock);
 	}
 	
-	@GetMapping("/barcode/{id}")
-	public void barcode(@PathVariable("id")String id, HttpServletResponse response) throws Exception{
-		response.setContentType("image/png");
-		OutputStream outputStream = response.getOutputStream();
-		outputStream.write(BarcodeGenerator.getBarCodeImage(id, 500, 300));
-		outputStream.flush();
-		outputStream.close();
-	}
+//	@GetMapping("/barcode/{id}")
+//	public void barcode(@PathVariable("id")String id, HttpServletResponse response) throws Exception{
+//		
+//		response.setContentType("image/png");
+//		OutputStream outputStream = response.getOutputStream();
+//		outputStream.write(BarcodeGenerator.getBarCodeImage(id, 500, 300));
+//		outputStream.flush();
+//		outputStream.close();
+//	}
 }

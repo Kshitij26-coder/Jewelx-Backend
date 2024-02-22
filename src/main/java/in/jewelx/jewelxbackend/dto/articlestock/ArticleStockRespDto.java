@@ -8,6 +8,10 @@ import lombok.Setter;
 @Setter
 public class ArticleStockRespDto {
 	
+	private Long tagId;
+	
+	private String articleName;
+	
 	private String barcode;
 
     private Double grossWeight;
@@ -21,4 +25,8 @@ public class ArticleStockRespDto {
     private String huid;
 
     private ItemCategoryRespDto category;
+    
+    private Long brandId;
+    
+    private Long subsidiLong;
 }
