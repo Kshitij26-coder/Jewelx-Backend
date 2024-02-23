@@ -2,6 +2,8 @@ package in.jewelx.jewelxbackend.security.model;
 
 import java.util.UUID;
 
+import in.jewelx.jewelxbackend.dto.brand.BrandShortDetailsDto;
+import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryShortDetailsDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,4 +34,11 @@ public class JwtResponse {
 	private Long brandId;
 
 	private Long idxId;
+
+	private BrandShortDetailsDto brand;
+
+	private SubsidiaryShortDetailsDto subsidiary;
+
+	private String mobileNumber;
+
 }
