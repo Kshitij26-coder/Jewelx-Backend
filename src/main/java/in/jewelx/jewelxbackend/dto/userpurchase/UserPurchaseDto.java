@@ -23,7 +23,7 @@ public class UserPurchaseDto {
 
 	private BigDecimal metalRate;
 
-	private BigDecimal totalAmount;
+	//private BigDecimal totalAmount;
 	
 	private Long subsidiaryId;
 	

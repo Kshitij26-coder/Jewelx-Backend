@@ -21,8 +21,6 @@ import in.jewelx.jewelxbackend.repository.UserPurchaseRepository;
 import in.jewelx.jewelxbackend.service.IUserPurchaseService;
 import jakarta.transaction.Transactional;
 
-
-
 @Service
 @Transactional
 public class UserPurchaseService implements IUserPurchaseService {
@@ -40,8 +38,8 @@ public class UserPurchaseService implements IUserPurchaseService {
 		if (dto != null) {
 			UserPurchaseEntity userPurchase = UserPurchaseMapper.dtoToEntity(dto);
 
-			MetalStockEntity metalStock = metalStockService
-					.addMetalStock(new MetalStockDto(dto.getNetWeight(), dto.getUserId(), dto.getMetalId()));
+			MetalStockEntity metalStock = metalStockService.addMetalStock(new MetalStockDto(dto.getNetWeight(),
+					dto.getUserId(), dto.getMetalId(), dto.getBrandId(), dto.getSubsidiaryId()));
 			userPurchase.setMetalStock(metalStock);
 
 			// Amount should recieve using '-' sign from frontend
@@ -77,7 +75,7 @@ public class UserPurchaseService implements IUserPurchaseService {
 		Page<UserPurchaseEntity> allUserPurchase = null;
 		if (role.equals("O")) {
 			allUserPurchase = userPurchaseRepo.findByBrand_BrandId(brandId, pageRequest);
-		} else if(role.equals("A") || role.equals("E")){
+		} else if (role.equals("A") || role.equals("E")) {
 			allUserPurchase = userPurchaseRepo.findBySubsidiary_IdxId(subsidiaryId, pageRequest);
 		}
 		return allUserPurchase.map(UserPurchaseMapper::entityToDto);

@@ -31,7 +31,7 @@ public class MetalStockEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
 	private Long stockId;
-	
+
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "stock_uid")
 	private UUID metalStockUUID;
@@ -44,7 +44,7 @@ public class MetalStockEntity {
 	private BigDecimal openingWeight;
 
 	@Column(name = "closing_weight", precision = 8, scale = 3, nullable = false)
-    private BigDecimal closingWeight;
+	private BigDecimal closingWeight;
 
 	@CreationTimestamp
 	@Column(name = "created_on", nullable = false, updatable = false)
@@ -64,7 +64,15 @@ public class MetalStockEntity {
 
 	// Constructors, getters, and setters
 	@Column(name = "transaction_weight", precision = 8, scale = 3, nullable = false)
-    private BigDecimal transactionWeight;
+	private BigDecimal transactionWeight;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity subsidiary;
 
 	public MetalStockEntity() {
 		this.metalStockUUID = UUID.randomUUID();
@@ -77,7 +85,5 @@ public class MetalStockEntity {
 		this.closingWeight = closingWeight;
 		this.openingWeight = openingWeight;
 	}
-	
-	
-	
+
 }

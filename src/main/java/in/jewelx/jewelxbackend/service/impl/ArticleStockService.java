@@ -103,5 +103,10 @@ public class ArticleStockService implements IArticleStockService {
 		Page<ArticleStockEntity> allArticleStocks = articleStockRepo.findAll(pageRequest);
 		return allArticleStocks.map(ArticleStockMapper::entityToDto);
 	}
+	
+	@Override
+	public void updatedArtifactStatus(Long tagId, String status) {
+		articleStockRepo.updateArticleStatusByTagId(tagId, status);
+	}
 
 }

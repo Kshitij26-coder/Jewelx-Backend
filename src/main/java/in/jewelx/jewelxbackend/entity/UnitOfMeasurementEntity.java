@@ -31,7 +31,7 @@ public class UnitOfMeasurementEntity {
 	@Column(name = "uom_name", nullable = false, length = 50, unique = true)
 	private String uomName;
 
-	@Column(name = "description", columnDefinition = "TEXT")
+	@Column(name = "description")
 	private String description;
 
 	@ManyToOne

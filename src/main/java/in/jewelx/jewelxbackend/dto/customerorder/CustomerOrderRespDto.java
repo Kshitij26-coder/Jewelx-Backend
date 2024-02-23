@@ -16,27 +16,31 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerOrderRespDto {
-	
+
 	private Long idxId;
-	
+
 	private UUID orderId;
-	
+
 	private MetalShortDto metal;
-	
+
 	private CustomerShortDto customer;
-	
+
 	private BigDecimal purity;
-	
+
 	private String articleDescription;
-	
+
 	private BigDecimal grossWeight;
-	
+
 	private BigDecimal netWeight;
-	
+
 	private String orderStatus;
-	
+
 	private Date fulfillDate;
-	
+
 	private Date orderDate;
-	
+
+	private Long brandId;
+
+	private Long subsidiaryId;
+
 }
