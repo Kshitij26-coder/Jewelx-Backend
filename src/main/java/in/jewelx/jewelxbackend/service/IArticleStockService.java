@@ -15,4 +15,6 @@ public interface IArticleStockService {
 	Page<ArticleStockRespDto> getAllArticleStocks(int pageNumber, int pageSize);
 
 	String addArticleStock(ArticleStockDto articleStockDto);
+
+	void updatedArtifactStatus(Long tagId, String status);
 }

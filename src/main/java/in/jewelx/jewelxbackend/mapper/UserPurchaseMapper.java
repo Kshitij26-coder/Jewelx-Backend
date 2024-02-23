@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.mapper;
 
+import java.math.BigDecimal;
+
 import in.jewelx.jewelxbackend.dto.userpurchase.UserPurchaseDto;
 import in.jewelx.jewelxbackend.dto.userpurchase.UserPurchaseResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
@@ -20,7 +22,18 @@ public class UserPurchaseMapper {
 		entity.setNetWeight(dto.getNetWeight());
 		entity.setGrossWeight(dto.getGrossWeight());
 		entity.setMetalRate(dto.getMetalRate());
-		entity.setTotalAmount(dto.getTotalAmount());
+		//entity.setTotalAmount(dto.getTotalAmount());
+		BigDecimal totalAmount = new BigDecimal("0");
+		if (dto.getChequeAmount() != null) {
+			totalAmount = totalAmount.add(dto.getChequeAmount());
+		}
+		if (dto.getCashAmount() != null) {
+			totalAmount = totalAmount.add(dto.getCashAmount());
+		}
+		if (dto.getNetBankingAmount() != null) {
+			totalAmount = totalAmount.add(dto.getNetBankingAmount());
+		}
+		entity.setTotalAmount(totalAmount);
 		entity.setSubsidiary(new SubsidiaryEntity(dto.getSubsidiaryId()));
 		entity.setBrand(new BrandEntity(dto.getBrandId()));
 		return entity;

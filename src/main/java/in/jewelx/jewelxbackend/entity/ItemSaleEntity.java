@@ -15,7 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "item_sales")
 public class ItemSaleEntity {
@@ -38,23 +42,23 @@ public class ItemSaleEntity {
 	private ArticleStockEntity tagId;
 
 	@Column(name = "item_amount", nullable = false)
-	private Long itemAmount;
+	private BigDecimal itemAmount;
 
 	@Column(name = "metal_rate", precision = 8, nullable = false)
 	private BigDecimal metalRate;
 
-	@Column(name = "total_amount", nullable = false)
-	private Long totalAmount;
-
-	@Column(name = "sgst", precision = 8, nullable = false)
-	private BigDecimal sgst;
-
-	@Column(name = "cgst", precision = 8, nullable = false)
-	private BigDecimal cgst;
-
+	@Column(name = "artifacts_amount", nullable = false)
+	private BigDecimal artifactAmount;
+//
+//	@Column(name = "sgst", precision = 8, nullable = false)
+//	private BigDecimal sgst;
+//
+//	@Column(name = "cgst", precision = 8, nullable = false)
+//	private BigDecimal cgst;
+//
 	@Column(name = "payable_amount", precision = 8, nullable = false)
 	private BigDecimal payableAmount;
-
+//
 	@Column(name = "making_charges", precision = 8, nullable = false)
 	private BigDecimal makingCharges;
 
@@ -78,5 +82,20 @@ public class ItemSaleEntity {
 
 	public ItemSaleEntity() {
 		// Default constructor
+		this.itemId = UUID.randomUUID();
 	}
+
+	public ItemSaleEntity(ArticleStockEntity tagId, BigDecimal itemAmount, BigDecimal metalRate,
+			BigDecimal artifactAmount, BigDecimal payableAmount, BigDecimal makingCharges, SaleEntity sale) {
+		super();
+		this.itemId = UUID.randomUUID();
+		this.tagId = tagId;
+		this.itemAmount = itemAmount;
+		this.metalRate = metalRate;
+		this.artifactAmount = artifactAmount;
+		this.payableAmount = payableAmount;
+		this.makingCharges = makingCharges;
+		this.sale = sale;
+	}
+
 }

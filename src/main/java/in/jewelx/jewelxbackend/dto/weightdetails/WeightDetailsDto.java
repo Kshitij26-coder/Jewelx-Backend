@@ -18,7 +18,11 @@ public class WeightDetailsDto {
 	private Long uomId;
 
 	private Long userID;
-	
+
 	private String weightTransactionType;
+
+	private Long brandId;
+
+	private Long subsidiaryId;
 
 }
