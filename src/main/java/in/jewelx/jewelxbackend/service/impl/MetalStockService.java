@@ -20,46 +20,48 @@ import in.jewelx.jewelxbackend.repository.MetalStockRepository;
 import in.jewelx.jewelxbackend.service.IMetalStockService;
 import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class MetalStockService implements IMetalStockService {
 
 	@Autowired
 	private MetalStockRepository metalStockRepo;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	@Override
 	@Transactional
-    public String addMetalStock(MetalStockDto metalStockDto) {
-		
-        if (metalStockDto == null) {
-            throw new NullObjectException("Metal Stock Dto is null");
-        } else {
-           // BigDecimal openingWeight = metalStockDto.getOpeningWeight(); // Add this line
-        	BigDecimal weight = metalStockRepo.findClosingWeightByMetalId(metalStockDto.getMetalId());
-           // System.out.println("******************************** : "+weight);
-            BigDecimal transactionWeight = metalStockDto.getWeight();
-            MetalStockEntity entity = MetalStockMapper.dtoToEntity(metalStockDto);
+	public MetalStockEntity addMetalStock(MetalStockDto metalStockDto) {
 
-            if (transactionWeight.compareTo(BigDecimal.ZERO) < 0) {
-                BigDecimal closingWeight = weight.subtract(transactionWeight.abs());
-                entity.setClosingWeight(closingWeight);
-            } else {
-                BigDecimal closingWeight = weight.add(transactionWeight);
-                entity.setClosingWeight(closingWeight);
-            }
-            entity.setTransactionWeight(transactionWeight);
-            BigDecimal openingWeight = weight;
-            entity.setOpeningWeight(openingWeight); // Set the opening weight
-            UserEntity userEntity = new UserEntity();
-            userEntity.setIdxId(metalStockDto.getUserId());
-            entity.setCreatedBy(userEntity);
-            entity.setUpdatedBy(userEntity);
-            metalStockRepo.save(entity);
-            return "Successfully Added Metal Stock";
-        }
-    }
+		if (metalStockDto == null) {
+			throw new NullObjectException("Metal Stock Dto is null");
+		} else {
+			// BigDecimal openingWeight = metalStockDto.getOpeningWeight(); // Add this line
+			BigDecimal weight = metalStockRepo.findClosingWeightByMetalId(metalStockDto.getMetalId());
+			// System.out.println("******************************** : "+weight);
+			if (weight == null)
+				weight = new BigDecimal("0");
+			BigDecimal transactionWeight = metalStockDto.getWeight();
+			MetalStockEntity entity = MetalStockMapper.dtoToEntity(metalStockDto);
+
+			if (transactionWeight.compareTo(BigDecimal.ZERO) < 0) {
+				BigDecimal closingWeight = weight.subtract(transactionWeight.abs());
+				entity.setClosingWeight(closingWeight);
+			} else {
+				BigDecimal closingWeight = weight.add(transactionWeight);
+				entity.setClosingWeight(closingWeight);
+			}
+			entity.setTransactionWeight(transactionWeight);
+			BigDecimal openingWeight = weight;
+			entity.setOpeningWeight(openingWeight); // Set the opening weight
+			UserEntity userEntity = new UserEntity();
+			userEntity.setIdxId(metalStockDto.getUserId());
+			entity.setCreatedBy(userEntity);
+			entity.setUpdatedBy(userEntity);
+			return metalStockRepo.save(entity);
+		}
+	}
 
 	@Override
 	public String deleteById(Long id) {
@@ -73,7 +75,8 @@ public class MetalStockService implements IMetalStockService {
 		MetalStockEntity entity = this.getMetalStockByIdHelper(id);
 		return MetalStockMapper.entityToResponseDto(entity);
 	}
-	//This helper method
+
+	// This helper method
 	public MetalStockEntity getMetalStockByIdHelper(Long id) {
 		return metalStockRepo.findById(id).orElseThrow(() -> new IdNotFoundException("Invalid Id"));
 	}
@@ -88,19 +91,20 @@ public class MetalStockService implements IMetalStockService {
 		updatedBy.setIdxId(metalStockDto.getUserId());
 		updatedBy.setUserId(null);
 		updatedEntity.setUpdatedBy(updatedBy);
-	//	BigDecimal weight = metalStockRepo.findClosingWeightByMetalId(metalStockDto.getMetalId());
+		// BigDecimal weight =
+		// metalStockRepo.findClosingWeightByMetalId(metalStockDto.getMetalId());
 		existingEntity.setOpeningWeight(updatedEntity.getOpeningWeight());
 		existingEntity.setClosingWeight(updatedEntity.getClosingWeight());
 		existingEntity.setUpdatedBy(updatedEntity.getUpdatedBy());
-		
+
 		MetalEntity metalEntity = new MetalEntity();
 		metalEntity.setMetalId(metalStockDto.getMetalId());
 		updatedEntity.setMetal(metalEntity);
 		existingEntity.setMetal(updatedEntity.getMetal());
 		existingEntity.setTransactionWeight(metalStockDto.getWeight());
-		//Model Mapper for avoiding null values
+		// Model Mapper for avoiding null values
 		modelMapper.map(updatedEntity, existingEntity);
-		
+
 		metalStockRepo.save(existingEntity);
 		return "updated successfully";
 	}
@@ -108,7 +112,7 @@ public class MetalStockService implements IMetalStockService {
 	@Override
 	public Page<MetalStockRepoDto> getAllMetalStocks(int pageNumber, int pageSize) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<MetalStockEntity> allMetalStocks  = metalStockRepo.findAll(pageRequest);
+		Page<MetalStockEntity> allMetalStocks = metalStockRepo.findAll(pageRequest);
 		return allMetalStocks.map(MetalStockMapper::entityToResponseDto);
 	}
 

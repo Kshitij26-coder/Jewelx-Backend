@@ -3,7 +3,6 @@ package in.jewelx.jewelxbackend.entity;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -63,5 +62,11 @@ public class BrandEntity {
 		return "BrandEntity [brandId=" + brandId + ", name=" + name + ", description=" + description + ", imageUrl="
 				+ imageUrl + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", updatedBy=" + updatedBy + "]";
 	}
+
+	public BrandEntity(Long brandId) {
+		super();
+		this.brandId = brandId;
+	}
+
 
 }

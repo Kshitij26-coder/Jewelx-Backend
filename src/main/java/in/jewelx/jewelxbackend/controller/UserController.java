@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import in.jewelx.jewelxbackend.dto.user.ActivateUserDto;
 import in.jewelx.jewelxbackend.dto.user.OtpRequestDto;
 import in.jewelx.jewelxbackend.dto.user.SetPasswordDto;
+import in.jewelx.jewelxbackend.dto.user.UpdateUserDto;
 import in.jewelx.jewelxbackend.dto.user.UserRequestDto;
 import in.jewelx.jewelxbackend.entity.UserEntity;
+import in.jewelx.jewelxbackend.mapper.BrandMapper;
 import in.jewelx.jewelxbackend.security.JwtHelper;
 import in.jewelx.jewelxbackend.security.model.JwtRequest;
 import in.jewelx.jewelxbackend.security.model.JwtResponse;
@@ -63,7 +65,9 @@ public class UserController {
 		JwtResponse response = JwtResponse.builder().jwtToken(token).username(userDetails.getUserName())
 				.email(userDetails.getEmail()).userId(userDetails.getUserId()).role(userDetails.getUserRole())
 				.subsidiaryId(userDetails.getSubsidiary() == null ? null : userDetails.getSubsidiary().getIdxId())
-				.brandId(userDetails.getBrand().getBrandId()).idxId(userDetails.getIdxId()).build();
+				.brandId(userDetails.getBrand().getBrandId()).idxId(userDetails.getIdxId())
+				.brand(BrandMapper.brandEntitytoBrandShortDetails(userDetails.getBrand()))
+				.mobileNumber(userDetails.getMobileNumber()).build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -122,14 +126,30 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUsersByRoleAndBrand(role, size, page, brand, subsidiary));
 	}
 
+	/*
+	 * Used to logout user
+	 */
 	@PutMapping("/logout/{id}")
 	public ResponseEntity<String> logout(@PathVariable UUID id) {
 		userService.logout(id);
 		return ResponseEntity.ok("logged successfully");
 	}
 
+	/*
+	 * Used to activate user
+	 */
 	@PutMapping("/activate")
 	public ResponseEntity<String> setUserActive(@RequestBody ActivateUserDto dto) {
 		return ResponseEntity.ok(userService.setUserActive(dto));
+	}
+
+	/*
+	 * Update User
+	 */
+	@PutMapping
+	public ResponseEntity<String> updateUser(@RequestBody UpdateUserDto dto) {
+		userService.updateUser(dto);
+
+		return ResponseEntity.ok("Successfully updated users");
 	}
 }

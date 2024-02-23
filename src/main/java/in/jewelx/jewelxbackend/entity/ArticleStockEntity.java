@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /*
  * This entity store data in regards to the stock of articles(ring, necklace, bracelet etc ) 
@@ -21,16 +22,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(name = "arcticle_stock")
+@Table(name = "article_stock")
 public class ArticleStockEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tag_id")
     private Long tagId;
+    
+    @Column(name="article_name", nullable = false)
+    private String articleName;
 
-    @Column(name = "barcode", length = 10, nullable = false)
+    @Column(name = "barcode", length = 40)
     private String barcode;
 
     @Column(name = "gross_weight", precision = 8,  nullable = false)
@@ -45,7 +50,7 @@ public class ArticleStockEntity {
     @Column(name = "stone_weight", precision = 8, nullable = false)
     private Double stoneWeight;
 
-    @Column(name = "huid", length = 6)
+    @Column(name = "huid", length = 6, unique = true)
     private String huid;
 
     @ManyToOne
@@ -71,6 +76,10 @@ public class ArticleStockEntity {
     @ManyToOne
     @JoinColumn(name = "updated_by", nullable = false)
     private UserEntity updatedBy;
+    
+    @ManyToOne
+    @JoinColumn(name="brand_id", nullable = false)
+    private BrandEntity brand;
 
     // Constructors, getters, and setters
 

@@ -85,4 +85,10 @@ public class CustomerEntity {
 	public CustomerEntity() {
 		// Default constructor
 	}
+
+	public CustomerEntity(Long idxId) {
+		super();
+		this.idxId = idxId;
+	}
+
 }

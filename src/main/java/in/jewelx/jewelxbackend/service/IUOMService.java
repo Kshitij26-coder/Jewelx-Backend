@@ -15,5 +15,6 @@ public interface IUOMService {
 
 	String updateUOM(Long uomId, UOMDto uomDto);
 
-	Page<UOMResponseDto> getAllUOM(int pageNumber, int PageSize);
+	Page<UOMResponseDto> getAllUOMByBrand(int pageNumber, int pageSize, Long brandId);
+
 }

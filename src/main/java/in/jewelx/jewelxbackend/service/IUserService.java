@@ -21,11 +21,11 @@ public interface IUserService {
 
 	public String setPassword(SetPasswordDto setPasswordDto);
 
-	UserEntity updateUser(UUID userId, UpdateUserDto updatedUserData);
-
 	UserResponseDto getUserById(UUID id);
 
 	Page<UserResponseDto> getUsersByRoleAndBrand(String role, int pageSize, int pageNumber, Long brandId,
 			Long subsidiaryId);
+
+	UserEntity updateUser(UpdateUserDto updatedUserData);
 
 }

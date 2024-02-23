@@ -1,13 +1,10 @@
 package in.jewelx.jewelxbackend.service.impl;
 
 import java.util.UUID;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import in.jewelx.jewelxbackend.dto.customerorder.CustomerOrderDto;
 import in.jewelx.jewelxbackend.dto.customerorder.CustomerOrderRespDto;
 import in.jewelx.jewelxbackend.entity.AccountingEntity;
@@ -20,8 +17,8 @@ import in.jewelx.jewelxbackend.repository.CustomerOrderRepository;
 import in.jewelx.jewelxbackend.service.ICustomerOrderService;
 import jakarta.transaction.Transactional;
 
-@Service
 @Transactional
+@Service
 public class CustomerOrderService implements ICustomerOrderService {
 
 	@Autowired

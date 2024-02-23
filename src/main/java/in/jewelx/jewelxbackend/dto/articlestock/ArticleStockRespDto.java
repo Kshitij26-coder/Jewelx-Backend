@@ -1,24 +1,31 @@
 package in.jewelx.jewelxbackend.dto.articlestock;
 
-import in.jewelx.jewelxbackend.dto.itemcategory.ItemCategoryRespDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class ArticleStockRespDto {
-	
+
+	private Long tagId;
+
+	private String articleName;
+
 	private String barcode;
 
-    private Double grossWeight;
+	private Double grossWeight;
 
-    private Double netWeight;
+	private Double netWeight;
 
-    private Double purity;
+	private Double purity;
 
-    private Double stoneWeight;
+	private Double stoneWeight;
 
-    private String huid;
+	private String huid;
 
-    private ItemCategoryRespDto category;
+	private Short category;
+
+	private Long brandId;
+
+	private Long subsidiary;
 }

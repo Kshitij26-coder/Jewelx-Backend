@@ -16,7 +16,9 @@ import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.MetalMapper;
 import in.jewelx.jewelxbackend.repository.MetalRepository;
 import in.jewelx.jewelxbackend.service.IMetalService;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class MetalService implements IMetalService {
 
@@ -28,16 +30,18 @@ public class MetalService implements IMetalService {
 		if (metalDto == null) {
 			throw new NullObjectException("Metal Dto is null");
 		} else {
-			metalRepo.save(MetalMapper.metalDtoToMetalEntity(metalDto));
+			MetalEntity metal = MetalMapper.metalDtoToMetalEntity(metalDto);
+			metal.setCreatedBy(new UserEntity(metalDto.getUserID()));
+			metalRepo.save(metal);
 			return "Successfully Add metal data";
 		}
 
 	}
 
 	@Override
-	public Page<MetalResponseDto> getAllMetals(int pageNumber, int pageSize) {
+	public Page<MetalResponseDto> getAllMetals(int pageNumber, int pageSize, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<MetalEntity> allMetals = metalRepo.findAll(pageRequest);
+		Page<MetalEntity> allMetals = metalRepo.findByBrand_BrandId(brandId, pageRequest);
 		return allMetals.map(MetalMapper::metalEntityToMetalRespDto);
 	}
 

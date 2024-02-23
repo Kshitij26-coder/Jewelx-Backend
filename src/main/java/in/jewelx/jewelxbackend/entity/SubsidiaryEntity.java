@@ -47,23 +47,23 @@ public class SubsidiaryEntity {
 	@Column(name = "address", columnDefinition = "TEXT", nullable = false)
 	private String address;
 
-	@Column(name = "city", length = 20, nullable = false)
+	@Column(name = "city", length = 150, nullable = false)
 	private String city;
 
 	@Column(name = "gstin", length = 15, nullable = false)
 	private String gstin;
 
-	@Column(name = "cash_balance", precision = 15, nullable = false)
-	private double cashBalance;
-
-	@Column(name = "logo_url", length = 150, nullable = false)
+	@Column(name = "logo_url", length = 150)
 	private String logoUrl;
 
-	@Column(name = "form_header", columnDefinition = "TEXT", nullable = false)
+	@Column(name = "form_header", columnDefinition = "TEXT")
 	private String formHeader;
 
-	@Column(name = "form_footer", columnDefinition = "TEXT", nullable = false)
+	@Column(name = "form_footer", columnDefinition = "TEXT")
 	private String formFooter;
+
+	@Column(name = "pincode")
+	private Long pinCode;
 
 	@CreationTimestamp
 	@Column(name = "created_on", nullable = false, updatable = false)
@@ -90,7 +90,7 @@ public class SubsidiaryEntity {
 	}
 
 	public SubsidiaryEntity(BrandEntity brand, String shopActNumber, String subsidiaryName, String address, String city,
-			String gstin, double cashBalance, String logoUrl, String formHeader, String formFooter, UserEntity user) {
+			String gstin, String logoUrl, String formHeader, String formFooter, UserEntity user, Long pinCode) {
 		super();
 		this.subsidiaryId = UUID.randomUUID();
 		this.brand = brand;
@@ -99,13 +99,18 @@ public class SubsidiaryEntity {
 		this.address = address;
 		this.city = city;
 		this.gstin = gstin;
-		this.cashBalance = cashBalance;
 		this.logoUrl = logoUrl;
 		this.formHeader = formHeader;
 		this.formFooter = formFooter;
 		this.createdBy = user;
 		this.updatedBy = user;
 		this.isActive = false;
+		this.pinCode = pinCode;
+	}
+
+	public SubsidiaryEntity(Long idxId) {
+		super();
+		this.idxId = idxId;
 	}
 
 }

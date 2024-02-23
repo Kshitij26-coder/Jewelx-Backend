@@ -29,12 +29,15 @@ import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.exception.NullObjectException;
 import in.jewelx.jewelxbackend.mapper.UserMapper;
 import in.jewelx.jewelxbackend.mapper.ViewBrandUser;
+import in.jewelx.jewelxbackend.repository.BrandRepository;
 import in.jewelx.jewelxbackend.repository.OtpRepository;
 import in.jewelx.jewelxbackend.repository.UserRepository;
 import in.jewelx.jewelxbackend.service.IUserService;
 import in.jewelx.jewelxbackend.utils.RolesEnum;
 import jakarta.mail.MessagingException;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Service
 public class UserService implements IUserService, UserDetailsService {
 	@Autowired
@@ -51,6 +54,9 @@ public class UserService implements IUserService, UserDetailsService {
 
 	@Autowired
 	private OtpRepository otpRepo;
+
+	@Autowired
+	private BrandRepository brandRepo;
 
 	/*
 	 * create a user. Brand is created first and then user is created
@@ -186,11 +192,20 @@ public class UserService implements IUserService, UserDetailsService {
 	 * updates a specific user by Id
 	 */
 	@Override
-	public UserEntity updateUser(UUID userId, UpdateUserDto updatedUserData) {
+	public UserEntity updateUser(UpdateUserDto updatedUserData) {
 		// Find the user by userId
-		UserEntity existingUser = userRepo.findByUserId(userId)
-				.orElseThrow(() -> new NullObjectException("User not found with userId: " + userId));
+		UserEntity existingUser = userRepo.findById(updatedUserData.getUserId()).orElseThrow(
+				() -> new NullObjectException("User not found with userId: " + updatedUserData.getUserId()));
 
+		if (updatedUserData.getRole().equals("O")) {
+			BrandEntity brand = brandRepo.findById(updatedUserData.getBrandId()).orElseThrow(
+					() -> new NullObjectException("User not found with userId: " + updatedUserData.getUserId()));
+			;
+			if (!brand.getName().equals("")) {
+				brand.setName(updatedUserData.getBrandName());
+				brandRepo.save(brand);
+			}
+		}
 		existingUser.setUserName(updatedUserData.getUsername());
 		existingUser.setMobileNumber(updatedUserData.getMobilenumber());
 
@@ -235,5 +250,14 @@ public class UserService implements IUserService, UserDetailsService {
 		System.out.println(usersPage);
 		return usersPage.map(UserMapper::UserToUserResponseDto);
 	}
+
+//	public String updateUser(UpdateUserDto dto) {
+//		UserEntity user = userRepo.findById(dto.getUserId())
+//				.orElseThrow(() -> new IdNotFoundException("User Id not found"));
+//		user.setUserName(dto.getUsername());
+//		user.setMobileNumber(dto.getMobilenumber());
+//		userRepo.save(user);
+//		return "User updated successfully";
+//	}
 
 }
