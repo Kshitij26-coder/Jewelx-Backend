@@ -47,7 +47,7 @@ public class UserEntity implements UserDetails {
 
 	@ManyToOne()
 	@JoinColumn(name = "brand_id", nullable = false)
-	private BrandEntity brand;
+	private BrandEntity brand; 
 
 	@Column(name = "email", length = 50, nullable = false)
 	private String email;
