@@ -2,6 +2,7 @@ package in.jewelx.jewelxbackend.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -46,7 +47,7 @@ public class SubsidiaryEntity {
 	@Column(name = "address", columnDefinition = "TEXT", nullable = false)
 	private String address;
 
-	@Column(name = "city", length = 20, nullable = false)
+	@Column(name = "city", length = 150, nullable = false)
 	private String city;
 
 	@Column(name = "gstin", length = 15, nullable = false)
@@ -60,7 +61,7 @@ public class SubsidiaryEntity {
 
 	@Column(name = "form_footer", columnDefinition = "TEXT")
 	private String formFooter;
-	
+
 	@Column(name = "pincode")
 	private Long pinCode;
 
@@ -104,7 +105,7 @@ public class SubsidiaryEntity {
 		this.createdBy = user;
 		this.updatedBy = user;
 		this.isActive = false;
-		this.pinCode=pinCode;
+		this.pinCode = pinCode;
 	}
 
 	public SubsidiaryEntity(Long idxId) {

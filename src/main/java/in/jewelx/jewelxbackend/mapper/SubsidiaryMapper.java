@@ -29,9 +29,8 @@ public class SubsidiaryMapper {
 		}
 
 		SubsidiaryEntity subsidiary = new SubsidiaryEntity(brand, dto.getShopActNumber(), dto.getSubsidiaryName(),
-				dto.getAddress(), dto.getCity(), dto.getGstin(),  dto.getLogoUrl(),
-				dto.getFormHeader(), dto.getFormFooter(), user, dto.getPinCode());
-		System.out.println("-------------------------" + subsidiary);
+				dto.getAddress(), dto.getCity(), dto.getGstin(), dto.getLogoUrl(), dto.getFormHeader(),
+				dto.getFormFooter(), user, dto.getPinCode());
 		return subsidiary;
 
 	}
@@ -47,8 +46,8 @@ public class SubsidiaryMapper {
 
 		SubsidiaryResponseDto dto = new SubsidiaryResponseDto(subsidiary.getIdxId(), subsidiary.getSubsidiaryId(),
 				brandDto, subsidiary.getShopActNumber(), subsidiary.getSubsidiaryName(), subsidiary.getAddress(),
-				subsidiary.getCity(), subsidiary.getGstin(), subsidiary.getLogoUrl(),
-				subsidiary.getFormHeader(), subsidiary.getFormFooter(), userDto, subsidiary.getPinCode());
+				subsidiary.getCity(), subsidiary.getGstin(), subsidiary.getLogoUrl(), subsidiary.getFormHeader(),
+				subsidiary.getFormFooter(), userDto, subsidiary.getPinCode(), subsidiary.isActive());
 
 		return dto;
 
@@ -66,9 +65,9 @@ public class SubsidiaryMapper {
 			return null; // Or handle the case where the subsidiary is null
 		}
 	}
-	
-	//Used to convert Subsidiary Dto To Accounting Dto
-	
+
+	// Used to convert Subsidiary Dto To Accounting Dto
+
 	public static AccountingDto subsidiaryDtoToAccountingDto(SubsidiaryRequestDto dto) {
 		AccountingDto accounting = new AccountingDto();
 		accounting.setTransactionType("C");

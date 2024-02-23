@@ -15,6 +15,8 @@ public class MetalDto {
 
 	private Double metalRate;
 
+	private Long brandId;
+
 	private String metalName;
 
 	private Long userID;
