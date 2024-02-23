@@ -38,6 +38,8 @@ public class SubsidiaryResponseDto {
 	private String formFooter;
 
 	private UserShortDetailsDto createdBy;
-	
+
 	private Long pinCode;
+
+	private boolean isActive;
 }
