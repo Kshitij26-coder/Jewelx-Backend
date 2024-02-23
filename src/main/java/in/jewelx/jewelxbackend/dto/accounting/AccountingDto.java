@@ -3,13 +3,17 @@ package in.jewelx.jewelxbackend.dto.accounting;
 import java.math.BigDecimal;
 //import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountingDto {
 
 	private String transactionType;
@@ -33,4 +37,6 @@ public class AccountingDto {
 	private Long brandId;
 
 	private Long subsidiaryId;
+	
+	
 }
