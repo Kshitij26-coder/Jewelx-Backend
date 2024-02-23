@@ -2,13 +2,14 @@ package in.jewelx.jewelxbackend.mapper;
 
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockDto;
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockRespDto;
+import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockShortDto;
 import in.jewelx.jewelxbackend.entity.ArticleStockEntity;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.ItemCategoryEntity;
 import in.jewelx.jewelxbackend.entity.SubsidiaryEntity;
 
 public class ArticleStockMapper {
-	
+
 	public static ArticleStockEntity dtoToEntity(ArticleStockDto dto) {
 		ArticleStockEntity entity = new ArticleStockEntity();
 		entity.setArticleName(dto.getArticleName());
@@ -16,22 +17,22 @@ public class ArticleStockMapper {
 		entity.setHuid(dto.getHuid());
 		entity.setNetWeight(dto.getNetWeight());
 		entity.setPurity(dto.getPurity());
-		entity.setStoneWeight(	dto.getStoneWeight());
-		
+		entity.setStoneWeight(dto.getStoneWeight());
+
 		BrandEntity brand = new BrandEntity(dto.getBrandId());
-		
+
 		SubsidiaryEntity subsidiary = new SubsidiaryEntity(dto.getSubsidiaryId());
-		
+
 		entity.setBrand(brand);
 		entity.setSubsidiary(subsidiary);
-		
+
 		ItemCategoryEntity itemEntity = new ItemCategoryEntity();
 		itemEntity.setCategoryId(dto.getCategory());
 		entity.setCategory(itemEntity);
 		return entity;
-		
+
 	}
-	
+
 	public static ArticleStockRespDto entityToDto(ArticleStockEntity entity) {
 		ArticleStockRespDto dto = new ArticleStockRespDto();
 		dto.setArticleName(entity.getArticleName());
@@ -46,6 +47,13 @@ public class ArticleStockMapper {
 		dto.setSubsidiary(entity.getSubsidiary().getIdxId());
 		dto.setCategory(entity.getCategory().getCategoryId());
 		return dto;
-		
+
+	}
+
+	public static ArticleStockShortDto entityToShortDto(ArticleStockEntity entity) {
+		ArticleStockShortDto dto = new ArticleStockShortDto(entity.getTagId(), entity.getArticleName(),
+				entity.getBarcode(), entity.getGrossWeight(), entity.getNetWeight(), entity.getPurity(),
+				entity.getStoneWeight(), entity.getHuid());
+		return dto;
 	}
 }
