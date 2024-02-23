@@ -36,6 +36,10 @@ public class MetalEntity {
 	@Column(name = "metal_name", nullable = false, length = 20, unique = true)
 	private String metalName;
 
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
 	@CreationTimestamp
 	@Column(name = "created_on", nullable = false, updatable = false)
 	private LocalDateTime createdOn;
@@ -58,14 +62,14 @@ public class MetalEntity {
 		// Default constructor
 	}
 
-	public MetalEntity(String metalDescription, Double metalRate, String metalName, UserEntity createdBy,
-			UserEntity updatedBy) {
+	public MetalEntity(String metalDescription, Double metalRate, String metalName, UserEntity updatedBy,
+			BrandEntity brand) {
 		super();
 		this.metalDescription = metalDescription;
 		this.metalRate = metalRate;
 		this.metalName = metalName;
-		this.createdBy = createdBy;
 		this.updatedBy = updatedBy;
+		this.brand = brand;
 	}
 
 	public MetalEntity(Long metalId) {

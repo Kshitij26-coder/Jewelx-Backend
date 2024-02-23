@@ -3,6 +3,7 @@ package in.jewelx.jewelxbackend.mapper;
 import in.jewelx.jewelxbackend.dto.metal.MetalDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalResponseDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
@@ -11,7 +12,7 @@ public class MetalMapper {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setIdxId(metalDto.getUserID());
 		MetalEntity metalEntity = new MetalEntity(metalDto.getMetalDescription(), metalDto.getMetalRate(),
-				metalDto.getMetalName(), userEntity, userEntity);
+				metalDto.getMetalName(), userEntity, new BrandEntity(metalDto.getBrandId()));
 		return metalEntity;
 	}
 

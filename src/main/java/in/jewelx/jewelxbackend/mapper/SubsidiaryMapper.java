@@ -31,7 +31,6 @@ public class SubsidiaryMapper {
 		SubsidiaryEntity subsidiary = new SubsidiaryEntity(brand, dto.getShopActNumber(), dto.getSubsidiaryName(),
 				dto.getAddress(), dto.getCity(), dto.getGstin(), dto.getLogoUrl(), dto.getFormHeader(),
 				dto.getFormFooter(), user, dto.getPinCode());
-		System.out.println("-------------------------" + subsidiary);
 		return subsidiary;
 
 	}

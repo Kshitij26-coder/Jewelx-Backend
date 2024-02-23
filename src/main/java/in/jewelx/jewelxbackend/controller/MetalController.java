@@ -31,8 +31,8 @@ public class MetalController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllMetals(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(metalService.getAllMetals(page,size));
+			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand) {
+		return ResponseEntity.ok(metalService.getAllMetals(page, size, brand));
 	}
 
 	@DeleteMapping("/{metalId}")

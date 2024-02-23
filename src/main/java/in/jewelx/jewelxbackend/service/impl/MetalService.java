@@ -37,9 +37,9 @@ public class MetalService implements IMetalService {
 	}
 
 	@Override
-	public Page<MetalResponseDto> getAllMetals(int pageNumber, int pageSize) {
+	public Page<MetalResponseDto> getAllMetals(int pageNumber, int pageSize, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<MetalEntity> allMetals = metalRepo.findAll(pageRequest);
+		Page<MetalEntity> allMetals = metalRepo.findByBrand_BrandId(brandId, pageRequest);
 		return allMetals.map(MetalMapper::metalEntityToMetalRespDto);
 	}
 
