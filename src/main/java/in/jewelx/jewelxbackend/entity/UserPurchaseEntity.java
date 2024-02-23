@@ -13,7 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "user_purchase")
 public class UserPurchaseEntity {
@@ -73,9 +77,21 @@ public class UserPurchaseEntity {
 	@JoinColumn(name = "updated_by", nullable = false, updatable = false)
 	private UserEntity updatedBy;
 
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity subsidiary;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
+	@ManyToOne
+	@JoinColumn(name = "metal_stock_id", nullable = false)
+	private MetalStockEntity metalStock;
+
 	// Constructors, getters, and setters
 
 	public UserPurchaseEntity() {
-		// Default constructor
+		this.purchaseId = UUID.randomUUID();
 	}
 }

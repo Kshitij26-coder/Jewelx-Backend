@@ -43,8 +43,8 @@ public class ArticleStockMapper {
 		dto.setPurity(entity.getPurity());
 		dto.setStoneWeight(entity.getStoneWeight());
 		dto.setBrandId(entity.getBrand().getBrandId());
-		dto.setSubsidiLong(entity.getSubsidiary().getIdxId());
-		
+		dto.setSubsidiary(entity.getSubsidiary().getIdxId());
+		dto.setCategory(entity.getCategory().getCategoryId());
 		return dto;
 		
 	}

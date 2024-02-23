@@ -26,7 +26,8 @@ public class MetalStockController {
 
 	@PostMapping
 	public ResponseEntity<String> addMetalStock(@RequestBody MetalStockDto metalStockDto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(metalStockService.addMetalStock(metalStockDto));
+		metalStockService.addMetalStock(metalStockDto);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Successfully Added Metal Stock");
 	}
 
 	@GetMapping

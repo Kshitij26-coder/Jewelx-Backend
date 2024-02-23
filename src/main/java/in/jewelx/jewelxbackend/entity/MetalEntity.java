@@ -68,4 +68,9 @@ public class MetalEntity {
 		this.updatedBy = updatedBy;
 	}
 
+	public MetalEntity(Long metalId) {
+		super();
+		this.metalId = metalId;
+	}
+
 }
