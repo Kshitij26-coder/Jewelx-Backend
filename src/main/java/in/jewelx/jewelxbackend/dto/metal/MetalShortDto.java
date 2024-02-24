@@ -10,10 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MetalShortDto {
-	
+
 	private Long metalId;
-	
+
 	private Double metalRate;
-	
+
 	private String metalName;
+
 }

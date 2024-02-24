@@ -19,4 +19,8 @@ public class MetalStockDto {
 
 	private Long metalId;
 
+	private Long brandId;
+
+	private Long subsidiaryid;
+
 }

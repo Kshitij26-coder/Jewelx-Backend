@@ -73,6 +73,14 @@ public class CustomerEntity {
 	private LocalDateTime updatedOn;
 
 	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity subsidiary;
+
+	@ManyToOne
 	@JoinColumn(name = "created_by", nullable = false, updatable = false)
 	private UserEntity createdBy;
 
@@ -84,11 +92,13 @@ public class CustomerEntity {
 
 	public CustomerEntity() {
 		// Default constructor
+		this.customerId = UUID.randomUUID();
 	}
 
 	public CustomerEntity(Long idxId) {
 		super();
 		this.idxId = idxId;
+		this.customerId = UUID.randomUUID();
 	}
 
 }

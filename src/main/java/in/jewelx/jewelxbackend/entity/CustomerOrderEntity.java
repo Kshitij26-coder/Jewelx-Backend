@@ -45,16 +45,16 @@ public class CustomerOrderEntity {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private CustomerEntity customer;
 
-	@Column(name = "purity", precision = 8,scale=3, nullable = false)
+	@Column(name = "purity", precision = 8, scale = 3, nullable = false)
 	private BigDecimal purity;
 
 	@Column(name = "article_description", length = 200, nullable = false)
 	private String articleDescription;
 
-	@Column(name = "gross_weight", precision = 8,scale=3)
+	@Column(name = "gross_weight", precision = 8, scale = 3)
 	private BigDecimal grossWeight;
 
-	@Column(name = "net_weight", precision = 8,scale=3)
+	@Column(name = "net_weight", precision = 8, scale = 3)
 	private BigDecimal netWeight;
 
 	@Column(name = "paid_amount", precision = 15)
@@ -64,15 +64,15 @@ public class CustomerOrderEntity {
 	private String orderStatus;
 
 	@Temporal(TemporalType.DATE)
-    @Column(name = "fulfill_date", nullable = false, updatable = false)
+	@Column(name = "fulfill_date", nullable = false, updatable = false)
 	private Date fulfillDate;
 
 	@Temporal(TemporalType.DATE)
-    @Column(name = "order_date", nullable = false)
-    @CreationTimestamp
+	@Column(name = "order_date", nullable = false)
+	@CreationTimestamp
 	private Date orderDate;
 
-	@Column(name = "metal_rate", precision = 8,scale=2, nullable = false)
+	@Column(name = "metal_rate", precision = 8, scale = 2, nullable = false)
 	private BigDecimal metalRate;
 
 	@CreationTimestamp
@@ -92,9 +92,17 @@ public class CustomerOrderEntity {
 	private UserEntity updatedBy;
 
 	@ManyToOne
-	@JoinColumn(name = "accounting_id", nullable=false, updatable = false)
+	@JoinColumn(name = "accounting_id", nullable = false, updatable = false)
 	private AccountingEntity accounting;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity sunsidiary;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
 	// Constructors, getters, and setters
 
 	public CustomerOrderEntity() {
@@ -103,7 +111,7 @@ public class CustomerOrderEntity {
 
 	public CustomerOrderEntity(MetalEntity metal, CustomerEntity customer, BigDecimal purity, String articleDescription,
 			BigDecimal grossWeight, BigDecimal netWeight, BigDecimal paidAmount, String orderStatus, Date fulfillDate,
-			BigDecimal metalRate ) {
+			BigDecimal metalRate) {
 		super();
 		this.orderId = UUID.randomUUID();
 		this.metal = metal;
@@ -117,4 +125,10 @@ public class CustomerOrderEntity {
 		this.fulfillDate = fulfillDate;
 		this.metalRate = metalRate;
 	}
+
+	public CustomerOrderEntity(Long idxId) {
+		super();
+		this.idxId = idxId;
+	}
+
 }

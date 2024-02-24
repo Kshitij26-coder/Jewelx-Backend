@@ -27,63 +27,72 @@ import lombok.ToString;
 @Table(name = "article_stock")
 public class ArticleStockEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tag_id")
-    private Long tagId;
-    
-    @Column(name="article_name", nullable = false)
-    private String articleName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "tag_id")
+	private Long tagId;
 
-    @Column(name = "barcode", length = 40)
-    private String barcode;
+	@Column(name = "article_name", nullable = false)
+	private String articleName;
 
-    @Column(name = "gross_weight", precision = 8,  nullable = false)
-    private Double grossWeight;
+	@Column(name = "barcode", length = 40)
+	private String barcode;
 
-    @Column(name = "net_weight", precision = 8,  nullable = false)
-    private Double netWeight;
+	@Column(name = "gross_weight", precision = 8, nullable = false)
+	private Double grossWeight;
 
-    @Column(name = "purity", precision = 3, nullable = false)
-    private Double purity;
+	@Column(name = "net_weight", precision = 8, nullable = false)
+	private Double netWeight;
 
-    @Column(name = "stone_weight", precision = 8, nullable = false)
-    private Double stoneWeight;
+	@Column(name = "purity", precision = 3, nullable = false)
+	private Double purity;
 
-    @Column(name = "huid", length = 6, unique = true)
-    private String huid;
+	@Column(name = "stone_weight", precision = 8, nullable = false)
+	private Double stoneWeight;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private ItemCategoryEntity category;
+	@Column(name = "huid", length = 6, unique = true)
+	private String huid;
 
-    @ManyToOne
-    @JoinColumn(name = "subsidiary_id", nullable = false)
-    private SubsidiaryEntity subsidiary;
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = false)
+	private ItemCategoryEntity category;
 
-    @CreationTimestamp
-    @Column(name = "created_on", nullable = false, updatable = false)
-    private LocalDateTime createdOn;
+	@ManyToOne
+	@JoinColumn(name = "subsidiary_id", nullable = false)
+	private SubsidiaryEntity subsidiary;
 
-    @UpdateTimestamp
-    @Column(name = "updated_on", nullable = false)
-    private LocalDateTime updatedOn;
-    
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private UserEntity createdBy;
+	@CreationTimestamp
+	@Column(name = "created_on", nullable = false, updatable = false)
+	private LocalDateTime createdOn;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by", nullable = false)
-    private UserEntity updatedBy;
-    
-    @ManyToOne
-    @JoinColumn(name="brand_id", nullable = false)
-    private BrandEntity brand;
+	@UpdateTimestamp
+	@Column(name = "updated_on", nullable = false)
+	private LocalDateTime updatedOn;
 
-    // Constructors, getters, and setters
+	@ManyToOne
+	@JoinColumn(name = "created_by", nullable = false, updatable = false)
+	private UserEntity createdBy;
 
-    public ArticleStockEntity() {
-        // Default constructor
-    }
+	@ManyToOne
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserEntity updatedBy;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id", nullable = false)
+	private BrandEntity brand;
+
+	@Column(name = "article_status", length = 10, nullable = false)
+	private String articleStatus;
+
+	// Constructors, getters, and setters
+
+	public ArticleStockEntity() {
+		// Default constructor
+	}
+
+	public ArticleStockEntity(Long tagId) {
+		super();
+		this.tagId = tagId;
+	}
+
 }

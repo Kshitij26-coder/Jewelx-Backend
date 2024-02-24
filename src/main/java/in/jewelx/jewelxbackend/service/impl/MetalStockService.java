@@ -1,6 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,10 +112,22 @@ public class MetalStockService implements IMetalStockService {
 	}
 
 	@Override
-	public Page<MetalStockRepoDto> getAllMetalStocks(int pageNumber, int pageSize) {
+	public Page<MetalStockRepoDto> getAllMetalStocks(int pageNumber, int pageSize, Long brandId, Long subsidiaryId,
+			String role) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<MetalStockEntity> allMetalStocks = metalStockRepo.findAll(pageRequest);
+		Page<MetalStockEntity> allMetalStocks = null;
+		if (role.equals("A") || role.equals("E")) {
+			allMetalStocks = metalStockRepo.findBySubsidiary_IdxId(subsidiaryId, pageRequest);
+		} else if (role.equals("O")) {
+			allMetalStocks = metalStockRepo.findByBrand_BrandId(brandId, pageRequest);
+		}
+
 		return allMetalStocks.map(MetalStockMapper::entityToResponseDto);
+	}
+
+	public List<MetalStockRepoDto> findLatestClosingValuesForAllMetals() {
+		return metalStockRepo.findLatestClosingValuesForAllMetals().stream().map(MetalStockMapper::entityToResponseDto)
+				.collect(Collectors.toList());
 	}
 
 }

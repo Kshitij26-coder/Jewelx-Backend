@@ -36,12 +36,13 @@ public class UOMController {
 	}
 
 	@GetMapping("/{uomId}")
-	public ResponseEntity<?> getOneUom(@PathVariable("uomID") Long id) {
+	public ResponseEntity<?> getOneUom(@PathVariable("uomId") Long id) {
 		return ResponseEntity.ok(uomService.getOneUOM(id));
 	}
 
 	@PutMapping("/{uomId}")
 	public ResponseEntity<?> updateUom(@PathVariable("uomId") Long id, @RequestBody UOMDto uomDto) {
+		System.out.println(id);
 		return ResponseEntity.ok(uomService.updateUOM(id, uomDto));
 	}
 

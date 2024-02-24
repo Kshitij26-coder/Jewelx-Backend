@@ -27,4 +27,8 @@ public class CustomerDto {
 
 	private Long userID;
 
+	private Long subsidiaryId;
+
+	private Long brandId;
+
 }

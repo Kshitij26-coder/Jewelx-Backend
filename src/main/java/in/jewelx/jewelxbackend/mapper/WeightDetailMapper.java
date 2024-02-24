@@ -2,8 +2,10 @@ package in.jewelx.jewelxbackend.mapper;
 
 import in.jewelx.jewelxbackend.dto.weightdetails.WeightDetailsDto;
 import in.jewelx.jewelxbackend.dto.weightdetails.WeightDetailsResponseDto;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.CustomerEntity;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
+import in.jewelx.jewelxbackend.entity.SubsidiaryEntity;
 import in.jewelx.jewelxbackend.entity.UnitOfMeasurementEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.entity.WeightDetailEntity;
@@ -13,6 +15,8 @@ public class WeightDetailMapper {
 	public static WeightDetailEntity dtoToEntity(WeightDetailsDto weightDetailsDto) {
 		WeightDetailEntity weightDetailEntity = new WeightDetailEntity();
 		weightDetailEntity.setMetalWeight(weightDetailsDto.getMetalWeight());
+		weightDetailEntity.setBrand(new BrandEntity(weightDetailsDto.getBrandId()));
+		weightDetailEntity.setSubsidiary(new SubsidiaryEntity(weightDetailsDto.getSubsidiaryId()));
 		UserEntity userEntity = new UserEntity();
 		userEntity.setIdxId(weightDetailsDto.getUserID());
 		weightDetailEntity.setCreatedBy(userEntity);

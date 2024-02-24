@@ -1,6 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,7 @@ public class MetalService implements IMetalService {
 		if (metalDto == null) {
 			throw new NullObjectException("Metal Dto is null");
 		} else {
+
 			MetalEntity metal = MetalMapper.metalDtoToMetalEntity(metalDto);
 			metal.setCreatedBy(new UserEntity(metalDto.getUserID()));
 			metalRepo.save(metal);
@@ -43,6 +46,11 @@ public class MetalService implements IMetalService {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 		Page<MetalEntity> allMetals = metalRepo.findByBrand_BrandId(brandId, pageRequest);
 		return allMetals.map(MetalMapper::metalEntityToMetalRespDto);
+	}
+
+	public List<MetalResponseDto> getAllMetalsWohoutPagination(Long brandId) {
+		List<MetalEntity> allMetals = metalRepo.findByBrand_BrandId(brandId);
+		return allMetals.stream().map(MetalMapper::metalEntityToMetalRespDto).collect(Collectors.toList());
 	}
 
 	@Override

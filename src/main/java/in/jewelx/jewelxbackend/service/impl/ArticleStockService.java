@@ -41,6 +41,7 @@ public class ArticleStockService implements IArticleStockService {
 
 			}
 			ArticleStockEntity entity = ArticleStockMapper.dtoToEntity(articleStockDto);
+			entity.setArticleStatus("unsold");
 			UserEntity userEntity = new UserEntity();
 			userEntity.setIdxId(articleStockDto.getUserIdx());
 			entity.setCreatedBy(userEntity);
@@ -102,6 +103,11 @@ public class ArticleStockService implements IArticleStockService {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 		Page<ArticleStockEntity> allArticleStocks = articleStockRepo.findAll(pageRequest);
 		return allArticleStocks.map(ArticleStockMapper::entityToDto);
+	}
+	
+	@Override
+	public void updatedArtifactStatus(Long tagId, String status) {
+		articleStockRepo.updateArticleStatusByTagId(tagId, status);
 	}
 
 }
