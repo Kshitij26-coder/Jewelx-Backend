@@ -3,7 +3,9 @@ package in.jewelx.jewelxbackend.mapper;
 import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
 import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
 import in.jewelx.jewelxbackend.dto.customer.CustomerShortDto;
+import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.CustomerEntity;
+import in.jewelx.jewelxbackend.entity.SubsidiaryEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 
 public class CustomerMapper {
@@ -19,6 +21,8 @@ public class CustomerMapper {
 		customerEntity.setOpeningBalance(customerDto.getOpeningBalance());
 		customerEntity.setPanId(customerDto.getPanId());
 		customerEntity.setPincode(customerDto.getPincode());
+		customerEntity.setSubsidiary(new SubsidiaryEntity(customerDto.getSubsidiaryId()));
+		customerEntity.setBrand(new BrandEntity(customerDto.getBrandId()));
 
 		UserEntity userEntity = new UserEntity();
 		userEntity.setIdxId(customerDto.getUserID());
@@ -44,7 +48,7 @@ public class CustomerMapper {
 		customerRespDto.setUpdatedOn(customerEntity.getUpdatedOn());
 		return customerRespDto;
 	}
-	
+
 	public static CustomerShortDto entityToCustomerShortDto(CustomerEntity entity) {
 		CustomerShortDto dto = new CustomerShortDto();
 		dto.setIdx_id(entity.getIdxId());

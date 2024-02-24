@@ -41,6 +41,7 @@ public class ArticleStockService implements IArticleStockService {
 
 			}
 			ArticleStockEntity entity = ArticleStockMapper.dtoToEntity(articleStockDto);
+			entity.setArticleStatus("unsold");
 			UserEntity userEntity = new UserEntity();
 			userEntity.setIdxId(articleStockDto.getUserIdx());
 			entity.setCreatedBy(userEntity);

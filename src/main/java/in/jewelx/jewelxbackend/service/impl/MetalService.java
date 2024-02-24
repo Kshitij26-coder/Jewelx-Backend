@@ -32,6 +32,7 @@ public class MetalService implements IMetalService {
 		if (metalDto == null) {
 			throw new NullObjectException("Metal Dto is null");
 		} else {
+
 			MetalEntity metal = MetalMapper.metalDtoToMetalEntity(metalDto);
 			metal.setCreatedBy(new UserEntity(metalDto.getUserID()));
 			metalRepo.save(metal);

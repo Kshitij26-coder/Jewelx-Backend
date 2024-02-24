@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +38,7 @@ public class ItemSaleEntity {
 	@JoinColumn(name = "sale_id", nullable = false)
 	private SaleEntity sale;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "tag_id", nullable = false)
 	private ArticleStockEntity tagId;
 

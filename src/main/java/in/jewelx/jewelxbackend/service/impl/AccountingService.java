@@ -64,10 +64,10 @@ public class AccountingService implements IAccountingService {
 			entity.setOpenigBalance(lastClosingAmount);
 			UserEntity userEntity = new UserEntity();
 			userEntity.setIdxId(dto.getUserId());
-			//System.out.println(dto.getUserId());
+			// System.out.println(dto.getUserId());
 			entity.setCreatedBy(userEntity);
 			entity.setUpdatedBy(userEntity);
-			//System.out.println(entity.getUpdatedBy());
+			// System.out.println(entity.getUpdatedBy());
 			BrandEntity brand = new BrandEntity(dto.getBrandId());
 			entity.setBrand(brand);
 			AccountingEntity savedEntity = accountingRepo.save(entity);
@@ -81,6 +81,7 @@ public class AccountingService implements IAccountingService {
 		Page<AccountingEntity> allAccountings = accountingRepo.findAll(pageRequest);
 		return allAccountings.map(AccountingMapper::entityToDto);
 	}
+
 	@Override
 	public AccountRespDto getAccountingByUUID(UUID id) {
 		AccountingEntity entity = accountingRepo.findByAccountingId(id);
