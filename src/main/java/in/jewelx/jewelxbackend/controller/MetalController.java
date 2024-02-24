@@ -3,6 +3,7 @@ package in.jewelx.jewelxbackend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import in.jewelx.jewelxbackend.service.impl.MetalService;
 
 @RestController
 @RequestMapping("/metal")
+@CrossOrigin("http://localhost:5173")
 public class MetalController {
 
 	@Autowired
@@ -33,6 +35,11 @@ public class MetalController {
 	public ResponseEntity<?> getAllMetals(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand) {
 		return ResponseEntity.ok(metalService.getAllMetals(page, size, brand));
+	}
+
+	@GetMapping("/all/{brand}")
+	public ResponseEntity<?> getAllMetalsWithoutPagination(@PathVariable Long brand) {
+		return ResponseEntity.ok(metalService.getAllMetalsWohoutPagination(brand));
 	}
 
 	@DeleteMapping("/{metalId}")
@@ -50,4 +57,5 @@ public class MetalController {
 		MetalResponseDto foundMetal = metalService.getOneMetal(id);
 		return ResponseEntity.ok(foundMetal);
 	}
+
 }

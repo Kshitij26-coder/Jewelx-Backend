@@ -70,7 +70,7 @@ public class UserMapper {
 			UserShortDetailsDto dto = new UserShortDetailsDto();
 			dto.setIdxId(user.getIdxId());
 			dto.setUserId(user.getUserId());
-			dto.setUsername(user.getUsername());
+			dto.setUsername(user.getUserName());
 			dto.setEmail(user.getEmail());
 			return dto;
 		} else {

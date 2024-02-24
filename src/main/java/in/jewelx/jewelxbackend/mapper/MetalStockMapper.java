@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.mapper;
 
+import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
 import in.jewelx.jewelxbackend.dto.metalstock.MetalStockDto;
 import in.jewelx.jewelxbackend.dto.metalstock.MetalStockRepoDto;
 import in.jewelx.jewelxbackend.dto.user.UserShortDetailsDto;
@@ -25,8 +26,10 @@ public class MetalStockMapper {
 	public static MetalStockRepoDto entityToResponseDto(MetalStockEntity entity) {
 		UserShortDetailsDto updatedBy = UserMapper.UserEntityToUserShortDetailsDto(entity.getUpdatedBy());
 		UserShortDetailsDto createdBy = UserMapper.UserEntityToUserShortDetailsDto(entity.getCreatedBy());
-		MetalStockRepoDto dto = new MetalStockRepoDto(entity.getStockId(), entity.getOpeningWeight(),
-				entity.getClosingWeight(), updatedBy, createdBy);
+		MetalStockRepoDto dto = new MetalStockRepoDto(
+				new MetalShortDto(entity.getMetal().getMetalId(), entity.getMetal().getMetalRate(),
+						entity.getMetal().getMetalName()),
+				entity.getOpeningWeight(), entity.getClosingWeight(), updatedBy, createdBy);
 		return dto;
 	}
 }

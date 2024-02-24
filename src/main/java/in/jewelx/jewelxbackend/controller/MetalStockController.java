@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +34,9 @@ public class MetalStockController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllMetalStocks(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(metalStockService.getAllMetalStocks(page, size));
+			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand,
+			@RequestParam(defaultValue = "0") Long subsidiary, @RequestParam String role) {
+		return ResponseEntity.ok(metalStockService.getAllMetalStocks(page, size, brand, subsidiary, role));
 	}
 
 	@DeleteMapping("/{metalStockId}")
@@ -52,4 +55,11 @@ public class MetalStockController {
 		MetalStockRepoDto foundMetalStock = metalStockService.getMetalStockById(stockId);
 		return ResponseEntity.ok(foundMetalStock);
 	}
+
+	@GetMapping("/values")
+	public ResponseEntity<List<MetalStockRepoDto>> findLatestClosingValuesForAllMetals() {
+
+		return ResponseEntity.ok(metalStockService.findLatestClosingValuesForAllMetals());
+	}
+
 }
