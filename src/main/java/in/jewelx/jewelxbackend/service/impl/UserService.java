@@ -24,6 +24,7 @@ import in.jewelx.jewelxbackend.dto.user.UserResponseDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.OtpEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
+import in.jewelx.jewelxbackend.exception.EmailAlreadyPresentException;
 import in.jewelx.jewelxbackend.exception.EmailNotFoundException;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
 import in.jewelx.jewelxbackend.exception.NullObjectException;
@@ -63,6 +64,10 @@ public class UserService implements IUserService, UserDetailsService {
 	 */
 	@Override
 	public String createUser(UserRequestDto userDto) {
+		UserEntity userEntity = userRepo.findByEmail(userDto.getEmail());
+		if (userEntity != null) {
+			throw new EmailAlreadyPresentException("Email already present");
+		}
 		ViewBrandUser viewBrandUser = UserMapper.mapToBrandUser(userDto);
 		if (RolesEnum.valueOf(userDto.getUserRole().toUpperCase()) == RolesEnum.O) {
 			BrandEntity createdBrand = brandService.createBrand(viewBrandUser.getBrand());

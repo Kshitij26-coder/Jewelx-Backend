@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
@@ -9,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.cloudinary.Cloudinary;
 
 @Configuration
 public class AppConfig {
@@ -39,5 +44,17 @@ public class AppConfig {
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
 		return builder.getAuthenticationManager();
+	}
+	
+	//Bean created to use cloudianry object and its method
+	@Bean
+	public Cloudinary getCloudinary() {
+		//setting cloudinary server configuration 
+		Map config = new HashMap();
+		config.put("cloud_name","dqpof2sxy");
+		config.put("api_key", "414357913281979");
+		config.put("api_secret", "sqHpzeimxE4aLIgQ2EKDUDA1G94");
+		config.put("secure", true);
+		return new Cloudinary(config);
 	}
 }
