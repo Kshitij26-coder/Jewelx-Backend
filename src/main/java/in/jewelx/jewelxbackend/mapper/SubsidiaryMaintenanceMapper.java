@@ -3,6 +3,8 @@ package in.jewelx.jewelxbackend.mapper;
 import java.math.BigDecimal;
 import in.jewelx.jewelxbackend.dto.accounting.AccountingDto;
 import in.jewelx.jewelxbackend.dto.subsidiary_maintenance.SubsidiaryMaintenanceDto;
+import in.jewelx.jewelxbackend.dto.subsidiary_maintenance.SubsidiaryMaintenanceRespDto;
+import in.jewelx.jewelxbackend.entity.SubsidiaryMaintenance;
 
 public class SubsidiaryMaintenanceMapper {
 
@@ -21,4 +23,13 @@ public class SubsidiaryMaintenanceMapper {
 		accountingDto.setSubsidiaryId(dto.getSubsidiaryId());
 		return accountingDto;
 	}
+
+	public static SubsidiaryMaintenanceRespDto entityToDto(SubsidiaryMaintenance entity) {
+		SubsidiaryMaintenanceRespDto dto = new SubsidiaryMaintenanceRespDto(entity.getIdxId(),
+				entity.getMaintenanceId(), entity.getMaintenanceDescription(),AccountingMapper.entityToShortDto(entity.getAccounting()),
+				UserMapper.UserEntityToUserShortDetailsDto(entity.getCreatedBy()), entity.getBrand().getBrandId(),SubsidiaryMapper.mapToSubsidiaryShortDetailsDto(entity.getSubsidiary()));
+		return dto;
+	}
+	
+	
 }

@@ -18,4 +18,5 @@ public class AccountingShortDto {
 	private UUID accountingId;
 	private BigDecimal closingBalance;
 	private String transactionMode;
+	private BigDecimal transactAmount;
 }

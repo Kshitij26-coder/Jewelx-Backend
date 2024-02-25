@@ -29,6 +29,6 @@ public class AccountingMapper {
 	
 	public static AccountingShortDto entityToShortDto(AccountingEntity entity) {
 		return new AccountingShortDto(entity.getIdxId(), entity.getAccountingId(), entity.getClosingBalance(),
-				entity.getTransactionMode());
+				entity.getTransactionMode(), entity.getTransactionAmount());
 	}
 }
