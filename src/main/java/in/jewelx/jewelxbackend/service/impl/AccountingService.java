@@ -1,6 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ import in.jewelx.jewelxbackend.mapper.AccountingMapper;
 import in.jewelx.jewelxbackend.repository.AccountingRepository;
 import in.jewelx.jewelxbackend.service.IAccountingService;
 import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -76,9 +81,15 @@ public class AccountingService implements IAccountingService {
 	}
 
 	@Override
-	public Page<AccountRespDto> getAllAccountings(int pageNumber, int pageSize) {
+	public Page<AccountRespDto> getAllAccountings(int pageNumber, int pageSize, Long brandId, Long subsidiaryId,
+			String role) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<AccountingEntity> allAccountings = accountingRepo.findAll(pageRequest);
+		Page<AccountingEntity> allAccountings = null;
+		if (role.equals("O")) {
+			allAccountings = accountingRepo.findByBrand_BrandId(brandId, pageRequest);
+		} else if (role.equals("A") || role.equals("E")) {
+			allAccountings = accountingRepo.findBySubsidiary_IdxId(subsidiaryId, pageRequest);
+		}
 		return allAccountings.map(AccountingMapper::entityToDto);
 	}
 
@@ -87,6 +98,39 @@ public class AccountingService implements IAccountingService {
 		AccountingEntity entity = accountingRepo.findByAccountingId(id);
 		AccountRespDto dto = AccountingMapper.entityToDto(entity);
 		return dto;
+	}
+
+	public BigDecimal dailyTransaction(String role, Long brandId, Long subsidiaryId) {
+		List<AccountingEntity> accountingEntityList = null;
+		BigDecimal amount = new BigDecimal("0");
+		if (role.equals("O")) {
+			// System.out.println(brandId);
+			accountingEntityList = accountingRepo.findByTransactionDateAndBrand_BrandId(Date.valueOf(LocalDate.now()),
+					brandId);
+		} else if (role.equals("A") || role.equals("E")) {
+			// System.out.println("req reached 2");
+			accountingEntityList = accountingRepo
+					.findByTransactionDateAndSubsidiary_IdxId(Date.valueOf(LocalDate.now()), subsidiaryId);
+		}
+		for (AccountingEntity e : accountingEntityList) {
+
+			amount = amount.add(e.getTransactionAmount());
+		}
+		// System.out.println(accountingEntityList+"*******");
+		return amount;
+	}
+
+	public List<Double> fiveDayTransaction(Long brandId, Long subsidiaryId) {
+		List<AccountingEntity> accountingEntityList = accountingRepo
+				.findTop5ByBrand_BrandIdAndSubsidiary_IdxIdOrderByCreatedOnDesc(brandId, subsidiaryId);
+		List<Double> amount = new ArrayList<Double>();
+
+		for (AccountingEntity e : accountingEntityList) {
+			System.out.println(e.getTransactionAmount().toString() + "*******");
+			amount.add(e.getTransactionAmount().doubleValue());
+		}
+		// System.out.println(accountingEntityList+"*******");
+		return amount;
 	}
 
 }
