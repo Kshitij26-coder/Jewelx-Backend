@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.dto.brand;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import lombok.Setter;
 public class BrandDto {
 	private String name;
 	private String description;
-	private String imageUrl;
+	//private String imageUrl;
+	private MultipartFile image;
 	private Long userId;
 }

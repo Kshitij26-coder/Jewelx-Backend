@@ -1,12 +1,17 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.cloudinary.Cloudinary;
 
 import in.jewelx.jewelxbackend.dto.brand.BrandDto;
 import in.jewelx.jewelxbackend.dto.brand.BrandResponseDto;
@@ -25,6 +30,26 @@ public class BrandService implements IBrandService {
 
 	@Autowired
 	private BrandRepository brandRepo;
+
+	@Autowired
+	private Cloudinary cloudinary;
+
+	@Override
+	public String upload(MultipartFile file, Long brandId) {
+		BrandEntity existingEntity = brandRepo.findById(brandId)
+				.orElseThrow(() -> new IdNotFoundException("Invalid id"));
+		try {
+			Map data = this.cloudinary.uploader().upload(file.getBytes(), Map.of());
+			existingEntity.setImageUrl(data.get("url").toString());
+			brandRepo.save(existingEntity);
+			;
+			return data.get("url").toString();
+
+		} catch (IOException e) {
+			throw new RuntimeException("Image uploading fail !!!");
+		} // creating map and passing
+
+	}
 
 	@Override
 	@Transactional

@@ -12,8 +12,8 @@ public interface IAccountingService {
 
 	AccountingEntity addAccounting(AccountingDto dto);
 
-	// for transaction
-	Page<AccountRespDto> getAllAccountings(int pageNumber, int pageSize);
-
 	AccountRespDto getAccountingByUUID(UUID id);
+
+	// for transaction
+	Page<AccountRespDto> getAllAccountings(int pageNumber, int pageSize, Long brandId, Long subsidiaryId, String role);
 }

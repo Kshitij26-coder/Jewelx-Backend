@@ -14,7 +14,7 @@ public class BrandMapper {
 	public static BrandEntity dtoToBrandEntity(BrandDto brandDto) {
 		BrandEntity brandEntity = new BrandEntity();
 		brandEntity.setDescription(brandDto.getDescription());
-		brandEntity.setImageUrl(brandDto.getImageUrl());
+		//brandEntity.setImageUrl(brandDto.getImageUrl());
 		brandEntity.setName(brandDto.getName());
 		UserEntity userEntity = new UserEntity();
 		userEntity.setIdxId(brandDto.getUserId());

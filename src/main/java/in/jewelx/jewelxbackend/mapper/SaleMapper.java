@@ -2,7 +2,6 @@ package in.jewelx.jewelxbackend.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import in.jewelx.jewelxbackend.dto.sale.SaleDto;
 import in.jewelx.jewelxbackend.dto.sale.SaleResponseById;
 import in.jewelx.jewelxbackend.dto.sale.SaleResponseDto;
@@ -39,7 +38,11 @@ public class SaleMapper {
 		SaleResponseDto dto = new SaleResponseDto();
 		dto.setSaleIdxId(entity.getIdxId());
 		dto.setSaleId(entity.getSaleId());
+		dto.setDiscount(entity.getDiscount());
+		dto.setCgst(entity.getCgst());
+		dto.setSgst(entity.getSgst());
 		dto.setCreatedOn(entity.getCreatedOn());
+		dto.setSubsidiary(SubsidiaryMapper.mapToResponseDto(entity.getSubsidiary()));
 		dto.setCustomer(CustomerMapper.entityToCustomerShortDto(entity.getCustomer()));
 		dto.setNetAmount(entity.getNetAmount());
 		dto.setPayableAmount(entity.getPayableAmount());
@@ -50,11 +53,15 @@ public class SaleMapper {
 	}
 
 	public static SaleResponseById entityToResponseDtoByUUID(SaleEntity entity) {
-		
+
 		SaleResponseById dto = new SaleResponseById();
 		dto.setSaleIdxId(entity.getIdxId());
 		dto.setSaleId(entity.getSaleId());
+		dto.setCgst(entity.getCgst());
+		dto.setSgst(entity.getSgst());
+		dto.setDiscount(entity.getDiscount());
 		dto.setCreatedOn(entity.getCreatedOn());
+		dto.setSubsidiary(SubsidiaryMapper.mapToResponseDto(entity.getSubsidiary()));
 		dto.setCustomer(CustomerMapper.entityToCustomerShortDto(entity.getCustomer()));
 		dto.setNetAmount(entity.getNetAmount());
 		dto.setPayableAmount(entity.getPayableAmount());

@@ -31,12 +31,22 @@ public class AccountingController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllAccoutings(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(accountingService.getAllAccountings(page, size));
+			@RequestParam(defaultValue = "10") int size,@RequestParam Long brand,@RequestParam Long subsidiary, @RequestParam String role) {
+		return ResponseEntity.ok(accountingService.getAllAccountings(page, size,brand,subsidiary, role));
 	}
 
 	@GetMapping("/{accountingId}")
 	public ResponseEntity<AccountRespDto> getAccountingByUUID(@PathVariable("accountingId") UUID id) {
 		return ResponseEntity.ok(accountingService.getAccountingByUUID(id));
 	}
+	@GetMapping("/daily-transaction")
+	public ResponseEntity<?> getDailyTransaction(@RequestParam String role, @RequestParam Long brand, @RequestParam Long subsidiary){
+		return ResponseEntity.ok(accountingService.dailyTransaction(role, brand, subsidiary));
+	}
+	
+	@GetMapping("/five-transaction")
+	public ResponseEntity<?> getFiveTransaction(@RequestParam Long brand, @RequestParam Long subsidiary){
+		return ResponseEntity.ok(accountingService.fiveDayTransaction(brand, subsidiary));
+	}
+	
 }

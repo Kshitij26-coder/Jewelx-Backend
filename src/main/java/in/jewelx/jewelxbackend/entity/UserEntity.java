@@ -49,7 +49,7 @@ public class UserEntity implements UserDetails {
 	@JoinColumn(name = "brand_id", nullable = false)
 	private BrandEntity brand;
 
-	@Column(name = "email", length = 50, nullable = false)
+	@Column(name = "email", length = 50, nullable = false, unique = true)
 	private String email;
 
 	@Column(name = "mobile_number", length = 15, nullable = false)
