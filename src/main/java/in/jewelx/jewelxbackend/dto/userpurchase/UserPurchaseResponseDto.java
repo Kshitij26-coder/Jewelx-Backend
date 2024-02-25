@@ -3,6 +3,8 @@ package in.jewelx.jewelxbackend.dto.userpurchase;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import in.jewelx.jewelxbackend.dto.customer.CustomerShortDto;
+import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,14 +15,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserPurchaseResponseDto {
-	
+
 	private Long idxId;
 
 	private UUID purchaseId;
 
-	private Long metal;
+	private MetalShortDto metal;
 
-	private Long customer;
+	private CustomerShortDto customer;
 
 	private BigDecimal purity;
 
@@ -33,7 +35,7 @@ public class UserPurchaseResponseDto {
 	private BigDecimal metalRate;
 
 	private BigDecimal totalAmount;
-	
+
 	private Long accounting;
 
 	private Long subsidiaryId;
