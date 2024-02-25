@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +14,5 @@ public interface UOMRepository extends JpaRepository<UnitOfMeasurementEntity, Lo
 
 	Page<UnitOfMeasurementEntity> findByBrand_BrandId(Long brand_id, Pageable page);
 
+	List<UnitOfMeasurementEntity> findByBrand_BrandId(Long brand_id);
 }

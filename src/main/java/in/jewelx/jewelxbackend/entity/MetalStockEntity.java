@@ -50,6 +50,10 @@ public class MetalStockEntity {
 	@Column(name = "created_on", nullable = false, updatable = false)
 	private LocalDateTime createdOn;
 
+	@ManyToOne
+	@JoinColumn(name = "uom_id")
+	private UnitOfMeasurementEntity uomId;
+
 	@UpdateTimestamp
 	@Column(name = "updated_on", nullable = false)
 	private LocalDateTime updatedOn;

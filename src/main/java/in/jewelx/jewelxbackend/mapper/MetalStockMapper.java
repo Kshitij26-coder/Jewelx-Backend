@@ -29,7 +29,8 @@ public class MetalStockMapper {
 		MetalStockRepoDto dto = new MetalStockRepoDto(
 				new MetalShortDto(entity.getMetal().getMetalId(), entity.getMetal().getMetalRate(),
 						entity.getMetal().getMetalName()),
-				entity.getOpeningWeight(), entity.getClosingWeight(), updatedBy, createdBy);
+				entity.getOpeningWeight(), entity.getClosingWeight(), updatedBy, createdBy,
+				entity.getTransactionWeight());
 		return dto;
 	}
 }

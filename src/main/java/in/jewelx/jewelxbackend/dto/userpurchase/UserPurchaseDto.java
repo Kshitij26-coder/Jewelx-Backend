@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserPurchaseDto {
-		
+
 	private Long metalId;
 
 	private Long customerId;
@@ -23,16 +23,18 @@ public class UserPurchaseDto {
 
 	private BigDecimal metalRate;
 
-	//private BigDecimal totalAmount;
-	
+	private Long uom;
+
+	// private BigDecimal totalAmount;
+
 	private Long subsidiaryId;
-	
+
 	private Long brandId;
-	
+
 	private Long userId;
-	
+
 	private String transactionType;
-	
+
 	private String transactionMode;
 
 	private String chequeNo;
