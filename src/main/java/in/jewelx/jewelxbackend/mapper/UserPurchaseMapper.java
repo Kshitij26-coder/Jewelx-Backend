@@ -44,7 +44,8 @@ public class UserPurchaseMapper {
 				MetalMapper.entityToMetalShortDto(entity.getMetal()),
 				CustomerMapper.entityToCustomerShortDto(entity.getCustomer()), entity.getPurity(),
 				entity.getArticleDescription(), entity.getNetWeight(), entity.getGrossWeight(), entity.getMetalRate(),
-				entity.getTotalAmount(), entity.getAccounting().getIdxId(), entity.getSubsidiary().getIdxId(),
+				entity.getTotalAmount(), entity.getAccounting().getIdxId(),
+				SubsidiaryMapper.mapToSubsidiaryShortDetailsDto(entity.getSubsidiary()),
 				entity.getBrand().getBrandId());
 		return dto;
 	}

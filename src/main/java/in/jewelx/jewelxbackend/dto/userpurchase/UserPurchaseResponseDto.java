@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import in.jewelx.jewelxbackend.dto.customer.CustomerShortDto;
 import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
+import in.jewelx.jewelxbackend.dto.subsidiary.SubsidiaryShortDetailsDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,7 +39,7 @@ public class UserPurchaseResponseDto {
 
 	private Long accounting;
 
-	private Long subsidiaryId;
+	private SubsidiaryShortDetailsDto subsidiaryId;
 
 	private Long brandId;
 }
