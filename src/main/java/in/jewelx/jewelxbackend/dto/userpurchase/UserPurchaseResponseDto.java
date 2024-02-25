@@ -38,7 +38,7 @@ public class UserPurchaseResponseDto {
 	private BigDecimal totalAmount;
 
 	private Long accounting;
-
+//uom is missing please add it in fututre scope
 	private SubsidiaryShortDetailsDto subsidiary;
 
 	private Long brandId;
