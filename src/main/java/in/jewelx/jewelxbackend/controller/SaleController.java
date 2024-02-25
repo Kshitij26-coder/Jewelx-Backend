@@ -31,8 +31,8 @@ public class SaleController {
 	@GetMapping
 	public ResponseEntity<?> getAllSales(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam String role, @RequestParam Long brand,
-			@RequestParam Long subsidiaryId) {
-		return ResponseEntity.ok(saleService.getAllSalesByUser(page, size, role, brand, subsidiaryId));
+			@RequestParam Long subsidiary) {
+		return ResponseEntity.ok(saleService.getAllSalesByUser(page, size, role, brand, subsidiary));
 	}
 
 	@GetMapping("/{saleId}")
