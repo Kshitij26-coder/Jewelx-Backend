@@ -34,7 +34,7 @@ public class SubsidiaryController {
 		return ResponseEntity.ok(subsidiaryService.getSubsidiariesByBrandId(page, size, brandId));
 	}
 
-	@GetMapping("/all/{id}")
+	@GetMapping("/all/{brand}")
 	public ResponseEntity<?> getSubsidiariesByBrand(@PathVariable Long brand) {
 		return ResponseEntity.ok(subsidiaryService.getSubsidiaryResponseDtos(brand));
 	}
