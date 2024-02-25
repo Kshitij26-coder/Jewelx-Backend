@@ -94,6 +94,12 @@
 			<version>3.4.1</version> <!-- or latest version -->
 		</dependency>
 
+		<!-- depency for cloudianry-->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.36.0</version>
+		</dependency>
 		<!--
 		https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
 		<dependency>

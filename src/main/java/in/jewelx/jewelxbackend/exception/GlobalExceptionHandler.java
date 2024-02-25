@@ -49,6 +49,10 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleHuidException(HuidExistedException ex){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
+	@ExceptionHandler
+	public ResponseEntity<String> handleEmailAlreadyPresentException(EmailAlreadyPresentException ex){
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+	}
 
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<String> handleException(Exception ex) {
