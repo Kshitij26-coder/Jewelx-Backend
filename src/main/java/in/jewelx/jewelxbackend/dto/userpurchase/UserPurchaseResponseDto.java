@@ -39,7 +39,7 @@ public class UserPurchaseResponseDto {
 
 	private Long accounting;
 
-	private SubsidiaryShortDetailsDto subsidiaryId;
+	private SubsidiaryShortDetailsDto subsidiary;
 
 	private Long brandId;
 }
