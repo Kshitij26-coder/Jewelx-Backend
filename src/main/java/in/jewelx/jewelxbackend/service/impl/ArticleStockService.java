@@ -112,6 +112,9 @@ public class ArticleStockService implements IArticleStockService {
 		} else if (role.equals("O")) {
 			allArticleStocks = articleStockRepo.findByBrand_BrandId(brandId, pageRequest);
 		}
+		if(allArticleStocks==null) {
+			throw new NullObjectException("Data is Empty");
+		}
 		return allArticleStocks.map(ArticleStockMapper::entityToDto);
 	}
 

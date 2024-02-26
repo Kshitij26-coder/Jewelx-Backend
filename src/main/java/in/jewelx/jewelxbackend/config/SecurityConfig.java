@@ -35,7 +35,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()).cors().and()
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/user/test").authenticated()
 						.requestMatchers("/user").permitAll().requestMatchers("/user/send-otp").permitAll()
-						.requestMatchers("/user/*").permitAll().requestMatchers("/brand/*").permitAll()
+						.requestMatchers("/user/*").permitAll().requestMatchers("/brand/*").permitAll().requestMatchers("/brand/cloud/*").permitAll().requestMatchers("/subsidiary/all/*").permitAll()
 						.requestMatchers("/subsidiary/brand/*").permitAll().requestMatchers("/user/send-otp/*")
 						.permitAll().requestMatchers("/article-stock/barcode/*").permitAll().anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
