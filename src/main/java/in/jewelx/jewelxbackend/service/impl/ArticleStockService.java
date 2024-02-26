@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -115,6 +118,11 @@ public class ArticleStockService implements IArticleStockService {
 	@Override
 	public void updatedArtifactStatus(Long tagId, String status) {
 		articleStockRepo.updateArticleStatusByTagId(tagId, status);
+	}
+
+	public List<ArticleStockRespDto> getAllArticlesby(Long id) {
+		return articleStockRepo.findByBrand_BrandId(id).stream().map(ArticleStockMapper::entityToDto)
+				.collect(Collectors.toList());
 	}
 
 }

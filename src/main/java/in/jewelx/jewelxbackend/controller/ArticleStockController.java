@@ -36,6 +36,11 @@ public class ArticleStockController {
 		return ResponseEntity.ok(articleStockService.getAllArticleStocks(page, size, subsidiary, brand, role));
 	}
 
+	@GetMapping("/all/{id}")
+	public ResponseEntity<?> getAllArticles(@PathVariable Long id) {
+		return ResponseEntity.ok(articleStockService.getAllArticlesby(id));
+	}
+
 	@DeleteMapping("/{articleStockId}")
 	public ResponseEntity<String> deleteArticleStockById(@PathVariable("articleStockId") Long id) {
 		return ResponseEntity.ok(articleStockService.deleteByArticleStockId(id));

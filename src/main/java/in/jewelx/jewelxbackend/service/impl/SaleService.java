@@ -14,6 +14,7 @@ import in.jewelx.jewelxbackend.dto.itemsale.ItemSaleResponse;
 import in.jewelx.jewelxbackend.dto.sale.SaleDto;
 import in.jewelx.jewelxbackend.dto.sale.SaleResponseById;
 import in.jewelx.jewelxbackend.dto.sale.SaleResponseDto;
+import in.jewelx.jewelxbackend.entity.AccountingEntity;
 import in.jewelx.jewelxbackend.entity.SaleEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.NullObjectException;
@@ -46,21 +47,22 @@ public class SaleService implements ISaleService {
 					dto.getNetBankingUTR(), dto.getNetBankingAmount(), dto.getUserId(), dto.getBrandId(),
 					dto.getSubsidiaryId());
 
-			accountingService.addAccounting(accountingDto);
+			AccountingEntity account = accountingService.addAccounting(accountingDto);
 
 			SaleEntity saleEntity = SaleMapper.dtoToEntity(dto);
-
+			saleEntity.setAccounting(account);
 			UserEntity user = new UserEntity(dto.getUserId());
 			saleEntity.setCreatedBy(user);
 			saleEntity.setUpdatedBy(user);
 
 			SaleEntity addedSaleEntity = saleRepo.save(saleEntity);
-
+			System.out.println(dto.getSaleItems() + "==========================");
 			for (ItemSaleDto eachItemDto : dto.getSaleItems()) {
 				// set article stock stauts to sold
 				articleStockService.updatedArtifactStatus(eachItemDto.getTagId(), "sold");
 				// need to add sale id in saleItem Dto
 				eachItemDto.setSaleId(addedSaleEntity.getIdxId());
+				eachItemDto.setUserId(dto.getUserId());
 				itemSaleService.addItemSale(eachItemDto);
 			}
 			return "Sale Successfully Added !!!";
