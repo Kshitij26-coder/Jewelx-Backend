@@ -107,7 +107,7 @@ public class ArticleStockService implements IArticleStockService {
 			String role) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 		Page<ArticleStockEntity> allArticleStocks = null;
-		if (role.equals("A") && role.equals("E")) {
+		if (role.equals("A") || role.equals("E")) {
 			allArticleStocks = articleStockRepo.findBySubsidiary_IdxId(subsidiaryId, pageRequest);
 		} else if (role.equals("O")) {
 			allArticleStocks = articleStockRepo.findByBrand_BrandId(brandId, pageRequest);
