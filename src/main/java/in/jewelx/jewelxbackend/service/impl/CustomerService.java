@@ -1,6 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import in.jewelx.jewelxbackend.dto.customer.CustomerDto;
 import in.jewelx.jewelxbackend.dto.customer.CustomerResponseDto;
+import in.jewelx.jewelxbackend.dto.customer.CustomerShortDto;
 import in.jewelx.jewelxbackend.entity.CustomerEntity;
 import in.jewelx.jewelxbackend.entity.UserEntity;
 import in.jewelx.jewelxbackend.exception.IdNotFoundException;
@@ -48,6 +51,12 @@ public class CustomerService implements ICustomerService {
 		return allCustomers.map(CustomerMapper::customerEntityToCustomerRespDto);
 	}
 
+	public List<CustomerShortDto> getAllCustomerByBrandId(Long brand){
+		List<CustomerEntity> allCustomers = customerRepo.findByBrand_BrandId(brand);
+		return allCustomers.stream().map(CustomerMapper::entityToCustomerShortDto).collect(Collectors.toList());
+	}
+	
+	
 	@Override
 	public String deleteCustomerById(UUID id) {
 		getOneCustomer(id);
