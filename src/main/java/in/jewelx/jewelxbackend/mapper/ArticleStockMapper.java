@@ -46,6 +46,7 @@ public class ArticleStockMapper {
 		dto.setBrandId(entity.getBrand().getBrandId());
 		dto.setSubsidiary(entity.getSubsidiary().getIdxId());
 		dto.setCategory(entity.getCategory().getCategoryId());
+		dto.setCategoryInfo(ItemCategoryMapper.itemCategoryEntityToDto(entity.getCategory()));
 		return dto;
 
 	}

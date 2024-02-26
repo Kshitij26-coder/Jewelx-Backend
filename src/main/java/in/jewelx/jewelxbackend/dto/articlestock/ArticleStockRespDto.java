@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.dto.articlestock;
 
+import in.jewelx.jewelxbackend.dto.itemcategory.ItemCategoryRespDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,4 +29,6 @@ public class ArticleStockRespDto {
 	private Long brandId;
 
 	private Long subsidiary;
+	
+	private ItemCategoryRespDto categoryInfo;
 }

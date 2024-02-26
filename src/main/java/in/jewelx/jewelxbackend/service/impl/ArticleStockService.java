@@ -127,5 +127,10 @@ public class ArticleStockService implements IArticleStockService {
 		return articleStockRepo.findByBrand_BrandId(id).stream().map(ArticleStockMapper::entityToDto)
 				.collect(Collectors.toList());
 	}
+	
+	public List<ArticleStockRespDto> getAllArticleByStatus(Long id){
+		return articleStockRepo.findBySubsidiaryIdAndArticleStatusNotSold(id).stream().map(ArticleStockMapper::entityToDto)
+				.collect(Collectors.toList());
+	}
 
 }

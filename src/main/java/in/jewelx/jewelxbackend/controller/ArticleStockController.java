@@ -58,6 +58,12 @@ public class ArticleStockController {
 		return ResponseEntity.ok(foundArticleStock);
 	}
 
+	@GetMapping("/status/{id}")
+	public ResponseEntity<?> getArticleStockByStatus(@PathVariable("id") Long subsidiary) {
+
+		return ResponseEntity.ok(articleStockService.getAllArticleByStatus(subsidiary));
+	}
+
 //	@GetMapping("/barcode/{id}")
 //	public void barcode(@PathVariable("id")String id, HttpServletResponse response) throws Exception{
 //		

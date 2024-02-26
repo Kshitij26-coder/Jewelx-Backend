@@ -24,4 +24,7 @@ public interface ArticleStockRepository extends JpaRepository<ArticleStockEntity
 	Page<ArticleStockEntity> findBySubsidiary_IdxId(Long id, Pageable page);
 
 	List<ArticleStockEntity> findByBrand_BrandId(Long id);
+	
+	@Query(value = "SELECT * FROM article_stock WHERE subsidiary_id = ?1 AND article_status != 'sold'", nativeQuery = true)
+    List<ArticleStockEntity> findBySubsidiaryIdAndArticleStatusNotSold(Long subsidiaryId);
 }
