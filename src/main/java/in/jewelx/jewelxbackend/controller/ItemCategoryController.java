@@ -29,8 +29,13 @@ public class ItemCategoryController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllItemCategory(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(itemCategoryService.getAllItemCategories(page, size));
+			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand) {
+		return ResponseEntity.ok(itemCategoryService.getAllItemCategories(page, size, brand));
+	}
+
+	@GetMapping("/all/{brand}")
+	public ResponseEntity<?> getAllItemCategory(@PathVariable Long brand) {
+		return ResponseEntity.ok(itemCategoryService.getAllItemCategories(brand));
 	}
 
 	@GetMapping("/{itemCategoryId}")

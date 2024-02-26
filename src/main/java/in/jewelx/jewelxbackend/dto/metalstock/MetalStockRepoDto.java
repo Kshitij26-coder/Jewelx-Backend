@@ -23,4 +23,6 @@ public class MetalStockRepoDto {
 
 	private UserShortDetailsDto createdBy;
 
+	private BigDecimal transactionWeight;
+
 }

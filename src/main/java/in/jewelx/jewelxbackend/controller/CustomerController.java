@@ -1,6 +1,7 @@
 package in.jewelx.jewelxbackend.controller;
 
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,8 +31,9 @@ public class CustomerController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllCustomers(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(customerService.getAllCustomers(page, size));
+			@RequestParam(defaultValue = "10") int size, @RequestParam Long brand, @RequestParam Long subsidiary,
+			String role) {
+		return ResponseEntity.ok(customerService.getAllCustomers(page, size, brand, subsidiary, role));
 	}
 
 	@GetMapping("/{customerId}")

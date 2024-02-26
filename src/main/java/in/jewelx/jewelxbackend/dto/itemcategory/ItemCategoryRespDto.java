@@ -1,5 +1,6 @@
 package in.jewelx.jewelxbackend.dto.itemcategory;
 
+import in.jewelx.jewelxbackend.dto.metal.MetalShortDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ public class ItemCategoryRespDto {
 
 	private Short id;
 	private String categoryName;
-	private Long metalId;
+	private MetalShortDto metal;
 	private Long userId;
 	private Long brandId;
 

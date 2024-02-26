@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockDto;
 import in.jewelx.jewelxbackend.dto.articlestock.ArticleStockRespDto;
 import in.jewelx.jewelxbackend.entity.ArticleStockEntity;
@@ -99,12 +100,18 @@ public class ArticleStockService implements IArticleStockService {
 	}
 
 	@Override
-	public Page<ArticleStockRespDto> getAllArticleStocks(int pageNumber, int pageSize) {
+	public Page<ArticleStockRespDto> getAllArticleStocks(int pageNumber, int pageSize, Long subsidiaryId, Long brandId,
+			String role) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<ArticleStockEntity> allArticleStocks = articleStockRepo.findAll(pageRequest);
+		Page<ArticleStockEntity> allArticleStocks = null;
+		if (role.equals("A") && role.equals("E")) {
+			allArticleStocks = articleStockRepo.findBySubsidiary_IdxId(subsidiaryId, pageRequest);
+		} else if (role.equals("O")) {
+			allArticleStocks = articleStockRepo.findByBrand_BrandId(brandId, pageRequest);
+		}
 		return allArticleStocks.map(ArticleStockMapper::entityToDto);
 	}
-	
+
 	@Override
 	public void updatedArtifactStatus(Long tagId, String status) {
 		articleStockRepo.updateArticleStatusByTagId(tagId, status);

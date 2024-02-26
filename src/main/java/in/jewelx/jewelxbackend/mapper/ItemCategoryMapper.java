@@ -5,22 +5,20 @@ import in.jewelx.jewelxbackend.dto.itemcategory.ItemCategoryRespDto;
 import in.jewelx.jewelxbackend.entity.BrandEntity;
 import in.jewelx.jewelxbackend.entity.ItemCategoryEntity;
 import in.jewelx.jewelxbackend.entity.MetalEntity;
-import in.jewelx.jewelxbackend.entity.UserEntity;
 
 public class ItemCategoryMapper {
 
 	public static ItemCategoryEntity dtoToItemCategoryEntity(ItemCategoryDto itemCategoryDto) {
 		ItemCategoryEntity itemCategoryEntity = new ItemCategoryEntity();
 		itemCategoryEntity.setCategoryName(itemCategoryDto.getCategoryName());
-		
+
 		MetalEntity metal = new MetalEntity();
 		metal.setMetalId(itemCategoryDto.getMetalId());
 		itemCategoryEntity.setMetal(metal);
-		
+
 		BrandEntity brand = new BrandEntity(itemCategoryDto.getBrandId());
 		itemCategoryEntity.setBrand(brand);
-		
-		
+
 		return itemCategoryEntity;
 	}
 
@@ -28,8 +26,7 @@ public class ItemCategoryMapper {
 		ItemCategoryRespDto itemCategoryRespDto = new ItemCategoryRespDto();
 		itemCategoryRespDto.setId(itemCategoryEntity.getCategoryId());
 		itemCategoryRespDto.setCategoryName(itemCategoryEntity.getCategoryName());
-		itemCategoryRespDto.setMetalId(itemCategoryEntity.getMetal().getMetalId());
-		
+		itemCategoryRespDto.setMetal(MetalMapper.entityToMetalShortDto(itemCategoryEntity.getMetal()));
 		return itemCategoryRespDto;
 
 	}

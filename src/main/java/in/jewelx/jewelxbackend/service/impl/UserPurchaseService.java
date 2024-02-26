@@ -39,7 +39,7 @@ public class UserPurchaseService implements IUserPurchaseService {
 			UserPurchaseEntity userPurchase = UserPurchaseMapper.dtoToEntity(dto);
 
 			MetalStockEntity metalStock = metalStockService.addMetalStock(new MetalStockDto(dto.getNetWeight(),
-					dto.getUserId(), dto.getMetalId(), dto.getBrandId(), dto.getSubsidiaryId()));
+					dto.getUserId(), dto.getMetalId(), dto.getBrandId(), dto.getSubsidiaryId(), dto.getUom()));
 			userPurchase.setMetalStock(metalStock);
 
 			// Amount should recieve using '-' sign from frontend

@@ -1,6 +1,9 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,10 +39,15 @@ public class SubsidiaryService implements ISubsidiaryService {
 	 * get subsidiary by id
 	 */
 	@Override
-	public Page<SubsidiaryResponseDto> getSubsidiariesByBrandId(int pageNumber, int pageSize,Long id) {
+	public Page<SubsidiaryResponseDto> getSubsidiariesByBrandId(int pageNumber, int pageSize, Long id) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<SubsidiaryEntity> subsidiaries = subsidiaryRepo.findByBrand_BrandId(id,pageRequest);
+		Page<SubsidiaryEntity> subsidiaries = subsidiaryRepo.findByBrand_BrandId(id, pageRequest);
 		return subsidiaries.map(SubsidiaryMapper::mapToResponseDto);
+	}
+
+	public List<SubsidiaryResponseDto> getSubsidiaryResponseDtos(Long id) {
+		return subsidiaryRepo.findByBrand_BrandId(id).stream().map(SubsidiaryMapper::mapToResponseDto)
+				.collect(Collectors.toList());
 	}
 
 	/*
@@ -47,7 +55,7 @@ public class SubsidiaryService implements ISubsidiaryService {
 	 */
 	@Override
 	public String createSubsidiary(SubsidiaryRequestDto dto) {
-		SubsidiaryEntity subsidiary =SubsidiaryMapper.mapToSubsidiaryEntity(dto);
+		SubsidiaryEntity subsidiary = SubsidiaryMapper.mapToSubsidiaryEntity(dto);
 		UserEntity user = new UserEntity(dto.getUserIdxId());
 		subsidiary.setCreatedBy(user);
 		subsidiary.setUpdatedBy(user);

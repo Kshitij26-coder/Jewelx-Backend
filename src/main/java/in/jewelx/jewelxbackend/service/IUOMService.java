@@ -1,5 +1,7 @@
 package in.jewelx.jewelxbackend.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import in.jewelx.jewelxbackend.dto.uom.UOMDto;
@@ -16,5 +18,7 @@ public interface IUOMService {
 	String updateUOM(Long uomId, UOMDto uomDto);
 
 	Page<UOMResponseDto> getAllUOMByBrand(int pageNumber, int pageSize, Long brandId);
+
+	List<UOMResponseDto> getAllUOMByBrand(Long brandId);
 
 }

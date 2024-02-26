@@ -35,9 +35,16 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public Page<CustomerResponseDto> getAllCustomers(int pageNumber, int pageSize) {
+	public Page<CustomerResponseDto> getAllCustomers(int pageNumber, int pageSize, Long brand, Long subsidiary,
+			String role) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<CustomerEntity> allCustomers = customerRepo.findAll(pageRequest);
+		Page<CustomerEntity> allCustomers = null;
+		if (role.equals("O")) {
+
+			allCustomers = customerRepo.findByBrand_BrandId(brand, pageRequest);
+		} else if (role.equals("A") || role.equals("E")) {
+			allCustomers = customerRepo.findBySubsidiary_IdxId(subsidiary, pageRequest);
+		}
 		return allCustomers.map(CustomerMapper::customerEntityToCustomerRespDto);
 	}
 

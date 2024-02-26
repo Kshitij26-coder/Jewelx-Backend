@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,10 +41,16 @@ public class ItemCategoryService implements IItemCategoryService {
 	}
 
 	@Override
-	public Page<ItemCategoryRespDto> getAllItemCategories(int pageNumber, int pageSize) {
+	public Page<ItemCategoryRespDto> getAllItemCategories(int pageNumber, int pageSize, Long brandId) {
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-		Page<ItemCategoryEntity> allItemcategories = itemCategoryRepo.findAll(pageRequest);
+		Page<ItemCategoryEntity> allItemcategories = itemCategoryRepo.findByBrand_BrandId(brandId, pageRequest);
 		return allItemcategories.map(ItemCategoryMapper::itemCategoryEntityToDto);
+	}
+
+	public List<ItemCategoryRespDto> getAllItemCategories(Long brandId) {
+
+		List<ItemCategoryEntity> allItemcategories = itemCategoryRepo.findByBrand_BrandId(brandId);
+		return allItemcategories.stream().map(ItemCategoryMapper::itemCategoryEntityToDto).collect(Collectors.toList());
 	}
 
 	@Override

@@ -35,6 +35,11 @@ public class UOMController {
 		return ResponseEntity.ok(uomService.getAllUOMByBrand(page, size, brand));
 	}
 
+	@GetMapping("/all/{brand}")
+	public ResponseEntity<?> getAllUOMsWithoutPaginati(@PathVariable Long brand) {
+		return ResponseEntity.ok(uomService.getAllUOMByBrand(brand));
+	}
+
 	@GetMapping("/{uomId}")
 	public ResponseEntity<?> getOneUom(@PathVariable("uomId") Long id) {
 		return ResponseEntity.ok(uomService.getOneUOM(id));

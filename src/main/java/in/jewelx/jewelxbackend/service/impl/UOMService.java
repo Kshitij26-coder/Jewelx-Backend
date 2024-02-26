@@ -1,5 +1,8 @@
 package in.jewelx.jewelxbackend.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +39,6 @@ public class UOMService implements IUOMService {
 	}
 
 	@Override
-
 	public Page<UOMResponseDto> getAllUOMByBrand(int pageNumber, int pageSize, Long brandId) {
 
 		PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
@@ -47,6 +49,14 @@ public class UOMService implements IUOMService {
 		brand.setBrandId(brandId);
 
 		return uomPage.map(UOMMapper::uomEntityToUOMRespDto);
+	}
+
+	@Override
+	public List<UOMResponseDto> getAllUOMByBrand(Long brandId) {
+		List<UnitOfMeasurementEntity> uomList = uomRepo.findByBrand_BrandId(brandId);
+		BrandEntity brand = new BrandEntity();
+		brand.setBrandId(brandId);
+		return uomList.stream().map(UOMMapper::uomEntityToUOMRespDto).collect(Collectors.toList());
 	}
 
 	@Override

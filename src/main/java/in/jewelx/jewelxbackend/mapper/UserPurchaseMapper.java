@@ -22,7 +22,7 @@ public class UserPurchaseMapper {
 		entity.setNetWeight(dto.getNetWeight());
 		entity.setGrossWeight(dto.getGrossWeight());
 		entity.setMetalRate(dto.getMetalRate());
-		//entity.setTotalAmount(dto.getTotalAmount());
+		// entity.setTotalAmount(dto.getTotalAmount());
 		BigDecimal totalAmount = new BigDecimal("0");
 		if (dto.getChequeAmount() != null) {
 			totalAmount = totalAmount.add(dto.getChequeAmount());
@@ -41,9 +41,11 @@ public class UserPurchaseMapper {
 
 	public static UserPurchaseResponseDto entityToDto(UserPurchaseEntity entity) {
 		UserPurchaseResponseDto dto = new UserPurchaseResponseDto(entity.getIdxId(), entity.getPurchaseId(),
-				entity.getMetal().getMetalId(), entity.getCustomer().getIdxId(), entity.getPurity(),
+				MetalMapper.entityToMetalShortDto(entity.getMetal()),
+				CustomerMapper.entityToCustomerShortDto(entity.getCustomer()), entity.getPurity(),
 				entity.getArticleDescription(), entity.getNetWeight(), entity.getGrossWeight(), entity.getMetalRate(),
-				entity.getTotalAmount(), entity.getAccounting().getIdxId(), entity.getSubsidiary().getIdxId(),
+				entity.getTotalAmount(), entity.getAccounting().getIdxId(),
+				SubsidiaryMapper.mapToSubsidiaryShortDetailsDto(entity.getSubsidiary()),
 				entity.getBrand().getBrandId());
 		return dto;
 	}

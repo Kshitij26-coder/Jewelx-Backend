@@ -29,8 +29,14 @@ public class SubsidiaryController {
 	private SubsidiaryService subsidiaryService;
 
 	@GetMapping("/brand/{id}")
-	public ResponseEntity<?> getSubsidiariesByBrandId(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,@PathVariable("id") Long brandId) {
-		return ResponseEntity.ok(subsidiaryService.getSubsidiariesByBrandId(page, size,brandId));
+	public ResponseEntity<?> getSubsidiariesByBrandId(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @PathVariable("id") Long brandId) {
+		return ResponseEntity.ok(subsidiaryService.getSubsidiariesByBrandId(page, size, brandId));
+	}
+
+	@GetMapping("/all/{brand}")
+	public ResponseEntity<?> getSubsidiariesByBrand(@PathVariable Long brand) {
+		return ResponseEntity.ok(subsidiaryService.getSubsidiaryResponseDtos(brand));
 	}
 
 	@PostMapping
