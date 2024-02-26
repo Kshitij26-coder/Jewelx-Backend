@@ -1,10 +1,8 @@
 package in.jewelx.jewelxbackend.controller;
 
 import in.jewelx.jewelxbackend.dto.feedback.FeedbackDto;
-import in.jewelx.jewelxbackend.dto.feedback.FeedbackRespDto;
 import in.jewelx.jewelxbackend.service.impl.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
