@@ -51,4 +51,9 @@ public class CustomerController {
 	public ResponseEntity<?> deleteCustomerById(@PathVariable("customerId") UUID id) {
 		return ResponseEntity.ok(customerService.deleteCustomerById(id));
 	}
+	
+	@GetMapping("/byBrand")
+	public ResponseEntity<?> getAllCustomerByBrandId(@RequestParam Long brand){
+		return ResponseEntity.ok(customerService.getAllCustomerByBrandId(brand));
+	}
 }
