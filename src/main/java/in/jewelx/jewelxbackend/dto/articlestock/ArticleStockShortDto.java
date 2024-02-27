@@ -26,5 +26,7 @@ public class ArticleStockShortDto {
 	private Double stoneWeight;
 
 	private String huid;
+	
+	private String status;
 
 }

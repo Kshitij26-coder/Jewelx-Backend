@@ -25,10 +25,10 @@ public class UnitOfMeasurementEntity {
 	@Column(name = "uom_id")
 	private Long uomId;
 
-	@Column(name = "uom_code", nullable = false, length = 5, unique = true)
+	@Column(name = "uom_code", nullable = false, length = 5)
 	private String uomCode;
 
-	@Column(name = "uom_name", nullable = false, length = 50, unique = true)
+	@Column(name = "uom_name", nullable = false, length = 50)
 	private String uomName;
 
 	@Column(name = "description")

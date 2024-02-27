@@ -47,6 +47,7 @@ public class ArticleStockMapper {
 		dto.setSubsidiary(entity.getSubsidiary().getIdxId());
 		dto.setCategory(entity.getCategory().getCategoryId());
 		dto.setCategoryInfo(ItemCategoryMapper.itemCategoryEntityToDto(entity.getCategory()));
+		dto.setStatus(entity.getArticleStatus());
 		return dto;
 
 	}
@@ -54,7 +55,7 @@ public class ArticleStockMapper {
 	public static ArticleStockShortDto entityToShortDto(ArticleStockEntity entity) {
 		ArticleStockShortDto dto = new ArticleStockShortDto(entity.getTagId(), entity.getArticleName(),
 				entity.getBarcode(), entity.getGrossWeight(), entity.getNetWeight(), entity.getPurity(),
-				entity.getStoneWeight(), entity.getHuid());
+				entity.getStoneWeight(), entity.getHuid(),entity.getArticleStatus());
 		return dto;
 	}
 }

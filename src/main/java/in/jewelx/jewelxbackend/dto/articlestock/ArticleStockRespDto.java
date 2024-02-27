@@ -31,4 +31,6 @@ public class ArticleStockRespDto {
 	private Long subsidiary;
 	
 	private ItemCategoryRespDto categoryInfo;
+	
+	private String status;
 }
