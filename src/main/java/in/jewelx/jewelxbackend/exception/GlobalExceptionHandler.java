@@ -43,14 +43,16 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<String> exceptionHandler() {
 		String errorMessage = "Credentials Invalid !!";
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
 	}
+
 	@ExceptionHandler(HuidExistedException.class)
-	public ResponseEntity<String> handleHuidException(HuidExistedException ex){
+	public ResponseEntity<String> handleHuidException(HuidExistedException ex) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
+
 	@ExceptionHandler
-	public ResponseEntity<String> handleEmailAlreadyPresentException(EmailAlreadyPresentException ex){
+	public ResponseEntity<String> handleEmailAlreadyPresentException(EmailAlreadyPresentException ex) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
 
@@ -59,5 +61,4 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
 	}
 
-	
 }
