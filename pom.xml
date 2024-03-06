@@ -135,6 +135,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>jewelx-aws-exe</finalName>
 	</build>
 
 </project>
